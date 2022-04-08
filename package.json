@@ -34,7 +34,7 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "name": "infobip",
+  "name": "@infobip/api",
   "author": "Alex Lakatos",
   "module": "dist/infobip.esm.js",
   "size-limit": [
