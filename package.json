@@ -1,0 +1,62 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "docs": "api-extractor run --local --verbose",
+    "test": "tsdx test --coverage",
+    "lint": "tsdx lint --fix",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "name": "infobip",
+  "author": "Alex Lakatos",
+  "module": "dist/infobip.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/infobip.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/infobip.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.20.1",
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "husky": "^7.0.4",
+    "size-limit": "^7.0.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.26.0"
+  }
+}
