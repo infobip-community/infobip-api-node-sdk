@@ -73,3 +73,23 @@ To run tests position yourself in the project's root after you've installed depe
 ```bash
 npm run test
 ```
+
+## Building & Installing a Local Version
+
+To build the project for the first time, position yourself in the project's root and run:
+
+```bash
+npm install
+```
+
+Subsequent builds can be triggered by using:
+
+```bash
+npm run build
+```
+
+After building a local version of this SDK, you can use it in a local Node.js project. First, position yourself in the new projext root, and then run:
+
+```
+npm install ../path/to/infobip-node
+```
