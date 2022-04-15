@@ -31,7 +31,7 @@ describe('Http', () => {
     let http = new Http(BASE_URL, AUTHORIZATION);
     let response = await http.post('/', {});
 
-    expect(axios.post).toHaveBeenCalledWith('/', {});
+    expect(axios.post).toHaveBeenCalledWith('/', {}, undefined);
     expect(response.config.headers?.Authorization).toEqual(AUTHORIZATION);
   });
 
