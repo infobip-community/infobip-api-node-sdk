@@ -1,11 +1,11 @@
 # infobip-api-node-sdk
-Node.js client SDK for Infobip's API Chaneels.
+Node.js Client SDK for Infobip APIs.
 
 # Supported Channels
 - Whatsapp -> [Docs](https://www.infobip.com/docs/api#channels/whatsapp)
 - Email -> [Docs](https://www.infobip.com/docs/api#channels/email)
 
-#### Table of contents:
+#### Table of Contents:
 
 - [General Info](#general-info)
 - [License](#license)
@@ -51,7 +51,7 @@ let infobip = new Infobip({
 ```
 After that you can access all the objects from `infobip.channel`.
 
-To send text message you can use the `infobip.channel.whatsapp.sent` method and add a payload:
+To send text message you can use the `infobip.channel.whatsapp.send` method and add a payload:
 
 ```javascript
 let response = await infobip.channels.whatsapp.send({
@@ -88,7 +88,7 @@ Subsequent builds can be triggered by using:
 npm run build
 ```
 
-After building a local version of this SDK, you can use it in a local Node.js project. First, position yourself in the new projext root, and then run:
+After building a local version of this SDK, you can use it in a local Node.js project. First, position yourself in the new project root, and then run:
 
 ```
 npm install ../path/to/infobip-node

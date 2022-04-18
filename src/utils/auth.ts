@@ -7,7 +7,7 @@ class InfobipAuth {
    */
 
   baseUrl: string;
-  authType: AuthType;
+  authType?: AuthType;
   apiKey?: string;
   username?: string;
   password?: string;
@@ -17,12 +17,12 @@ class InfobipAuth {
 
   constructor({
     baseUrl,
-    authType,
-    apiKey,
-    username,
-    password,
-    ibssoToken,
-    oauthToken,
+    authType = AuthType.ApiKey,
+    apiKey = '',
+    username = '',
+    password = '',
+    ibssoToken = '',
+    oauthToken = '',
   }: InfobipAuth) {
     this.baseUrl = baseUrl;
     this.authType = authType;
@@ -37,9 +37,26 @@ class InfobipAuth {
         this.authorization = `${authType} ${apiKey}`;
         break;
 
+      case AuthType.Basic:
+        this.authorization = `${authType} ${Buffer.from(
+          `${username}:${password}`,
+          'base64'
+        ).toString()}`;
+        break;
+
+      case AuthType.IBSSO:
+        this.authorization = `${authType} ${ibssoToken}`;
+        break;
+
+      case AuthType.OAuth:
+        this.authorization = `${authType} ${oauthToken}`;
+        break;
+
       default:
         this.authorization = '';
-        break;
+        throw new Error(
+          `Invalid authentication type: ${authType}. The only supported types are: ${AuthType.ApiKey}, ${AuthType.Basic}, ${AuthType.IBSSO}, ${AuthType.OAuth}`
+        );
     }
   }
 }
