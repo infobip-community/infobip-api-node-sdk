@@ -30,7 +30,6 @@ describe('Validator.required', () => {
   });
 });
 
-
 describe('Validator.string', () => {
   it('throws if value is not a string', () => {
     expect(() => {

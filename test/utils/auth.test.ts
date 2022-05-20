@@ -5,7 +5,11 @@ const BASE_URL = 'https://example.org';
 
 describe('InfobipAuth', () => {
   it('only requires a baseUrl', () => {
-    let auth = new InfobipAuth({ baseUrl: BASE_URL, authType: AuthType.ApiKey, apiKey: "s3creT"});
+    let auth = new InfobipAuth({
+      baseUrl: BASE_URL,
+      authType: AuthType.ApiKey,
+      apiKey: 's3creT',
+    });
 
     expect(auth.baseUrl).toEqual(BASE_URL);
     expect(auth.authType).toEqual('App');

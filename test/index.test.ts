@@ -29,19 +29,19 @@ describe('infobip', () => {
       new Infobip({
         baseUrl: BASE_URL,
         authType: AuthType.ApiKey,
-        password: 10 as unknown as string
+        password: (10 as unknown) as string,
       });
-    }).toThrow("Infobip.password must be a string.");
+    }).toThrow('Infobip.password must be a string.');
   });
-  
+
   it('validates username', () => {
     expect(() => {
       new Infobip({
         baseUrl: BASE_URL,
         authType: AuthType.ApiKey,
-        username: 10 as unknown as string
+        username: (10 as unknown) as string,
       });
-    }).toThrow("Infobip.username must be a string.");
+    }).toThrow('Infobip.username must be a string.');
   });
 
   it('validates apiKey', () => {
@@ -49,9 +49,9 @@ describe('infobip', () => {
       new Infobip({
         baseUrl: BASE_URL,
         authType: AuthType.ApiKey,
-        apiKey: 10 as unknown as string
+        apiKey: (10 as unknown) as string,
       });
-    }).toThrow("Infobip.apiKey must be a string.");
+    }).toThrow('Infobip.apiKey must be a string.');
   });
 
   it('validates oauthToken', () => {
@@ -59,9 +59,9 @@ describe('infobip', () => {
       new Infobip({
         baseUrl: BASE_URL,
         authType: AuthType.ApiKey,
-        oauthToken: 10 as unknown as string
+        oauthToken: (10 as unknown) as string,
       });
-    }).toThrow("Infobip.oauthToken must be a string.");
+    }).toThrow('Infobip.oauthToken must be a string.');
   });
 
   it('validates ibssoToken', () => {
@@ -69,9 +69,9 @@ describe('infobip', () => {
       new Infobip({
         baseUrl: BASE_URL,
         authType: AuthType.ApiKey,
-        ibssoToken: 10 as unknown as string
+        ibssoToken: (10 as unknown) as string,
       });
-    }).toThrow("Infobip.ibssoToken must be a string.");
+    }).toThrow('Infobip.ibssoToken must be a string.');
   });
 });
 

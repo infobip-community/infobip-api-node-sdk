@@ -75,7 +75,7 @@ class Auth {
           },
         }
       );
-      
+
       return response;
     } catch (error) {
       return error;
