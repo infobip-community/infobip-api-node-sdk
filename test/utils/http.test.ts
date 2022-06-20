@@ -59,6 +59,21 @@ describe('Http', () => {
     expect(response.config.headers?.Authorization).toEqual(AUTHORIZATION);
   });
 
+  it('exposes a download method', async () => {
+    (axios as any).get.mockResolvedValue({
+      config: { headers: { Authorization: AUTHORIZATION } },
+    });
+
+    let http = new Http(BASE_URL, AUTHORIZATION);
+    let response = await http.download('/');
+
+    expect(axios.get).toHaveBeenCalledWith('/', {
+      params: undefined,
+      responseType: 'stream',
+    });
+    expect(response.config.headers?.Authorization).toEqual(AUTHORIZATION);
+  });
+
   it('exposes a head method', async () => {
     (axios as any).head.mockResolvedValue({
       config: { headers: { Authorization: AUTHORIZATION } },

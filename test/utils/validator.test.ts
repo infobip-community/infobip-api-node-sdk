@@ -8,9 +8,21 @@ describe('Validator', () => {
   it('exports a string method', () => {
     expect(Validator.string).toBeDefined();
   });
+
+  it('exports an object method', () => {
+    expect(Validator.object).toBeDefined();
+  });
+
+  it('exports an array method', () => {
+    expect(Validator.array).toBeDefined();
+  });
 });
 
 describe('Validator.required', () => {
+  it('checks a value is present', () => {
+    expect(Validator.required(1)).toBeTruthy();
+  });
+
   it('throws if value is null', () => {
     expect(() => {
       Validator.required(null, 'value');
@@ -31,6 +43,10 @@ describe('Validator.required', () => {
 });
 
 describe('Validator.string', () => {
+  it('checks a string is present', () => {
+    expect(Validator.string('1')).toBeTruthy();
+  });
+
   it('throws if value is not a string', () => {
     expect(() => {
       Validator.string(10, 'value');
@@ -41,5 +57,41 @@ describe('Validator.string', () => {
     expect(() => {
       Validator.string('', 'value');
     }).toThrow('value must be a string.');
+  });
+});
+
+describe('Validator.number', () => {
+  it('checks a string is present', () => {
+    expect(Validator.number(1)).toBeTruthy();
+  });
+
+  it('throws if value is not a number', () => {
+    expect(() => {
+      Validator.number('10', 'value');
+    }).toThrow('value must be a number.');
+  });
+});
+
+describe('Validator.object', () => {
+  it('checks an object is present', () => {
+    expect(Validator.object({})).toBeTruthy();
+  });
+
+  it('throws if value is not an object', () => {
+    expect(() => {
+      Validator.object(10, 'value');
+    }).toThrow('value must be an object.');
+  });
+});
+
+describe('Validator.array', () => {
+  it('checks an array is present', () => {
+    expect(Validator.array([])).toBeTruthy();
+  });
+
+  it('throws if value is not an array', () => {
+    expect(() => {
+      Validator.array(10, 'value');
+    }).toThrow('value must be an array.');
   });
 });

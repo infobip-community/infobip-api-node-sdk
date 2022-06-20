@@ -14,6 +14,30 @@ module Validator {
 
     return true;
   }
+
+  export function number(x: any, name?: string) {
+    if (typeof x !== 'number') {
+      throw new Error(`${name} must be a number.`);
+    }
+
+    return true;
+  }
+
+  export function object(x: any, name?: string) {
+    if (typeof x !== 'object') {
+      throw new Error(`${name} must be an object.`);
+    }
+
+    return true;
+  }
+
+  export function array(x: any, name?: string) {
+    if (!Array.isArray(x)) {
+      throw new Error(`${name} must be an array.`);
+    }
+
+    return true;
+  }
 }
 
 export { Validator };
