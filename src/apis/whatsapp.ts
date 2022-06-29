@@ -73,7 +73,7 @@ class WhatsApp {
     }
   }
 
-  async downloadMedia(sender: string, mediaId: string) {
+  private async downloadMedia(sender: string, mediaId: string) {
     try {
       Validator.required(sender, 'sender');
       Validator.string(sender, 'sender');
@@ -91,7 +91,7 @@ class WhatsApp {
     }
   }
 
-  async metadataMedia(sender: string, mediaId: string) {
+  private async metadataMedia(sender: string, mediaId: string) {
     try {
       Validator.required(sender, 'sender');
       Validator.string(sender, 'sender');
@@ -109,7 +109,7 @@ class WhatsApp {
     }
   }
 
-  async deleteMedia(sender: string, url: string) {
+  private async deleteMedia(sender: string, url: string) {
     try {
       Validator.required(sender, 'sender');
       Validator.string(sender, 'sender');
@@ -117,7 +117,7 @@ class WhatsApp {
       Validator.string(url, 'url');
 
       const response = await this.http.delete(
-        endpoints['media'].replace(`{sender}`, sender).replace('{mediaId}', ''),
+        endpoints['media'].replace('{sender}', sender).replace('{mediaId}', ''),
         { url }
       );
       return response;
@@ -145,7 +145,7 @@ class WhatsApp {
     }
   }
 
-  async getTemplate(sender: string) {
+  private async getTemplate(sender: string) {
     try {
       Validator.required(sender, 'sender');
       Validator.string(sender, 'sender');
@@ -159,7 +159,7 @@ class WhatsApp {
     }
   }
 
-  async createTemplate(sender: string, request: any) {
+  private async createTemplate(sender: string, request: any) {
     try {
       validateWhatsappTemplateCreate(sender, request);
 
@@ -173,7 +173,7 @@ class WhatsApp {
     }
   }
 
-  async deleteTemplate(sender: string, templateName: string) {
+  private async deleteTemplate(sender: string, templateName: string) {
     try {
       Validator.required(sender, 'sender');
       Validator.string(sender, 'sender');
@@ -189,7 +189,7 @@ class WhatsApp {
     }
   }
 
-  async getIdentity(sender: string, userNumber: string) {
+  private async getIdentity(sender: string, userNumber: string) {
     try {
       Validator.required(sender, 'sender');
       Validator.string(sender, 'sender');
@@ -207,7 +207,7 @@ class WhatsApp {
     }
   }
 
-  async confirmIdentity(sender: string, userNumber: string, hash: string) {
+  private async confirmIdentity(sender: string, userNumber: string, hash: string) {
     try {
       Validator.required(sender, 'sender');
       Validator.string(sender, 'sender');
