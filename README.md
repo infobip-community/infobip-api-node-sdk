@@ -15,7 +15,7 @@ Node.js Client SDK for Infobip APIs.
 
 ## General Info
 
-For the `@infobip/api` package versioning we use the [Semantic Versioning](https://semver.org) scheme.
+For the `@infobip-api/sdk` package versioning we use the [Semantic Versioning](https://semver.org) scheme.
 
 [Node.js 14](https://nodejs.org/en/about/releases/) is minimum supported version by this SDK.
 
