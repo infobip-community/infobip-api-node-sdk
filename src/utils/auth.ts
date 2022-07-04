@@ -1,4 +1,5 @@
 import { AuthType } from './auth-type';
+import { Validator } from './validator';
 
 class InfobipAuth {
   /**
@@ -34,10 +35,24 @@ class InfobipAuth {
 
     switch (authType) {
       case AuthType.ApiKey:
+        Validator.required(
+          apiKey,
+          'When using AuthType.ApiKey, Infobip.apiKey'
+        );
+
         this.authorization = `${authType} ${apiKey}`;
         break;
 
       case AuthType.Basic:
+        Validator.required(
+          username,
+          'When using AuthType.Basic, Infobip.username'
+        );
+        Validator.required(
+          password,
+          'When using AuthType.Basic, Infobip.password'
+        );
+
         this.authorization = `${authType} ${Buffer.from(
           `${username}:${password}`,
           'base64'
@@ -45,10 +60,20 @@ class InfobipAuth {
         break;
 
       case AuthType.IBSSO:
+        Validator.required(
+          ibssoToken,
+          'When using AuthType.IBSSO, Infobip.ibssoToken'
+        );
+
         this.authorization = `${authType} ${ibssoToken}`;
         break;
 
       case AuthType.OAuth:
+        Validator.required(
+          oauthToken,
+          'When using AuthType.OAuth, Infobip.oauthToken'
+        );
+
         this.authorization = `${authType} ${oauthToken}`;
         break;
 

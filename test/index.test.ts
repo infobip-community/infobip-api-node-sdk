@@ -13,6 +13,66 @@ describe('infobip', () => {
 
     expect(infobip.credentials.baseUrl).toEqual('https://api.infobip.com');
   });
+
+  it('exposes an auth object', () => {
+    let infobip = new Infobip({
+      baseUrl: BASE_URL,
+      apiKey: API_KEY,
+      authType: AuthType.ApiKey,
+    });
+
+    expect(infobip.auth).toBeDefined();
+  });
+
+  it('validates password', () => {
+    expect(() => {
+      new Infobip({
+        baseUrl: BASE_URL,
+        authType: AuthType.ApiKey,
+        password: (10 as unknown) as string,
+      });
+    }).toThrow('Infobip.password must be a string.');
+  });
+
+  it('validates username', () => {
+    expect(() => {
+      new Infobip({
+        baseUrl: BASE_URL,
+        authType: AuthType.ApiKey,
+        username: (10 as unknown) as string,
+      });
+    }).toThrow('Infobip.username must be a string.');
+  });
+
+  it('validates apiKey', () => {
+    expect(() => {
+      new Infobip({
+        baseUrl: BASE_URL,
+        authType: AuthType.ApiKey,
+        apiKey: (10 as unknown) as string,
+      });
+    }).toThrow('Infobip.apiKey must be a string.');
+  });
+
+  it('validates oauthToken', () => {
+    expect(() => {
+      new Infobip({
+        baseUrl: BASE_URL,
+        authType: AuthType.ApiKey,
+        oauthToken: (10 as unknown) as string,
+      });
+    }).toThrow('Infobip.oauthToken must be a string.');
+  });
+
+  it('validates ibssoToken', () => {
+    expect(() => {
+      new Infobip({
+        baseUrl: BASE_URL,
+        authType: AuthType.ApiKey,
+        ibssoToken: (10 as unknown) as string,
+      });
+    }).toThrow('Infobip.ibssoToken must be a string.');
+  });
 });
 
 describe('infobip.channels', () => {

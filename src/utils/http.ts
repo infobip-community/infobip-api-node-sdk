@@ -19,6 +19,11 @@ class Http {
     return response;
   }
 
+  async download(url: string) {
+    const response = await this.axios.get(url, { responseType: 'stream' });
+    return response;
+  }
+
   async head(url: string, params?: any) {
     const response = await this.axios.head(url, { params });
     return response;

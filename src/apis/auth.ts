@@ -2,6 +2,7 @@ import { Http } from '../utils/http';
 import { InfobipAuth } from '../utils/auth';
 import { AuthType } from '../utils/auth-type';
 import { URLSearchParams } from 'url';
+import { Validator } from '../utils/validator';
 
 const endpoints: any = {
   session: '/auth/1/session',
@@ -27,11 +28,15 @@ class Auth {
 
   private async createSession() {
     try {
+      Validator.required(this.credentials.password, 'Infobip.password');
+      Validator.required(this.credentials.username, 'Infobip.username');
+
       const http = new Http(this.credentials.baseUrl);
       const response = await http.post(endpoints.session, {
         password: this.credentials.password,
         username: this.credentials.username,
       });
+
       return response;
     } catch (error) {
       return error;
@@ -53,6 +58,9 @@ class Auth {
 
   private async createToken() {
     try {
+      Validator.required(this.credentials.password, 'Infobip.password');
+      Validator.required(this.credentials.username, 'Infobip.username');
+
       const http = new Http(this.credentials.baseUrl);
       const response = await http.post(
         `${endpoints.oauth2}?${new URLSearchParams({
@@ -67,6 +75,7 @@ class Auth {
           },
         }
       );
+
       return response;
     } catch (error) {
       return error;
