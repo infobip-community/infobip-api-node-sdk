@@ -1,7 +1,7 @@
 import {
   validateWhatsappSend,
   validateWhatsappTemplateCreate,
-} from '../../src/utils/validators';
+} from '../../src/utils/validators/whatsapp';
 
 import {
   templateMessage,
