@@ -38,6 +38,16 @@ module Validator {
 
     return true;
   }
+
+  export function maxLength(x: any, y: number, name?: string) {
+    if (x.length > y) {
+      throw new Error(
+        `${name} must have a length smaller than or equal to ${y}.`
+      );
+    }
+
+    return true;
+  }
 }
 
 export { Validator };

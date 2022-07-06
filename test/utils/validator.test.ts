@@ -95,3 +95,15 @@ describe('Validator.array', () => {
     }).toThrow('value must be an array.');
   });
 });
+
+describe('Validator.maxLength', () => {
+  it('checks if length of a parameter is smaller or equal to a maximum length', () => {
+    expect(Validator.maxLength('test', 4)).toBeTruthy();
+  });
+
+  it('throws if length of a parameter is larger than a maximum length', () => {
+    expect(() => {
+      Validator.maxLength('test', 3, 'parameter');
+    }).toThrow('parameter must have a length smaller than or equal to 3.');
+  });
+});
