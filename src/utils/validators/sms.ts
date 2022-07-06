@@ -5,13 +5,17 @@ export function validateSMSSend(message: any) {
   Validator.array(message.messages, 'messages');
 
   message.messages.forEach((message: any) => {
-    Validator.required(message, 'message.destinations');
-    Validator.object(message, 'message.destinations');
+    Validator.required(message, 'message');
+    Validator.object(message, 'message');
+
+    Validator.required(message.destinations, 'message.destinations');
+    Validator.array(message.destinations, 'message.destinations');
 
     message.destinations.forEach((destination: any) => {
-      Validator.required(destination.to, 'message.destinations.to');
-      Validator.string(destination.to, 'message.destinations.to');
-      Validator.maxLength(destination.to, 50, 'message.destinations.to');
+      Validator.object(destination, 'message.destination');
+      Validator.required(destination.to, 'message.destination.to');
+      Validator.string(destination.to, 'message.destination.to');
+      Validator.maxLength(destination.to, 50, 'message.destination.to');
     });
 
     if (message.deliveryTimeWindow) {
