@@ -1,6 +1,6 @@
 import { Http } from '../utils/http';
 import { InfobipAuth } from '../utils/auth';
-import { Validator } from '../utils/validator';
+import { validateSMSSend } from '../utils/validators/sms';
 
 const endpoints: any = {
   send: '/sms/2/text/advanced',
@@ -16,13 +16,7 @@ class SMS {
 
   async send(message: any) {
     try {
-      // Validate
-
-      Validator.array(message.messages, "message.messages")
-      message.messages.forEach((message: any) => {
-        Validator.object(message, "message.messages.message")
-      })
-
+      validateSMSSend(message);
       const response = await this.http.post(endpoints.send, message);
       return response;
     } catch (error) {

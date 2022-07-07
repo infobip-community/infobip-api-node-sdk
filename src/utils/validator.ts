@@ -23,6 +23,14 @@ module Validator {
     return true;
   }
 
+  export function integer(x: any, name?: string) {
+    if (!Number.isInteger(x)) {
+      throw new Error(`${name} must be an integer.`);
+    }
+
+    return true;
+  }
+
   export function object(x: any, name?: string) {
     if (typeof x !== 'object') {
       throw new Error(`${name} must be an object.`);
@@ -44,6 +52,14 @@ module Validator {
       throw new Error(
         `${name} must have a length smaller than or equal to ${y}.`
       );
+    }
+
+    return true;
+  }
+
+  export function max(x: any, y: number, name?: string) {
+    if (x > y) {
+      throw new Error(`${name} must be lower than or equal to ${y}.`);
     }
 
     return true;

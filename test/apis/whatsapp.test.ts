@@ -13,7 +13,7 @@ import {
   interactiveListMessage,
   interactiveMultiProductMessage,
   interactiveProductMessage,
-} from '../whatsapp-fixtures';
+} from '../fixtures/whatsapp';
 
 import axios from 'axios';
 jest.mock('axios');
