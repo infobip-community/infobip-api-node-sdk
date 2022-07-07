@@ -1,7 +1,7 @@
 import {
   validateWhatsappSend,
   validateWhatsappTemplateCreate,
-} from '../../src/utils/validators/whatsapp';
+} from '../../../src/utils/validators/whatsapp';
 
 import {
   templateMessage,
@@ -18,7 +18,7 @@ import {
   interactiveMultiProductMessage,
   interactiveProductMessage,
   interactiveButtonsWithHeaderMessage,
-} from '../fixtures';
+} from '../../fixtures/whatsapp';
 
 describe('validateWhatsappTemplateCreate', () => {
   it('validates required parameters for template messages', () => {

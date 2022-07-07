@@ -1,5 +1,5 @@
 import { SMS } from '../../src/apis/sms';
-import { sendMessage } from '../sms-fixtures';
+import { basicTextMessage } from '../fixtures/sms';
 import axios from 'axios';
 
 jest.mock('axios');
@@ -36,11 +36,11 @@ describe('SMS', () => {
       username: USERNAME,
       password: PASSWORD,
     });
-    await sms.send(sendMessage);
+    await sms.send(basicTextMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
       '/sms/2/text/advanced',
-      sendMessage,
+      basicTextMessage,
       undefined
     );
   });

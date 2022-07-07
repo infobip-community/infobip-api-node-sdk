@@ -67,3 +67,15 @@ export const sendMessage = {
     type: 'MY_CAMPAIGN',
   },
 };
+
+export const basicTextMessage = {
+  messages: [
+    {
+      destinations: [
+        {
+          to: '41793026700',
+        },
+      ],
+    },
+  ],
+};
