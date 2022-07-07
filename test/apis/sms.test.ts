@@ -45,7 +45,7 @@ describe('SMS', () => {
     );
   });
 
-  it('will throw an error when getting fails', async () => {
+  it('will throw an error when getting SMS messages fails', async () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
@@ -59,7 +59,7 @@ describe('SMS', () => {
     expect(error).toEqual({ message: 'error' });
   });
 
-  it('can send a text message', async () => {
+  it('can get SMS messages', async () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
@@ -72,6 +72,36 @@ describe('SMS', () => {
 
     expect(axios.get).toHaveBeenCalledWith('/sms/1/inbox/reports', {
       params: { limit: undefined },
+    });
+  });
+
+  it('will throw an error when getting SMS delivery reports fails', async () => {
+    expect.assertions(1);
+    (axios as any).get.mockRejectedValue({ message: 'error' });
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    let error = await sms.reports.get();
+    expect(error).toEqual({ message: 'error' });
+  });
+
+  it('can get SMS delivery reports ', async () => {
+    expect.assertions(1);
+    (axios as any).get.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await sms.reports.get();
+
+    expect(axios.get).toHaveBeenCalledWith('/sms/1/reports', {
+      params: { bulkId: undefined, messageId: undefined, limit: undefined },
     });
   });
 });
