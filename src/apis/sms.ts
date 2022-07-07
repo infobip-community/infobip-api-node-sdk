@@ -4,6 +4,7 @@ import { Validator } from '../utils/validator';
 
 const endpoints: any = {
   send: '/sms/2/text/advanced',
+  get: '/sms/1/inbox/reports'
 };
 
 class SMS {
@@ -23,6 +24,15 @@ class SMS {
       })
 
       const response = await this.http.post(endpoints.send, message);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async get(limit?: number) {
+    try {
+      const response = await this.http.get(endpoints.get, { limit });
       return response;
     } catch (error) {
       return error;
