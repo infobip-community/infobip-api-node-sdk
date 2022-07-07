@@ -4,7 +4,7 @@ import { validateSMSSend } from '../utils/validators/sms';
 
 const endpoints: any = {
   send: '/sms/2/text/advanced',
-  get: '/sms/1/inbox/reports'
+  get: '/sms/1/inbox/reports',
 };
 
 class SMS {
