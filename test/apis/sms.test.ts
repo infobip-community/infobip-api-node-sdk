@@ -45,7 +45,7 @@ describe('SMS', () => {
     );
   });
 
-  it('will throw an error when getting fails', async () => {
+  it('will throw an error when getting SMS messages fails', async () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
@@ -59,7 +59,7 @@ describe('SMS', () => {
     expect(error).toEqual({ message: 'error' });
   });
 
-  it('can send a text message', async () => {
+  it('can get SMS messages', async () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
