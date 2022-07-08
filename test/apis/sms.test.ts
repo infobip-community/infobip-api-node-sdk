@@ -54,12 +54,45 @@ describe('SMS', () => {
       username: USERNAME,
       password: PASSWORD,
     });
-    let error: Error = (await sms.sendQuery(1)) as Error;
 
+    let error: Error = (await sms.sendQuery(1)) as Error;
     expect(error).toBeInstanceOf(Error);
   });
 
   it('can send a query text message', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    await sms.sendQuery(sendQueryMessage);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      '/sms/1/text/query/' +
+        '?username=Some%2520User&password=Some%2520Password&' +
+        'to=41793026727%2C41793026728%2C41793026729'
+    );
+  });
+
+  it('will throw an error when getting SMS messages fails', async () => {
+    expect.assertions(1);
+    (axios as any).get.mockRejectedValue({ message: 'error' });
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    let error = await sms.get();
+    expect(error).toEqual({ message: 'error' });
+  });
+
+  it('can get SMS messages', async () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
@@ -68,12 +101,10 @@ describe('SMS', () => {
       username: USERNAME,
       password: PASSWORD,
     });
-    await sms.sendQuery(sendQueryMessage);
+    await sms.get();
 
-    expect(axios.get).toHaveBeenCalledWith(
-      '/sms/1/text/query/' +
-        '?username=Some%2520User&password=Some%2520Password&' +
-        'to=41793026727%2C41793026728%2C41793026729'
-    );
+    expect(axios.get).toHaveBeenCalledWith('/sms/1/inbox/reports', {
+      params: { limit: undefined },
+    });
   });
 });

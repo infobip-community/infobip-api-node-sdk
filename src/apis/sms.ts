@@ -7,6 +7,7 @@ const endpoints: any = {
   sendBinary: '/sms/2/binary/advanced',
   preview: '/sms/1/preview',
   sendQuery: '/sms/1/text/query',
+  get: '/sms/1/inbox/reports',
 };
 
 class SMS {
@@ -48,6 +49,15 @@ class SMS {
         endpoints[message.type],
         message
       );
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async get(limit?: number) {
+    try {
+      const response = await this.http.get(endpoints.get, { limit });
       return response;
     } catch (error) {
       return error;
