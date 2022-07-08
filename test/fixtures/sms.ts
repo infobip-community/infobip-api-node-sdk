@@ -1,4 +1,5 @@
 export const sendMessage = {
+  type: 'send',
   bulkId: 'BULK-ID-123-xyz',
   messages: [
     {
@@ -69,6 +70,7 @@ export const sendMessage = {
 };
 
 export const basicTextMessage = {
+  type: 'send',
   messages: [
     {
       destinations: [
@@ -78,4 +80,34 @@ export const basicTextMessage = {
       ],
     },
   ],
+};
+
+export const binaryTextMessage = {
+  type: 'binary',
+  messages: [
+    {
+      binary: {
+        hex: '0048 0065 006c 006c 006f 0020 0077 006f 0072 006c',
+      },
+      destinations: [
+        {
+          to: '41793026727',
+        },
+      ],
+      flash: true,
+      from: 'InfoSMS',
+    },
+  ],
+};
+
+export const previewMessage = {
+  type: 'preview',
+  text: "Let's see how many characters remain unused in this message.",
+};
+
+export const sendQueryMessage = {
+  type: 'sendQuery',
+  username: 'Some User',
+  password: 'Some Password',
+  to: ['41793026727', '41793026728', '41793026729'],
 };

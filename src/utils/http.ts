@@ -4,7 +4,7 @@ class Http {
   baseUrl: string;
   axios: Axios;
 
-  async post(url: string, body: any, config?: any) {
+  async post(url: string, body?: any, config?: any) {
     const response = await this.axios.post(url, body, config);
     return response;
   }
@@ -16,6 +16,18 @@ class Http {
 
   async get(url: string, params?: any) {
     const response = await this.axios.get(url, { params });
+    return response;
+  }
+
+  async getQuery(url: string, params?: any) {
+    delete params['type'];
+    for (const k in params) {
+      if (k === 'username' || k === 'password') {
+        params[k] = encodeURI(params[k]);
+      }
+    }
+    const queryString = new URLSearchParams(params);
+    const response = await this.axios.get(url + `/?${queryString}`);
     return response;
   }
 
