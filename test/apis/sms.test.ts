@@ -1,5 +1,11 @@
 import { SMS } from '../../src/apis/sms';
-import { basicTextMessage, sendQueryMessage } from '../fixtures/sms';
+import {
+  basicTextMessage,
+  bulkId,
+  rescheduleSendAt,
+  sendQueryMessage,
+  updateStatus,
+} from '../fixtures/sms';
 import axios from 'axios';
 
 jest.mock('axios');
@@ -47,7 +53,7 @@ describe('SMS', () => {
 
   it('will throw an error method query parameters are wrong', async () => {
     expect.assertions(1);
-    (axios as any).post.mockResolvedValue({});
+    (axios as any).get.mockResolvedValue({});
 
     let sms = new SMS({
       baseUrl: BASE_URL,
@@ -61,7 +67,7 @@ describe('SMS', () => {
 
   it('can send a query text message', async () => {
     expect.assertions(1);
-    (axios as any).post.mockResolvedValue({});
+    (axios as any).get.mockResolvedValue({});
 
     let sms = new SMS({
       baseUrl: BASE_URL,
@@ -106,5 +112,137 @@ describe('SMS', () => {
     expect(axios.get).toHaveBeenCalledWith('/sms/1/inbox/reports', {
       params: { limit: undefined },
     });
+  });
+
+  it('getScheduledMessage, throw an error wrong for query parameters', async () => {
+    expect.assertions(1);
+    (axios as any).get.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    let error: Error = (await sms.getScheduledMessage(1)) as Error;
+    expect(error).toBeInstanceOf(Error);
+  });
+
+  it('can get scheduled SMS messages', async () => {
+    expect.assertions(1);
+    (axios as any).get.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    await sms.getScheduledMessage(bulkId);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      '/sms/1/bulks/?bulkId=BULK-ID-123-xyz',
+      {
+        params: undefined,
+      }
+    );
+  });
+
+  it('rescheduleMessage, throw an error wrong for query parameters', async () => {
+    expect.assertions(1);
+    (axios as any).put.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    let error: Error = (await sms.rescheduleMessage(1, 1)) as Error;
+    expect(error).toBeInstanceOf(Error);
+  });
+
+  it('can reschedule SMS message', async () => {
+    expect.assertions(1);
+    (axios as any).put.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    await sms.rescheduleMessage(bulkId, rescheduleSendAt);
+
+    expect(axios.put).toHaveBeenCalledWith(
+      '/sms/1/bulks/?bulkId=BULK-ID-123-xyz',
+      rescheduleSendAt
+    );
+  });
+
+  it('getMessageStatus, throw an error wrong for query parameters', async () => {
+    expect.assertions(1);
+    (axios as any).get.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    let error: Error = (await sms.getMessageStatus(1)) as Error;
+    expect(error).toBeInstanceOf(Error);
+  });
+
+  it('can get scheduled SMS message status', async () => {
+    expect.assertions(1);
+    (axios as any).get.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    await sms.getMessageStatus(bulkId);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      '/sms/1/bulks/status/?bulkId=BULK-ID-123-xyz',
+      {
+        params: undefined,
+      }
+    );
+  });
+
+  it('updateMessageStatus, throw an error wrong for query parameters', async () => {
+    expect.assertions(1);
+    (axios as any).put.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    let error: Error = (await sms.updateMessageStatus(1, 1)) as Error;
+    expect(error).toBeInstanceOf(Error);
+  });
+
+  it('can change SMS message status', async () => {
+    expect.assertions(1);
+    (axios as any).put.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    await sms.updateMessageStatus(bulkId, updateStatus);
+
+    expect(axios.put).toHaveBeenCalledWith(
+      '/sms/1/bulks/status/?bulkId=BULK-ID-123-xyz',
+      updateStatus
+    );
   });
 });

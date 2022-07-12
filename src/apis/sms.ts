@@ -1,6 +1,10 @@
 import { Http } from '../utils/http';
 import { InfobipAuth } from '../utils/auth';
-import { validateSMSMessage } from '../utils/validators/sms';
+import {
+  validateBodyParameters,
+  validateQueryParameters,
+  validateSMSMessage,
+} from '../utils/validators/sms';
 
 const endpoints: any = {
   send: '/sms/2/text/advanced',
@@ -8,6 +12,11 @@ const endpoints: any = {
   preview: '/sms/1/preview',
   sendQuery: '/sms/1/text/query',
   get: '/sms/1/inbox/reports',
+};
+
+const reschedule: any = {
+  scheduledMessages: '/sms/1/bulks',
+  scheduledStatus: '/sms/1/bulks/status',
 };
 
 class SMS {
@@ -58,6 +67,66 @@ class SMS {
   async get(limit?: number) {
     try {
       const response = await this.http.get(endpoints.get, { limit });
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getScheduledMessage(query: any) {
+    try {
+      validateQueryParameters(query);
+
+      const queryString = new URLSearchParams(query);
+      const response = await this.http.get(
+        reschedule.scheduledMessages + `/?${queryString}`
+      );
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async rescheduleMessage(query: any, body: any) {
+    try {
+      validateQueryParameters(query);
+      validateBodyParameters(body);
+
+      const queryString = new URLSearchParams(query);
+      const response = await this.http.put(
+        reschedule.scheduledMessages + `/?${queryString}`,
+        body
+      );
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getMessageStatus(query: any) {
+    try {
+      validateQueryParameters(query);
+
+      const queryString = new URLSearchParams(query);
+      const response = await this.http.get(
+        reschedule.scheduledStatus + `/?${queryString}`
+      );
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async updateMessageStatus(query: any, body: any) {
+    try {
+      validateQueryParameters(query);
+      validateBodyParameters(body);
+
+      const queryString = new URLSearchParams(query);
+      const response = await this.http.put(
+        reschedule.scheduledStatus + `/?${queryString}`,
+        body
+      );
       return response;
     } catch (error) {
       return error;
