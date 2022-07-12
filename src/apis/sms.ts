@@ -73,6 +73,12 @@ class SMS {
     }
   }
 
+  /**
+   * See the status and the scheduled time of your SMS messages.
+   *
+   * @param { any } query - Query object
+   * @return { AxiosResponse<any, any> } response - Return Axios Response
+   */
   async getScheduledMessage(query: any) {
     try {
       validateQueryParameters(query);
@@ -87,6 +93,13 @@ class SMS {
     }
   }
 
+  /**
+   * Change the date and time for sending scheduled messages.
+   *
+   * @param { any } query - Query object
+   * @param { any } body - Body object
+   * @return { AxiosResponse<any, any> } response - Return Axios Response
+   */
   async rescheduleMessage(query: any, body: any) {
     try {
       validateQueryParameters(query);
@@ -103,6 +116,12 @@ class SMS {
     }
   }
 
+  /**
+   * See the status of scheduled messages.
+   *
+   * @param { any } query - Query object
+   * @return { AxiosResponse<any, any> } response - Return Axios Response
+   */
   async getMessageStatus(query: any) {
     try {
       validateQueryParameters(query);
@@ -117,6 +136,13 @@ class SMS {
     }
   }
 
+  /**
+   * Change status or completely cancel sending of scheduled messages.
+   *
+   * @param { any } query - Query object
+   * @param { any } body - Body object
+   * @return { AxiosResponse<any, any> } response - Return Axios Response
+   */
   async updateMessageStatus(query: any, body: any) {
     try {
       validateQueryParameters(query);
