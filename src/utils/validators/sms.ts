@@ -24,14 +24,18 @@ export function validateBodyParameters(body: any) {
     Validator.required(body, 'sendAt');
     Validator.object(body, 'sendAt');
     Validator.string(body.sendAt, 'sendAt');
+
+    return true;
   }
   if (body.status) {
     Validator.required(body, 'status');
     Validator.object(body, 'status');
     Validator.string(body.status, 'status');
-  }
 
-  return true;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function validatePreview(message: any) {

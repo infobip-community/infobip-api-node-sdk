@@ -1,4 +1,8 @@
-import { validateSMSMessage } from '../../../src/utils/validators/sms';
+import {
+  validateSMSMessage,
+  validateBodyParameters,
+  validateQueryParameters,
+} from '../../../src/utils/validators/sms';
 
 import {
   sendMessage,
@@ -6,6 +10,9 @@ import {
   binaryTextMessage,
   previewMessage,
   sendQueryMessage,
+  bulkId,
+  rescheduleSendAt,
+  updateStatus,
 } from '../../fixtures/sms';
 
 describe('validateSMSSend', () => {
@@ -33,5 +40,21 @@ describe('validateSMSSend', () => {
 
   it('validates query object for query text messages', () => {
     expect(validateSMSMessage(sendQueryMessage)).toBeTruthy();
+  });
+
+  it('validates query object for scheduled messages', () => {
+    expect(validateQueryParameters(bulkId)).toBeTruthy();
+  });
+
+  it('validates sendAt body object for scheduled messages', () => {
+    expect(validateBodyParameters(rescheduleSendAt)).toBeTruthy();
+  });
+
+  it('validates status body object for scheduled messages', () => {
+    expect(validateBodyParameters(updateStatus)).toBeTruthy();
+  });
+
+  it('return false body object for scheduled messages', () => {
+    expect(validateBodyParameters({ test: 'false' })).toBeFalsy();
   });
 });
