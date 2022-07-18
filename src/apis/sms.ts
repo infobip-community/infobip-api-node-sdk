@@ -16,6 +16,8 @@ const sendEndpoints: any = {
 const endpoints: any = {
   preview: '/sms/1/preview',
   get: '/sms/1/inbox/reports',
+  reports: '/sms/1/reports',
+  logs: '/sms/1/logs',
 };
 
 const reschedule: any = {
@@ -27,12 +29,20 @@ class SMS {
   http: Http;
   username?: string;
   password?: string;
+  reports: any;
+  logs: any;
 
   constructor(credentials: InfobipAuth) {
     this.http = new Http(credentials.baseUrl, credentials.authorization);
-
     this.username = credentials.username;
     this.password = credentials.password;
+
+    this.reports = {
+      get: this.getDeliveryReports.bind(this),
+    };
+    this.logs = {
+      get: this.getMessageLogs.bind(this),
+    };
   }
 
   async send(message: any) {
@@ -167,6 +177,24 @@ class SMS {
         reschedule.scheduledStatus + `/?${queryString}`,
         body
       );
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  private async getDeliveryReports(filter: any) {
+    try {
+      const response = await this.http.get(endpoints.reports, filter);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  private async getMessageLogs(filter: any) {
+    try {
+      const response = await this.http.get(endpoints.logs, filter);
       return response;
     } catch (error) {
       return error;
