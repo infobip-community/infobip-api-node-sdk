@@ -101,7 +101,7 @@ describe('SMS', () => {
     await sms.reports.get({ limit: 10 });
 
     expect(axios.get).toHaveBeenCalledWith('/sms/1/reports', {
-      params: { limit: 10 }
+      params: { limit: 10 },
     });
   });
 

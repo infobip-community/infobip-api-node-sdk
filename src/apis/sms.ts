@@ -43,9 +43,7 @@ class SMS {
     }
   }
 
-  private async getDeliveryReports(
-    filter: any
-  ) {
+  private async getDeliveryReports(filter: any) {
     try {
       const response = await this.http.get(endpoints.reports, filter);
       return response;
@@ -54,9 +52,7 @@ class SMS {
     }
   }
 
-  private async getMessageLogs(
-    filter: any
-  ) {
+  private async getMessageLogs(filter: any) {
     try {
       const response = await this.http.get(endpoints.logs, filter);
       return response;
