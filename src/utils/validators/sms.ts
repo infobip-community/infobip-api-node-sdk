@@ -8,40 +8,6 @@ export function validateSMSMessage(message: any) {
   }
 }
 
-export function validateQueryParameters(query: any) {
-  Validator.required(query, 'bulkId');
-  Validator.object(query, 'bulkId');
-  Validator.string(query.bulkId, 'bulkId');
-
-  return true;
-}
-
-export function validateBodyParameters(body: any) {
-  if (body.sendAt) {
-    Validator.required(body, 'sendAt');
-    Validator.object(body, 'sendAt');
-    Validator.string(body.sendAt, 'sendAt');
-
-    return true;
-  }
-  if (body.status) {
-    Validator.required(body, 'status');
-    Validator.object(body, 'status');
-    Validator.string(body.status, 'status');
-
-    return true;
-  } else {
-    return false;
-  }
-}
-
-export function validatePreview(message: any) {
-  Validator.required(message.text, 'text');
-  Validator.string(message.text, 'text');
-
-  return true;
-}
-
 function validateSMSSendTextAndBinary(message: any) {
   Validator.required(message.messages, 'messages');
   Validator.array(message.messages, 'messages');

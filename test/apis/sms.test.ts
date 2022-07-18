@@ -1,11 +1,9 @@
 import { SMS } from '../../src/apis/sms';
 import {
   basicTextMessage,
-  bulkId,
-  rescheduleSendAt,
-  updateStatus,
   previewMessage,
   sendQueryMessage,
+  bulkId,
 } from '../fixtures/sms';
 import axios from 'axios';
 
@@ -213,7 +211,7 @@ describe('SMS', () => {
     });
   });
 
-  it('getScheduledMessage, throw an error wrong for query parameters', async () => {
+  it('scheduled.get will throw validation errors', async () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
@@ -223,7 +221,7 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    let error: Error = (await sms.getScheduledMessage(1)) as Error;
+    let error: Error = (await sms.scheduled.get(1)) as Error;
     expect(error).toBeInstanceOf(Error);
   });
 
@@ -237,17 +235,14 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    await sms.getScheduledMessage(bulkId);
+    await sms.scheduled.get(bulkId);
 
-    expect(axios.get).toHaveBeenCalledWith(
-      '/sms/1/bulks/?bulkId=BULK-ID-123-xyz',
-      {
-        params: undefined,
-      }
-    );
+    expect(axios.get).toHaveBeenCalledWith('/sms/1/bulks', {
+      params: { bulkId },
+    });
   });
 
-  it('rescheduleMessage, throw an error wrong for query parameters', async () => {
+  it('scheduled.reschedule will throw validation errors', async () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
@@ -257,7 +252,7 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    let error: Error = (await sms.rescheduleMessage(1, 1)) as Error;
+    let error: Error = (await sms.scheduled.reschedule(1, 1)) as Error;
     expect(error).toBeInstanceOf(Error);
   });
 
@@ -271,15 +266,17 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    await sms.rescheduleMessage(bulkId, rescheduleSendAt);
+    await sms.scheduled.reschedule(bulkId, '2022-07-12T16:00:00.000+0000');
 
     expect(axios.put).toHaveBeenCalledWith(
       '/sms/1/bulks/?bulkId=BULK-ID-123-xyz',
-      rescheduleSendAt
+      {
+        sendAt: '2022-07-12T16:00:00.000+0000',
+      }
     );
   });
 
-  it('getMessageStatus, throw an error wrong for query parameters', async () => {
+  it('status.get will throw validation errors', async () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
@@ -289,7 +286,7 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    let error: Error = (await sms.getMessageStatus(1)) as Error;
+    let error: Error = (await sms.status.get(1)) as Error;
     expect(error).toBeInstanceOf(Error);
   });
 
@@ -303,17 +300,14 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    await sms.getMessageStatus(bulkId);
+    await sms.status.get(bulkId);
 
-    expect(axios.get).toHaveBeenCalledWith(
-      '/sms/1/bulks/status/?bulkId=BULK-ID-123-xyz',
-      {
-        params: undefined,
-      }
-    );
+    expect(axios.get).toHaveBeenCalledWith('/sms/1/bulks/status', {
+      params: { bulkId },
+    });
   });
 
-  it('updateMessageStatus, throw an error wrong for query parameters', async () => {
+  it('status.update will throw validation errors', async () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
@@ -323,7 +317,7 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    let error: Error = (await sms.updateMessageStatus(1, 1)) as Error;
+    let error: Error = (await sms.status.update(1, 1)) as Error;
     expect(error).toBeInstanceOf(Error);
   });
 
@@ -337,11 +331,13 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    await sms.updateMessageStatus(bulkId, updateStatus);
+    await sms.status.update(bulkId, 'PENDING');
 
     expect(axios.put).toHaveBeenCalledWith(
       '/sms/1/bulks/status/?bulkId=BULK-ID-123-xyz',
-      updateStatus
+      {
+        status: 'PENDING',
+      }
     );
   });
 });

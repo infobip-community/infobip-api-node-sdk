@@ -1,11 +1,8 @@
 import { Http } from '../utils/http';
 import { InfobipAuth } from '../utils/auth';
-import {
-  validateBodyParameters,
-  validateQueryParameters,
-  validateSMSMessage,
-  validatePreview
-} from '../utils/validators/sms';
+import { validateSMSMessage } from '../utils/validators/sms';
+
+import { Validator } from '../utils/validator';
 
 const sendEndpoints: any = {
   text: '/sms/2/text/advanced',
@@ -18,11 +15,8 @@ const endpoints: any = {
   get: '/sms/1/inbox/reports',
   reports: '/sms/1/reports',
   logs: '/sms/1/logs',
-};
-
-const reschedule: any = {
-  scheduledMessages: '/sms/1/bulks',
-  scheduledStatus: '/sms/1/bulks/status',
+  schedule: '/sms/1/bulks',
+  status: '/sms/1/bulks/status',
 };
 
 class SMS {
@@ -31,6 +25,8 @@ class SMS {
   password?: string;
   reports: any;
   logs: any;
+  scheduled: any;
+  status: any;
 
   constructor(credentials: InfobipAuth) {
     this.http = new Http(credentials.baseUrl, credentials.authorization);
@@ -42,6 +38,14 @@ class SMS {
     };
     this.logs = {
       get: this.getMessageLogs.bind(this),
+    };
+    this.scheduled = {
+      get: this.getScheduledMessage.bind(this),
+      reschedule: this.rescheduleMessage.bind(this),
+    };
+    this.status = {
+      get: this.getMessageStatus.bind(this),
+      update: this.updateMessageStatus.bind(this),
     };
   }
 
@@ -80,7 +84,7 @@ class SMS {
 
   async preview(message: any) {
     try {
-      validatePreview(message);
+      Validator.requiredString(message.text, 'message.text');
       const response = await this.http.post(endpoints.preview, message);
       return response;
     } catch (error) {
@@ -100,17 +104,14 @@ class SMS {
   /**
    * See the status and the scheduled time of your SMS messages.
    *
-   * @param { any } query - Query object
+   * @param { string } bulkId - ID of the scheduled message
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async getScheduledMessage(query: any) {
+  private async getScheduledMessage(bulkId: string) {
     try {
-      validateQueryParameters(query);
+      Validator.requiredString(bulkId, 'bulkId');
 
-      const queryString = new URLSearchParams(query);
-      const response = await this.http.get(
-        reschedule.scheduledMessages + `/?${queryString}`
-      );
+      const response = await this.http.get(endpoints.schedule, { bulkId });
       return response;
     } catch (error) {
       return error;
@@ -120,19 +121,19 @@ class SMS {
   /**
    * Change the date and time for sending scheduled messages.
    *
-   * @param { any } query - Query object
-   * @param { any } body - Body object
+   * @param { string } bulkId - ID of the scheduled message
+   * @param { string } sendAt - Date and time when the message is to be sent.
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async rescheduleMessage(query: any, body: any) {
+  private async rescheduleMessage(bulkId: string, sendAt: string) {
     try {
-      validateQueryParameters(query);
-      validateBodyParameters(body);
+      Validator.requiredString(bulkId, 'bulkId');
+      Validator.requiredString(sendAt, 'sendAt');
 
-      const queryString = new URLSearchParams(query);
+      const queryString = new URLSearchParams({ bulkId });
       const response = await this.http.put(
-        reschedule.scheduledMessages + `/?${queryString}`,
-        body
+        endpoints.schedule + `/?${queryString}`,
+        { sendAt }
       );
       return response;
     } catch (error) {
@@ -143,17 +144,14 @@ class SMS {
   /**
    * See the status of scheduled messages.
    *
-   * @param { any } query - Query object
+   * @param { string } bulkId - ID of the scheduled message
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async getMessageStatus(query: any) {
+  private async getMessageStatus(bulkId: string) {
     try {
-      validateQueryParameters(query);
+      Validator.requiredString(bulkId, 'bulkId');
 
-      const queryString = new URLSearchParams(query);
-      const response = await this.http.get(
-        reschedule.scheduledStatus + `/?${queryString}`
-      );
+      const response = await this.http.get(endpoints.status, { bulkId });
       return response;
     } catch (error) {
       return error;
@@ -163,19 +161,19 @@ class SMS {
   /**
    * Change status or completely cancel sending of scheduled messages.
    *
-   * @param { any } query - Query object
-   * @param { any } body - Body object
+   * @param { string } bulkId - ID of the scheduled message
+   * @param { string } status - The status of the message(s).
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async updateMessageStatus(query: any, body: any) {
+  private async updateMessageStatus(bulkId: string, status: string) {
     try {
-      validateQueryParameters(query);
-      validateBodyParameters(body);
+      Validator.requiredString(bulkId, 'bulkId');
+      Validator.requiredString(status, 'status');
 
-      const queryString = new URLSearchParams(query);
+      const queryString = new URLSearchParams({ bulkId });
       const response = await this.http.put(
-        reschedule.scheduledStatus + `/?${queryString}`,
-        body
+        endpoints.status + `/?${queryString}`,
+        { status }
       );
       return response;
     } catch (error) {

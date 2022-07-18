@@ -110,14 +110,4 @@ export const sendQueryMessage = {
   to: ['41793026727', '41793026728', '41793026729'],
 };
 
-export const bulkId = {
-  bulkId: 'BULK-ID-123-xyz',
-};
-
-export const rescheduleSendAt = {
-  sendAt: '2022-07-12T16:00:00.000+0000',
-};
-
-export const updateStatus = {
-  status: 'PENDING',
-};
+export const bulkId = 'BULK-ID-123-xyz';

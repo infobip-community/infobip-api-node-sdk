@@ -64,6 +64,10 @@ module Validator {
 
     return true;
   }
+
+  export function requiredString(x: any, name?: string) {
+    return required(x, name) && string(x, name);
+  }
 }
 
 export { Validator };
