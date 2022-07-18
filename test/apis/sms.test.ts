@@ -3,8 +3,9 @@ import {
   basicTextMessage,
   bulkId,
   rescheduleSendAt,
-  sendQueryMessage,
   updateStatus,
+  previewMessage,
+  sendQueryMessage,
 } from '../fixtures/sms';
 import axios from 'axios';
 
@@ -19,7 +20,7 @@ const USERNAME = 'infobip';
 const PASSWORD = 's3cr3t';
 
 describe('SMS', () => {
-  it('will throw an error method parameters are wrong', async () => {
+  it('sending will throw an error when method parameters are wrong', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -31,6 +32,22 @@ describe('SMS', () => {
     let error: Error = (await sms.send(1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
+  });
+
+  it('sending will throw an error when the message type is unsupported', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    let error: Error = (await sms.send({ type: 'something' })) as Error;
+
+    expect(error.message).toEqual(
+      'Invalid message type something. Supported types are: text, binary, query.'
+    );
   });
 
   it('can send a text message', async () => {
@@ -51,20 +68,6 @@ describe('SMS', () => {
     );
   });
 
-  it('will throw an error method query parameters are wrong', async () => {
-    expect.assertions(1);
-    (axios as any).get.mockResolvedValue({});
-
-    let sms = new SMS({
-      baseUrl: BASE_URL,
-      username: USERNAME,
-      password: PASSWORD,
-    });
-
-    let error: Error = (await sms.sendQuery(1)) as Error;
-    expect(error).toBeInstanceOf(Error);
-  });
-
   it('can send a query text message', async () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
@@ -75,13 +78,48 @@ describe('SMS', () => {
       password: PASSWORD,
     });
 
-    await sms.sendQuery(sendQueryMessage);
+    await sms.send(sendQueryMessage);
 
-    expect(axios.get).toHaveBeenCalledWith(
-      '/sms/1/text/query/' +
-        '?username=Some%2520User&password=Some%2520Password&' +
-        'to=41793026727%2C41793026728%2C41793026729'
+    expect(axios.get).toHaveBeenCalledWith('/sms/1/text/query', {
+      params: {
+        password: 's3cr3t',
+        to: '41793026727,41793026728,41793026729',
+        type: 'query',
+        username: 'infobip',
+      },
+    });
+  });
+
+  it('can preview a text message', async () => {
+    expect.assertions(1);
+    (axios as any).get.mockResolvedValue({});
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await sms.preview(previewMessage);
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/sms/1/preview',
+      previewMessage,
+      undefined
     );
+  });
+
+  it('will throw an error when preivewing a text message fails', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockRejectedValue({ message: 'error' });
+
+    let sms = new SMS({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+
+    let error = await sms.preview(previewMessage);
+    expect(error).toEqual({ message: 'error' });
   });
 
   it('will throw an error when getting SMS messages fails', async () => {

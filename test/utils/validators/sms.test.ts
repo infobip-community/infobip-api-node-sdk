@@ -2,6 +2,7 @@ import {
   validateSMSMessage,
   validateBodyParameters,
   validateQueryParameters,
+  validatePreview,
 } from '../../../src/utils/validators/sms';
 
 import {
@@ -34,10 +35,6 @@ describe('validateSMSSend', () => {
     expect(validateSMSMessage(binaryTextMessage)).toBeTruthy();
   });
 
-  it('validates binary object parameter for binary text messages', () => {
-    expect(validateSMSMessage(previewMessage)).toBeTruthy();
-  });
-
   it('validates query object for query text messages', () => {
     expect(validateSMSMessage(sendQueryMessage)).toBeTruthy();
   });
@@ -56,5 +53,17 @@ describe('validateSMSSend', () => {
 
   it('return false body object for scheduled messages', () => {
     expect(validateBodyParameters({ test: 'false' })).toBeFalsy();
+  });
+});
+
+describe('validatePreview', () => {
+  it('validates basic parameters for text messages', () => {
+    expect(validatePreview(previewMessage)).toBeTruthy();
+  });
+
+  it('throws if messages is missing', () => {
+    expect(() => {
+      validatePreview({});
+    }).toThrow('text is required.');
   });
 });

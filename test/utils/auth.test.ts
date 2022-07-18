@@ -50,7 +50,7 @@ describe('InfobipAuth', () => {
     let [type, encoded] = auth.authorization?.split(' ') as Array<string>;
 
     expect(type).toEqual('Basic');
-    expect(Buffer.from(`infobip:s3cr3t`, 'base64').toString()).toEqual(encoded);
+    expect(Buffer.from(`infobip:s3cr3t`).toString('base64')).toEqual(encoded);
   });
 
   it('creates authorization for ibsso', () => {

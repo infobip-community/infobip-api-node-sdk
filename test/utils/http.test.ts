@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { Http } from '../../src/utils/http';
-import { sendQueryMessage } from '../fixtures/sms';
 
 jest.mock('axios');
 
@@ -55,18 +54,6 @@ describe('Http', () => {
 
     let http = new Http(BASE_URL, AUTHORIZATION);
     let response = await http.get('/');
-
-    expect(axios.get).toHaveBeenCalledWith('/', { params: undefined });
-    expect(response.config.headers?.Authorization).toEqual(AUTHORIZATION);
-  });
-
-  it('exposes a get method with added query parameters', async () => {
-    (axios as any).get.mockResolvedValue({
-      config: { headers: { Authorization: AUTHORIZATION } },
-    });
-
-    let http = new Http(BASE_URL, AUTHORIZATION);
-    let response = await http.getQuery('/', sendQueryMessage);
 
     expect(axios.get).toHaveBeenCalledWith('/', { params: undefined });
     expect(response.config.headers?.Authorization).toEqual(AUTHORIZATION);

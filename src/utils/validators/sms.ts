@@ -1,10 +1,7 @@
 import { Validator } from '../validator';
 
 export function validateSMSMessage(message: any) {
-  if (message.type === 'preview') {
-    return validatePreview(message);
-  }
-  if (message.type === 'sendQuery') {
+  if (message.type === 'query') {
     return validateSMSSendQuery(message);
   } else {
     return validateSMSSendTextAndBinary(message);
@@ -38,7 +35,7 @@ export function validateBodyParameters(body: any) {
   }
 }
 
-function validatePreview(message: any) {
+export function validatePreview(message: any) {
   Validator.required(message.text, 'text');
   Validator.string(message.text, 'text');
 

@@ -19,18 +19,6 @@ class Http {
     return response;
   }
 
-  async getQuery(url: string, params?: any) {
-    delete params['type'];
-    for (const k in params) {
-      if (k === 'username' || k === 'password') {
-        params[k] = encodeURI(params[k]);
-      }
-    }
-    const queryString = new URLSearchParams(params);
-    const response = await this.axios.get(url + `/?${queryString}`);
-    return response;
-  }
-
   async download(url: string) {
     const response = await this.axios.get(url, { responseType: 'stream' });
     return response;
