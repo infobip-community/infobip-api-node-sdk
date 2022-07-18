@@ -1,5 +1,4 @@
 export const sendMessage = {
-  type: 'send',
   bulkId: 'BULK-ID-123-xyz',
   messages: [
     {
@@ -70,7 +69,6 @@ export const sendMessage = {
 };
 
 export const basicTextMessage = {
-  type: 'send',
   messages: [
     {
       destinations: [
@@ -106,7 +104,7 @@ export const previewMessage = {
 };
 
 export const sendQueryMessage = {
-  type: 'sendQuery',
+  type: 'query',
   username: 'Some User',
   password: 'Some Password',
   to: ['41793026727', '41793026728', '41793026729'],
