@@ -1,10 +1,26 @@
 import { Validator } from '../validator';
 
-export function validateSMSSend(message: any) {
+export function validateSMSMessage(message: any) {
+  if (message.type === 'query') {
+    return validateSMSSendQuery(message);
+  } else {
+    return validateSMSSendTextAndBinary(message);
+  }
+}
+
+function validateSMSSendTextAndBinary(message: any) {
   Validator.required(message.messages, 'messages');
   Validator.array(message.messages, 'messages');
 
+  const tempMessage: any = message;
   message.messages.forEach((message: any) => {
+    if (tempMessage.type === 'binary') {
+      if (message.binary) {
+        Validator.object(message.binary);
+        Validator.required(message.binary.hex, 'message.binary.hex');
+        Validator.string(message.binary.hex, 'message.binary.hex');
+      }
+    }
     Validator.required(message, 'message');
     Validator.object(message, 'message');
 
@@ -126,6 +142,20 @@ export function validateSMSSend(message: any) {
       'message.sendingSpeedLimit.amount'
     );
   }
+
+  return true;
+}
+
+function validateSMSSendQuery(message: any) {
+  Validator.required(message.username, 'username');
+  Validator.string(message.username, 'username');
+  Validator.required(message.password, 'password');
+  Validator.string(message.password, 'password');
+  Validator.required(message.to, 'to');
+  Validator.array(message.to, 'to');
+  message.to.forEach((to: any) => {
+    Validator.string(to, 'to');
+  });
 
   return true;
 }

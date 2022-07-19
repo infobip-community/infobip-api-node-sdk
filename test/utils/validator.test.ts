@@ -16,6 +16,10 @@ describe('Validator', () => {
   it('exports an array method', () => {
     expect(Validator.array).toBeDefined();
   });
+
+  it('exports a requiredString method', () => {
+    expect(Validator.requiredString).toBeDefined();
+  });
 });
 
 describe('Validator.required', () => {
@@ -129,5 +133,17 @@ describe('Validator.max', () => {
     expect(() => {
       Validator.max(4, 3, 'parameter');
     }).toThrow('parameter must be lower than or equal to 3.');
+  });
+});
+
+describe('Validator.requiredString', () => {
+  it('checks a string is present', () => {
+    expect(Validator.requiredString('1')).toBeTruthy();
+  });
+
+  it('throws if value is empty', () => {
+    expect(() => {
+      Validator.requiredString('', 'value');
+    }).toThrow('value is required.');
   });
 });
