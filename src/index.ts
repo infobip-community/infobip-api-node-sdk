@@ -2,6 +2,7 @@ import { AuthType } from './utils/auth-type';
 import { InfobipAuth } from './utils/auth';
 import { Validator } from './utils/validator';
 import { WhatsApp } from './apis/whatsapp';
+import { SMS } from './apis/sms';
 import { Auth } from './apis/auth';
 
 class Infobip {
@@ -44,6 +45,7 @@ class Infobip {
     });
     this.channels = {
       whatsapp: new WhatsApp(this.credentials),
+      sms: new SMS(this.credentials),
     };
     this.auth = new Auth(this.credentials);
   }

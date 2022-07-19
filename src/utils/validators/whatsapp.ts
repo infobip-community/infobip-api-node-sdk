@@ -1,4 +1,4 @@
-import { Validator } from './validator';
+import { Validator } from '../validator';
 
 export function validateWhatsappSend(message: any) {
   if (message.type !== 'template') {

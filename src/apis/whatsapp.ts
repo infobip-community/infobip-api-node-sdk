@@ -4,7 +4,7 @@ import { Validator } from '../utils/validator';
 import {
   validateWhatsappSend,
   validateWhatsappTemplateCreate,
-} from '../utils/validators';
+} from '../utils/validators/whatsapp';
 
 const sendEndpoints: any = {
   template: '/whatsapp/1/message/template',
@@ -207,7 +207,11 @@ class WhatsApp {
     }
   }
 
-  private async confirmIdentity(sender: string, userNumber: string, hash: string) {
+  private async confirmIdentity(
+    sender: string,
+    userNumber: string,
+    hash: string
+  ) {
     try {
       Validator.required(sender, 'sender');
       Validator.string(sender, 'sender');

@@ -4,7 +4,7 @@ class Http {
   baseUrl: string;
   axios: Axios;
 
-  async post(url: string, body: any, config?: any) {
+  async post(url: string, body?: any, config?: any) {
     const response = await this.axios.post(url, body, config);
     return response;
   }
