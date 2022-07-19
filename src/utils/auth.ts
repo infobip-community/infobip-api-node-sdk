@@ -54,9 +54,9 @@ class InfobipAuth {
         );
 
         this.authorization = `${authType} ${Buffer.from(
-          `${username}:${password}`,
-          'base64'
-        ).toString()}`;
+          `${username}:${password}`
+        ).toString('base64')}`;
+
         break;
 
       case AuthType.IBSSO:

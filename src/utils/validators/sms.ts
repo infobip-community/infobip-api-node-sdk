@@ -1,48 +1,11 @@
 import { Validator } from '../validator';
 
 export function validateSMSMessage(message: any) {
-  if (message.type === 'preview') {
-    return validatePreview(message);
-  }
-  if (message.type === 'sendQuery') {
+  if (message.type === 'query') {
     return validateSMSSendQuery(message);
   } else {
     return validateSMSSendTextAndBinary(message);
   }
-}
-
-export function validateQueryParameters(query: any) {
-  Validator.required(query, 'bulkId');
-  Validator.object(query, 'bulkId');
-  Validator.string(query.bulkId, 'bulkId');
-
-  return true;
-}
-
-export function validateBodyParameters(body: any) {
-  if (body.sendAt) {
-    Validator.required(body, 'sendAt');
-    Validator.object(body, 'sendAt');
-    Validator.string(body.sendAt, 'sendAt');
-
-    return true;
-  }
-  if (body.status) {
-    Validator.required(body, 'status');
-    Validator.object(body, 'status');
-    Validator.string(body.status, 'status');
-
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function validatePreview(message: any) {
-  Validator.required(message.text, 'text');
-  Validator.string(message.text, 'text');
-
-  return true;
 }
 
 function validateSMSSendTextAndBinary(message: any) {
