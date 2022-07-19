@@ -16,6 +16,10 @@ describe('Validator', () => {
   it('exports an array method', () => {
     expect(Validator.array).toBeDefined();
   });
+
+  it('exports a requiredString method', () => {
+    expect(Validator.requiredString).toBeDefined();
+  });
 });
 
 describe('Validator.required', () => {
@@ -61,7 +65,7 @@ describe('Validator.string', () => {
 });
 
 describe('Validator.number', () => {
-  it('checks a string is present', () => {
+  it('checks a number is present', () => {
     expect(Validator.number(1)).toBeTruthy();
   });
 
@@ -69,6 +73,18 @@ describe('Validator.number', () => {
     expect(() => {
       Validator.number('10', 'value');
     }).toThrow('value must be a number.');
+  });
+});
+
+describe('Validator.integer', () => {
+  it('checks an integer is present', () => {
+    expect(Validator.integer(1)).toBeTruthy();
+  });
+
+  it('throws if value is not an integer', () => {
+    expect(() => {
+      Validator.integer(1.2, 'value');
+    }).toThrow('value must be an integer.');
   });
 });
 
@@ -105,5 +121,41 @@ describe('Validator.oneOf', () => {
     expect(() => {
       Validator.oneOf(10, { a: 1, b: 0 }, 'value');
     }).toThrow('value must be one of 1, 0.');
+  });
+});
+
+describe('Validator.maxLength', () => {
+  it('checks if length of a parameter is smaller or equal to a maximum length', () => {
+    expect(Validator.maxLength('test', 4)).toBeTruthy();
+  });
+
+  it('throws if length of a parameter is larger than a maximum length', () => {
+    expect(() => {
+      Validator.maxLength('test', 3, 'parameter');
+    }).toThrow('parameter must have a length smaller than or equal to 3.');
+  });
+});
+
+describe('Validator.max', () => {
+  it('checks if value is smaller than max', () => {
+    expect(Validator.max(2, 4)).toBeTruthy();
+  });
+
+  it('throws if value is bigger than max', () => {
+    expect(() => {
+      Validator.max(4, 3, 'parameter');
+    }).toThrow('parameter must be lower than or equal to 3.');
+  });
+});
+
+describe('Validator.requiredString', () => {
+  it('checks a string is present', () => {
+    expect(Validator.requiredString('1')).toBeTruthy();
+  });
+
+  it('throws if value is empty', () => {
+    expect(() => {
+      Validator.requiredString('', 'value');
+    }).toThrow('value is required.');
   });
 });

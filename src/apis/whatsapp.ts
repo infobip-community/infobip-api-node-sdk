@@ -4,7 +4,7 @@ import { Validator } from '../utils/validator';
 import {
   validateWhatsappSend,
   validateWhatsappTemplateCreate,
-} from '../utils/validators';
+} from '../utils/validators/whatsapp';
 
 const sendEndpoints: any = {
   template: '/whatsapp/1/message/template',

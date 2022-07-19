@@ -3,6 +3,7 @@ import { EmailStatus } from './utils/email-status-type';
 import { InfobipAuth } from './utils/auth';
 import { Validator } from './utils/validator';
 import { WhatsApp } from './apis/whatsapp';
+import { SMS } from './apis/sms';
 import { Auth } from './apis/auth';
 import { Email } from './apis/email';
 
@@ -47,6 +48,7 @@ class Infobip {
     this.channels = {
       whatsapp: new WhatsApp(this.credentials),
       email: new Email(this.credentials),
+      sms: new SMS(this.credentials),
     };
     this.auth = new Auth(this.credentials);
   }
