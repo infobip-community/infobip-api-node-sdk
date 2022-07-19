@@ -1,13 +1,14 @@
 import FormData from 'form-data';
 
 import { Http } from '../utils/http';
+import { FormDataBuilder } from '../utils/form-data';
 import { InfobipAuth } from '../utils/auth';
 import { Validator } from '../utils/validator';
 import { EmailStatus } from '../utils/email-status-type';
 import { EmailDomain } from './email-domain';
 
 const endpoints: any = {
-  send: '/email/2/send',
+  send: '/email/3/send',
   validate: '/email/2/validation',
   bulk: '/email/1/bulks',
   report: '/email/1/reports',
@@ -48,18 +49,20 @@ class Email {
       Validator.required(email.from, 'email.from');
       Validator.string(email.from, 'email.from');
 
-      Validator.required(email.subject, 'email.subject');
-      Validator.string(email.subject, 'email.subject');
+      if (!email.content.templateId) {
+        Validator.required(email.subject, 'email.subject');
+        Validator.string(email.subject, 'email.subject');
+      }
 
-      if (!(email.text || email.html || email.templateId))
+      if (
+        !(email.content.text || email.content.html || email.content.templateId)
+      )
         throw new Error(
-          'Email must contain at least one of these (text, html or templateId).'
+          'Email must contain at least one of these (content.text, content.html or content.templateId).'
         );
 
       let form = new FormData();
-      for (let key in email) {
-        form.append(key, email[key]);
-      }
+      FormDataBuilder(form, email);
 
       const response = await this.http.post(endpoints.send, form, {
         headers: form.getHeaders(),
