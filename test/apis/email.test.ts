@@ -27,7 +27,7 @@ describe('Email', () => {
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
-      content: { text: 'test' },
+      text: 'test',
     });
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -37,7 +37,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an html argument inside the content object', async () => {
+  it('exposes a send method that accepts an html argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -50,7 +50,7 @@ describe('Email', () => {
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
-      content: { html: 'test' },
+      html: 'test',
     });
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -60,7 +60,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts a templateId argument inside the content object', async () => {
+  it('exposes a send method that accepts a templateId argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -73,7 +73,7 @@ describe('Email', () => {
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
-      content: { templateId: 'test' },
+      templateId: 'test',
     });
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -97,7 +97,7 @@ describe('Email', () => {
     expect(error.message).toEqual('email.to is required.');
   });
 
-  it('exposes a send method that throws an error if text, html or templateId is not present in content', async () => {
+  it('exposes a send method that throws an error if text, html or templateId is not present', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -109,32 +109,11 @@ describe('Email', () => {
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
-      subject: 'Testing',
-      content: {},
+      subject: 'Testing'
     })) as Error;
 
     expect(error.message).toEqual(
-      'Email must contain at least one of these (content.text, content.html or content.templateId).'
-    );
-  });
-
-  it('exposes a send method that throws an error if content is not present', async () => {
-    expect.assertions(1);
-    (axios as any).post.mockResolvedValue({});
-
-    let email = new Email({
-      baseUrl: BASE_URL,
-      username: USERNAME,
-      password: PASSWORD,
-    });
-    let error = (await email.send({
-      to: 'test@example.com',
-      from: 'Tests <testing@example.com>',
-      subject: 'Testing',
-    })) as Error;
-
-    expect(error.message).toEqual(
-      "Cannot read property 'templateId' of undefined"
+      'Email must contain at least one of these (text, html or templateId).'
     );
   });
 

@@ -49,16 +49,14 @@ class Email {
       Validator.required(email.from, 'email.from');
       Validator.string(email.from, 'email.from');
 
-      if (!email.content.templateId) {
+      if (!email.templateId) {
         Validator.required(email.subject, 'email.subject');
         Validator.string(email.subject, 'email.subject');
       }
 
-      if (
-        !(email.content.text || email.content.html || email.content.templateId)
-      )
+      if (!(email.text || email.html || email.templateId))
         throw new Error(
-          'Email must contain at least one of these (content.text, content.html or content.templateId).'
+          'Email must contain at least one of these (text, html or templateId).'
         );
 
       let form = new FormData();
