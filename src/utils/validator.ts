@@ -47,6 +47,14 @@ module Validator {
     return true;
   }
 
+  export function oneOf(x: any, y: any, name?: string) {
+    if (!Object.values(y).includes(x)) {
+      throw new Error(`${name} must be one of ${Object.values(y).join(', ')}.`);
+    }
+
+    return true;
+  }
+
   export function maxLength(x: any, y: number, name?: string) {
     if (x.length > y) {
       throw new Error(

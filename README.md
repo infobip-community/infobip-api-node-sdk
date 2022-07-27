@@ -15,7 +15,7 @@ Node.js Client SDK for Infobip APIs.
 
 ## General Info
 
-For the `@infobip/api` package versioning we use the [Semantic Versioning](https://semver.org) scheme.
+For the `@infobip-api/sdk` package versioning we use the [Semantic Versioning](https://semver.org) scheme.
 
 [Node.js 14](https://nodejs.org/en/about/releases/) is minimum supported version by this SDK.
 
@@ -27,7 +27,7 @@ Published under an [MIT License](LICENSE).
 
 Install the library by using the following command:
 ```bash
-npm install @infobip/api
+npm install @infobip-api/sdk
 ```
 
 ## Code Example
@@ -37,7 +37,7 @@ The package is intended to be used with an Infobip account. If you don't already
 This example shows you how to send a WhatsApp text message. The first step is to import the `Infobip` and `AuthType` dependencies.
 
 ```javascript
-import { Infobip, AuthType } from "@infobip/api";
+import { Infobip, AuthType } from "@infobip-api/sdk";
 ```
 
 Next, you need to create an instance of `Infobip` with your API Base URL and authentication mechanism. You can find all this information on the [Infobip Portal](https://portal.infobip.com/homepage/).

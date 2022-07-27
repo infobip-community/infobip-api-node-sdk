@@ -112,6 +112,18 @@ describe('Validator.array', () => {
   });
 });
 
+describe('Validator.oneOf', () => {
+  it('checks a value is present in an object', () => {
+    expect(Validator.oneOf(1, { a: 1 })).toBeTruthy();
+  });
+
+  it('throws if value is not in object', () => {
+    expect(() => {
+      Validator.oneOf(10, { a: 1, b: 0 }, 'value');
+    }).toThrow('value must be one of 1, 0.');
+  });
+});
+
 describe('Validator.maxLength', () => {
   it('checks if length of a parameter is smaller or equal to a maximum length', () => {
     expect(Validator.maxLength('test', 4)).toBeTruthy();

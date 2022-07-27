@@ -1,4 +1,4 @@
-import { Infobip, AuthType } from '../src';
+import { Infobip, AuthType, EmailStatus } from '../src';
 
 const BASE_URL = 'https://api.infobip.com';
 const API_KEY = 's3cr3t';
@@ -12,6 +12,10 @@ describe('infobip', () => {
     });
 
     expect(infobip.credentials.baseUrl).toEqual('https://api.infobip.com');
+  });
+
+  it('exports an EmailStatus util', () => {
+    expect(EmailStatus).toBeDefined();
   });
 
   it('exposes an auth object', () => {
@@ -84,5 +88,15 @@ describe('infobip.channels', () => {
     });
 
     expect(infobip.channels.whatsapp).toBeDefined();
+  });
+
+  it('creates an email object', () => {
+    let infobip = new Infobip({
+      baseUrl: BASE_URL,
+      apiKey: API_KEY,
+      authType: AuthType.ApiKey,
+    });
+
+    expect(infobip.channels.email).toBeDefined();
   });
 });
