@@ -23,6 +23,14 @@ module Validator {
     return true;
   }
 
+  export function boolean(x: any, name?: string) {
+    if (typeof x !== 'boolean') {
+      throw new Error(`${name} must be a boolean.`);
+    }
+
+    return true;
+  }
+
   export function integer(x: any, name?: string) {
     if (!Number.isInteger(x)) {
       throw new Error(`${name} must be an integer.`);

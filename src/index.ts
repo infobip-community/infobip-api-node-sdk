@@ -6,6 +6,7 @@ import { WhatsApp } from './apis/whatsapp';
 import { SMS } from './apis/sms';
 import { Auth } from './apis/auth';
 import { Email } from './apis/email';
+import { Auth2FA } from './apis/auth-2fa';
 
 class Infobip {
   /**
@@ -15,6 +16,7 @@ class Infobip {
    */
 
   credentials: InfobipAuth;
+  service: any;
   channels: any;
   auth: any;
 
@@ -49,6 +51,9 @@ class Infobip {
       whatsapp: new WhatsApp(this.credentials),
       email: new Email(this.credentials),
       sms: new SMS(this.credentials),
+    };
+    this.service = {
+      auth2fa: new Auth2FA(this.credentials),
     };
     this.auth = new Auth(this.credentials);
   }
