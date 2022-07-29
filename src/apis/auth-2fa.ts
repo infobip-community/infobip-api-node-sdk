@@ -1,6 +1,13 @@
 import { Http } from '../utils/http';
 import { InfobipAuth } from '../utils/auth';
 import { Validator } from '../utils/validator';
+import {
+  Auth2FAApplication,
+  Auth2FAMessageTemplate,
+  Auth2FAPinCode,
+  Pin,
+  Auth2FAVerificationStatus,
+} from '../models/auth-2fa-models';
 
 const auth2FAEndpoints: any = {
   uri: '/2fa/2/applications',
@@ -39,10 +46,11 @@ class Auth2FA {
   /**
    * Create and configure a new 2FA application
    *
-   * @param { {} } reqBody - Create 2FA application request body
+   * @param { Auth2FAApplication | any } reqBody - Create 2FA application
+   * request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async createApplication(reqBody: any) {
+  async createApplication(reqBody: Auth2FAApplication | any) {
     try {
       Validator.requiredString(reqBody.name, 'name');
 
@@ -74,10 +82,11 @@ class Auth2FA {
    * Change configuration options for your existing 2FA application
    *
    * @param { string } appId - ID of the 2FA application
-   * @param { {} } reqBody - Change 2FA application request body
+   * @param { Auth2FAApplication | any } reqBody - Change 2FA application
+   * request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async updateApplication(appId: string, reqBody: any) {
+  async updateApplication(appId: string, reqBody: Auth2FAApplication | any) {
     try {
       Validator.requiredString(appId, 'appId');
       Validator.requiredString(reqBody.name, 'name');
@@ -116,14 +125,24 @@ class Auth2FA {
    * where your PIN will be dynamically included when you send the PIN message.
    *
    * @param { string } appId - ID of the 2FA application
-   * @param { {} } reqBody - Create message template request body
+   * @param { Auth2FAMessageTemplate | any } reqBody - Create message template
+   * request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async createMessageTemplate(appId: string, reqBody: any) {
+  async createMessageTemplate(
+    appId: string,
+    reqBody: Auth2FAMessageTemplate | any
+  ) {
     try {
       Validator.requiredString(appId, 'appId');
       Validator.requiredString(reqBody.messageText, 'messageText');
       Validator.requiredString(reqBody.pinType, 'pinType');
+      if (reqBody.regional.indiaDlt) {
+        Validator.requiredString(
+          reqBody.regional.indiaDlt.principalEntityId,
+          'reqBody.regional.indiaDlt.principalEntityId'
+        );
+      }
 
       const response = await this.http.post(
         auth2FAEndpoints.uri + `/${appId}/messages`,
@@ -163,13 +182,24 @@ class Auth2FA {
    *
    * @param { string } appId - ID of the 2FA application
    * @param { string } messageId - ID of the message template
-   * @param { {} } reqBody - Update message template request body
+   * @param { Auth2FAMessageTemplate | any } reqBody - Update message template
+   * request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async updateMessageTemplate(appId: string, messageId: string, reqBody: any) {
+  async updateMessageTemplate(
+    appId: string,
+    messageId: string,
+    reqBody: Auth2FAMessageTemplate | any
+  ) {
     try {
       Validator.requiredString(appId, 'appId');
       Validator.requiredString(messageId, 'messageId');
+      if (reqBody.regional.indiaDlt) {
+        Validator.requiredString(
+          reqBody.regional.indiaDlt,
+          'reqBody.regional.indiaDlt.principalEntityId'
+        );
+      }
 
       const response = await this.http.put(
         auth2FAEndpoints.uri + `/${appId}/messages/${messageId}`,
@@ -186,10 +216,10 @@ class Auth2FA {
    *
    * @param { string } ncNeeded - Indicates if Number Lookup is needed before
    *                              sending the 2FA message.
-   * @param { {} } reqBody - Send PIN over SMS request body
+   * @param { Auth2FAPinCode | any } reqBody - Send PIN over SMS request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async sendPINCodeSMS(ncNeeded: boolean, reqBody: any) {
+  async sendPINCodeSMS(ncNeeded: boolean, reqBody: Auth2FAPinCode | any) {
     try {
       Validator.boolean(ncNeeded, 'ncNeeded');
       Validator.requiredString(reqBody.applicationId, 'applicationId');
@@ -212,10 +242,10 @@ class Auth2FA {
    * If needed, you can resend the same (previously sent) PIN code over SMS
    *
    * @param { string } pinId - ID of the pin code that has to be verified
-   * @param { {} } reqBody - Resend PIN over SMS request body
+   * @param { object | any } reqBody - Resend PIN over SMS request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async resendPINCodeSMS(pinId: string, reqBody?: any) {
+  async resendPINCodeSMS(pinId: string, reqBody?: object | any) {
     try {
       Validator.requiredString(pinId, 'pinId');
 
@@ -232,10 +262,10 @@ class Auth2FA {
   /**
    * Send a PIN code over Voice using previously created message template
    *
-   * @param { {} } reqBody - Send PIN over Voice request body
+   * @param { Auth2FAPinCode | any } reqBody - Send PIN over Voice request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async sendPINCodeVoice(reqBody: any) {
+  async sendPINCodeVoice(reqBody: Auth2FAPinCode | any) {
     try {
       Validator.requiredString(reqBody.applicationId, 'applicationId');
       Validator.requiredString(reqBody.messageId, 'messageId');
@@ -255,10 +285,10 @@ class Auth2FA {
    * If needed, you can resend the same (previously sent) PIN code over Voice
    *
    * @param { string } pinId - ID of the pin code that has to be verified
-   * @param { {} } reqBody - Resend PIN over Voice request body
+   * @param { object | any } reqBody - Resend PIN over Voice request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async resendPINCodeVoice(pinId: string, reqBody?: any) {
+  async resendPINCodeVoice(pinId: string, reqBody?: object | any) {
     try {
       Validator.requiredString(pinId, 'pinId');
 
@@ -276,11 +306,11 @@ class Auth2FA {
    * Verify a phone number to confirm successful 2FA authentication
    *
    * @param { string } pinId - ID of the pin code that has to be verified
-   * @param { {} } reqBody - Verify a phone number request body
+   * @param { Pin | any } reqBody - Verify a phone number request body
    *                         The PIN code to verify
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async verifyPhoneNumber(pinId: string, reqBody: any) {
+  async verifyPhoneNumber(pinId: string, reqBody: Pin | any) {
     try {
       Validator.requiredString(pinId, 'pinId');
       Validator.requiredString(reqBody.pin, 'pin');
@@ -299,12 +329,15 @@ class Auth2FA {
    * Check if a phone number is already verified for a specific 2FA application
    *
    * @param { string } appId - ID of 2-FA application for which phone number
-   *                           verification status is requested.
-   * @param { {} } queryParameters - Get verification status request query
-   *                                 parameters.
+   * verification status is requested.
+   * @param { Auth2FAVerificationStatus | any } queryParameters - Get verification
+   * status request query parameters.
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async getVerificationStatus(appId: string, queryParameters: any) {
+  async getVerificationStatus(
+    appId: string,
+    queryParameters: Auth2FAVerificationStatus | any
+  ) {
     try {
       Validator.requiredString(appId, 'appId');
       Validator.requiredString(queryParameters.msisdn, 'msisdn');
