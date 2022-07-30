@@ -392,4 +392,184 @@ describe('2FA', () => {
 
         expect(error).toBeInstanceOf(Error);
     });
+
+    it('Resend PIN code over SMS with defined body', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+
+        await auth2fa.resendPINCodeSMS(
+            "1ABC2D",
+            {
+                "placeholders":{"firstName":"John"}
+            }
+        );
+
+        expect(axios.post).toHaveBeenCalledWith(
+            '/2fa/2/pin/1ABC2D/resend',
+            {
+                "placeholders":{"firstName":"John"}
+            },
+            undefined
+        );
+    });
+
+    it('Resend PIN code over SMS without defined body', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+
+        await auth2fa.resendPINCodeSMS(
+            "22CGH3",
+        );
+
+        expect(axios.post).toHaveBeenCalledWith(
+            '/2fa/2/pin/22CGH3/resend',
+            {},
+            undefined
+        );
+    });
+
+    it('Resend PIN code over SMS returns error', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockRejectedValue({ message: 'error' })
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+        let error: Error = (
+            await auth2fa.resendPINCodeSMS(
+                "22CGH3",
+            )
+        ) as Error;
+
+        expect(error).toEqual({ message: 'error' });
+    });
+
+    it('Send PIN code over Voice', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+        const reqBody : Auth2FAPinCode = {
+            applicationId: '8F9B78',
+            messageId: '1C8DA3',
+            to: '41793026727'
+        }
+        await auth2fa.sendPINCodeVoice(
+            reqBody,
+        );
+
+        expect(axios.post).toHaveBeenCalledWith(
+            '/2fa/2/pin/voice',
+            reqBody,
+            undefined
+        );
+    });
+
+    it('Send PIN code over Voice with wrong parameters', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+
+        let error: Error = (await auth2fa.sendPINCodeVoice(
+            1,
+        )) as Error
+
+        expect(error).toBeInstanceOf(Error);
+    });
+
+    it('Resend PIN code over Voice with defined body', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+
+        await auth2fa.resendPINCodeVoice(
+            "1ABC2D",
+            {
+                "placeholders":{"firstName":"John"}
+            }
+        );
+
+        expect(axios.post).toHaveBeenCalledWith(
+            '/2fa/2/pin/1ABC2D/resend/voice',
+            {
+                "placeholders":{"firstName":"John"}
+            },
+            undefined
+        );
+    });
+
+    it('Resend PIN code over Voice without defined body', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+
+        await auth2fa.resendPINCodeVoice(
+            "22CGH3",
+        );
+
+        expect(axios.post).toHaveBeenCalledWith(
+            '/2fa/2/pin/22CGH3/resend/voice',
+            {},
+            undefined
+        );
+    });
+
+    it('Resend PIN code over Voice returns error', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockRejectedValue({ message: 'error' })
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+        let error: Error = (
+            await auth2fa.resendPINCodeVoice(
+                "22CGH3",
+            )
+        ) as Error;
+
+        expect(error).toEqual({ message: 'error' });
+    });
 });

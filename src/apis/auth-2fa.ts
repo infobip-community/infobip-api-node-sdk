@@ -251,14 +251,15 @@ class Auth2FA {
    * @param { object | any } reqBody - Resend PIN over SMS request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async resendPINCodeSMS(pinId: string, reqBody?: object | any) {
+  async resendPINCodeSMS(pinId: string, reqBody: object | any = {}) {
     try {
       Validator.requiredString(pinId, 'pinId');
 
       const response = await this.http.post(
-        pin2FAEndpoints.uri + `/${pinId}/resend`,
-        reqBody
+          pin2FAEndpoints.uri + `/${pinId}/resend`,
+          reqBody
       );
+
       return response;
     } catch (error) {
       return error;
@@ -294,7 +295,7 @@ class Auth2FA {
    * @param { object | any } reqBody - Resend PIN over Voice request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async resendPINCodeVoice(pinId: string, reqBody?: object | any) {
+  async resendPINCodeVoice(pinId: string, reqBody: object | any = {}) {
     try {
       Validator.requiredString(pinId, 'pinId');
 
