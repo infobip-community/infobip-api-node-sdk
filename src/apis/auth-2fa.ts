@@ -137,7 +137,7 @@ class Auth2FA {
       Validator.requiredString(appId, 'appId');
       Validator.requiredString(reqBody.messageText, 'messageText');
       Validator.requiredString(reqBody.pinType, 'pinType');
-      if (reqBody.regional.indiaDlt) {
+      if (reqBody.regional && reqBody.regional.indiaDlt) {
         Validator.requiredString(
           reqBody.regional.indiaDlt.principalEntityId,
           'reqBody.regional.indiaDlt.principalEntityId'
@@ -194,9 +194,9 @@ class Auth2FA {
     try {
       Validator.requiredString(appId, 'appId');
       Validator.requiredString(messageId, 'messageId');
-      if (reqBody.regional.indiaDlt) {
+      if (reqBody.regional && reqBody.regional.indiaDlt) {
         Validator.requiredString(
-          reqBody.regional.indiaDlt,
+          reqBody.regional.indiaDlt.principalEntityId,
           'reqBody.regional.indiaDlt.principalEntityId'
         );
       }
@@ -214,20 +214,26 @@ class Auth2FA {
   /**
    * Send a PIN code over SMS using a previously created message template
    *
-   * @param { string } ncNeeded - Indicates if Number Lookup is needed before
-   *                              sending the 2FA message.
+   * @param { string } ncNeededQuery - Indicates if Number Lookup is needed
+   * before sending the 2FA message.
    * @param { Auth2FAPinCode | any } reqBody - Send PIN over SMS request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async sendPINCodeSMS(ncNeeded: boolean, reqBody: Auth2FAPinCode | any) {
+  async sendPINCodeSMS(
+      reqBody: Auth2FAPinCode | any, 
+      ncNeededQuery?: boolean
+  ) {
     try {
-      Validator.boolean(ncNeeded, 'ncNeeded');
       Validator.requiredString(reqBody.applicationId, 'applicationId');
       Validator.requiredString(reqBody.messageId, 'messageId');
       Validator.requiredString(reqBody.to, 'to');
 
-      const ncNeededString = String(ncNeeded);
-      const queryString = new URLSearchParams({ ncNeededString });
+      let ncNeeded = 'true'
+      if(!ncNeededQuery){
+        ncNeeded = String(ncNeededQuery);
+      }
+
+      const queryString = new URLSearchParams({ ncNeeded });
       const response = await this.http.post(
         pin2FAEndpoints.uri + `/?${queryString}`,
         reqBody
