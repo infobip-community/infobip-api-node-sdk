@@ -1,9 +1,3 @@
-export interface Auth2FAVerificationStatus {
-  msisdn: string;
-  verified?: boolean;
-  sent?: boolean;
-}
-
 export interface Auth2FAApplication {
   configuration?: Configuration;
   enabled?: boolean;
@@ -49,4 +43,10 @@ export interface Auth2FAPinCode {
 
 export interface Pin {
   pin: string;
+}
+
+export interface Auth2FAVerificationStatus {
+  msisdn: string;
+  verified?: boolean;
+  sent?: boolean;
 }

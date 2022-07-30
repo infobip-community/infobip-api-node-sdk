@@ -2,7 +2,8 @@ import { Auth2FA } from "../../src/apis/auth-2fa";
 import {
     Auth2FAApplication,
     Auth2FAMessageTemplate,
-    Auth2FAPinCode
+    Auth2FAPinCode,
+    Auth2FAVerificationStatus
 } from '../../src/models/auth-2fa-models'
 
 import axios from 'axios';
@@ -571,5 +572,94 @@ describe('2FA', () => {
         ) as Error;
 
         expect(error).toEqual({ message: 'error' });
+    });
+
+    it('Verify phone number', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+
+        await auth2fa.verifyPhoneNumber(
+            "1ABC2D",
+            { pin: '1111'}
+        );
+
+        expect(axios.post).toHaveBeenCalledWith(
+            '/2fa/2/pin/1ABC2D/verify',
+            { pin: '1111'},
+            undefined
+        );
+    });
+
+    it('Verify phone number with wrong parameters', async () => {
+        expect.assertions(1);
+        (axios as any).post.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+        let error: Error = (
+            await auth2fa.verifyPhoneNumber(
+                "1ABC2D",
+                1
+            )
+        ) as Error
+
+        expect(error).toBeInstanceOf(Error);
+    });
+
+    it('Get verification status', async () => {
+        expect.assertions(1);
+        (axios as any).get.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+
+        const queryParamaters : Auth2FAVerificationStatus = {
+            msisdn: '385717284759547'
+        }
+
+        await auth2fa.getVerificationStatus(
+            "appId",
+            queryParamaters
+            );
+
+        expect(axios.get).toHaveBeenCalledWith(
+            '/2fa/2/applications/appId/verifications/?msisdn=385717284759547',
+            { "params": undefined }
+        );
+    });
+
+    it('Get verification status with wrong parameters', async () => {
+        expect.assertions(1);
+        (axios as any).get.mockResolvedValue({});
+
+        let auth2fa = new Auth2FA({
+            baseUrl: BASE_URL,
+            username: USERNAME,
+            password: PASSWORD,
+        });
+
+        let error: Error = (
+            await auth2fa.getVerificationStatus(
+                "appId",
+                1
+            )
+        ) as Error
+
+        expect(error).toBeInstanceOf(Error);
     });
 });
