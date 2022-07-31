@@ -7,6 +7,13 @@ import { SMS } from './apis/sms';
 import { Auth } from './apis/auth';
 import { Email } from './apis/email';
 import { Auth2FA } from './apis/auth-2fa';
+import {
+  Auth2FAApplication,
+  Auth2FAMessageTemplate,
+  Auth2FAPinCode,
+  Pin,
+  Auth2FAVerificationStatus,
+} from './models/auth-2fa-models';
 
 class Infobip {
   /**
@@ -59,4 +66,13 @@ class Infobip {
   }
 }
 
-export { Infobip, AuthType, EmailStatus };
+export {
+  Infobip,
+  AuthType,
+  EmailStatus,
+  Auth2FAApplication,
+  Auth2FAMessageTemplate,
+  Auth2FAPinCode,
+  Pin,
+  Auth2FAVerificationStatus,
+};

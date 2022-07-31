@@ -219,21 +219,19 @@ class Auth2FA {
    * @param { Auth2FAPinCode | any } reqBody - Send PIN over SMS request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async sendPINCodeSMS(
-      reqBody: Auth2FAPinCode | any, 
-      ncNeededQuery?: boolean
-  ) {
+  async sendPINCodeSMS(reqBody: Auth2FAPinCode | any, ncNeededQuery?: boolean) {
     try {
       Validator.requiredString(reqBody.applicationId, 'applicationId');
       Validator.requiredString(reqBody.messageId, 'messageId');
       Validator.requiredString(reqBody.to, 'to');
 
-      let ncNeeded = 'true'
-      if(!ncNeededQuery){
+      let ncNeeded = 'true';
+      if (!ncNeededQuery) {
         ncNeeded = String(ncNeededQuery);
       }
 
-      const queryString = new URLSearchParams({ ncNeeded });
+      const query = new URLSearchParams({ ncNeeded });
+      const queryString = query.toString();
       const response = await this.http.post(
         pin2FAEndpoints.uri + `/?${queryString}`,
         reqBody
@@ -256,8 +254,8 @@ class Auth2FA {
       Validator.requiredString(pinId, 'pinId');
 
       const response = await this.http.post(
-          pin2FAEndpoints.uri + `/${pinId}/resend`,
-          reqBody
+        pin2FAEndpoints.uri + `/${pinId}/resend`,
+        reqBody
       );
 
       return response;
