@@ -59,5 +59,28 @@
   "dependencies": {
     "axios": "^0.26.0",
     "form-data": "^2.3.3"
-  }
+  },
+  "description": "Node.js Client SDK for Infobip APIs.",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infobip-community/infobip-api-node-sdk.git"
+  },
+  "keywords": [
+    "infobip",
+    "api",
+    "infobip",
+    "sdk",
+    "sms",
+    "whatsapp",
+    "email",
+    "2fa"
+  ],
+  "bugs": {
+    "url": "https://github.com/infobip-community/infobip-api-node-sdk/issues"
+  },
+  "homepage": "https://github.com/infobip-community/infobip-api-node-sdk#readme"
 }

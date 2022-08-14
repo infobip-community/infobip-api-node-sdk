@@ -109,7 +109,7 @@ describe('Email', () => {
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
-      subject: 'Testing'
+      subject: 'Testing',
     })) as Error;
 
     expect(error.message).toEqual(
