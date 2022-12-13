@@ -1,21 +1,23 @@
 import { InfobipAuth } from '../../src/utils/auth';
 import { AuthType } from '../../src/utils/auth-type';
+import { v4 as uuid } from 'uuid';
 
 const BASE_URL = 'https://example.org';
+const PASSWORD = uuid();
 
 describe('InfobipAuth', () => {
   it('only requires a baseUrl', () => {
     let auth = new InfobipAuth({
       baseUrl: BASE_URL,
       authType: AuthType.ApiKey,
-      apiKey: 's3creT',
+      apiKey: PASSWORD,
     });
 
     expect(auth.baseUrl).toEqual(BASE_URL);
     expect(auth.authType).toEqual('App');
     expect(auth.password).toEqual('');
     expect(auth.username).toEqual('');
-    expect(auth.apiKey).toEqual('s3creT');
+    expect(auth.apiKey).toEqual(PASSWORD);
     expect(auth.ibssoToken).toEqual('');
     expect(auth.oauthToken).toEqual('');
   });
@@ -35,9 +37,9 @@ describe('InfobipAuth', () => {
   });
 
   it('creates authorization for api keys', () => {
-    let auth = new InfobipAuth({ baseUrl: BASE_URL, apiKey: 's3cr3t' });
+    let auth = new InfobipAuth({ baseUrl: BASE_URL, apiKey: PASSWORD });
 
-    expect(auth.authorization).toEqual('App s3cr3t');
+    expect(auth.authorization).toEqual(`App ${PASSWORD}`);
   });
 
   it('creates authorization for username and password', () => {
@@ -45,31 +47,31 @@ describe('InfobipAuth', () => {
       baseUrl: BASE_URL,
       authType: AuthType.Basic,
       username: 'infobip',
-      password: 's3cr3t',
+      password: PASSWORD,
     });
     let [type, encoded] = auth.authorization?.split(' ') as Array<string>;
 
     expect(type).toEqual('Basic');
-    expect(Buffer.from(`infobip:s3cr3t`).toString('base64')).toEqual(encoded);
+    expect(Buffer.from(`infobip:${PASSWORD}`).toString('base64')).toEqual(encoded);
   });
 
   it('creates authorization for ibsso', () => {
     let auth = new InfobipAuth({
       baseUrl: BASE_URL,
       authType: AuthType.IBSSO,
-      ibssoToken: 's3cr3t',
+      ibssoToken: PASSWORD,
     });
 
-    expect(auth.authorization).toEqual('IBSSO s3cr3t');
+    expect(auth.authorization).toEqual(`IBSSO ${PASSWORD}`);
   });
 
   it('creates authorization for oauth', () => {
     let auth = new InfobipAuth({
       baseUrl: BASE_URL,
       authType: AuthType.OAuth,
-      oauthToken: 's3cr3t',
+      oauthToken: PASSWORD,
     });
 
-    expect(auth.authorization).toEqual('Bearer s3cr3t');
+    expect(auth.authorization).toEqual(`Bearer ${PASSWORD}`);
   });
 });
