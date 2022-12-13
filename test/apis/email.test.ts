@@ -1,5 +1,6 @@
 import { Email } from '../../src/apis/email';
 import FormData from 'form-data';
+import { v4 as uuid } from 'uuid';
 
 import axios from 'axios';
 import { EmailStatus } from '../../src/utils/email-status-type';
@@ -11,7 +12,7 @@ beforeAll(() => {
 
 const BASE_URL = 'https://example.org';
 const USERNAME = 'infobip';
-const PASSWORD = 's3cr3t';
+const PASSWORD = uuid();
 
 describe('Email', () => {
   it('exposes a send method', async () => {

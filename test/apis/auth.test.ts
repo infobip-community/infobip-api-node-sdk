@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { Auth } from '../../src/apis/auth';
 
 import axios from 'axios';
@@ -9,7 +10,7 @@ beforeAll(() => {
 
 const BASE_URL = 'https://example.org';
 const USERNAME = 'infobip';
-const PASSWORD = 's3cr3t';
+const PASSWORD = uuid();
 
 describe('Auth', () => {
   it('exposes an ibsso create method', async () => {
@@ -87,7 +88,7 @@ describe('Auth', () => {
     await auth.oauth2.create();
 
     expect(axios.post).toHaveBeenCalledWith(
-      '/auth/1/oauth2/token?client_secret=s3cr3t&client_id=infobip&grant_type=client_credentials',
+      `/auth/1/oauth2/token?client_secret=${PASSWORD}&client_id=infobip&grant_type=client_credentials`,
       {},
       { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
     );

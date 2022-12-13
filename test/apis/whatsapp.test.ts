@@ -14,7 +14,7 @@ import {
   interactiveMultiProductMessage,
   interactiveProductMessage,
 } from '../fixtures/whatsapp';
-
+import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 jest.mock('axios');
 
@@ -24,7 +24,7 @@ beforeAll(() => {
 
 const BASE_URL = 'https://example.org';
 const USERNAME = 'infobip';
-const PASSWORD = 's3cr3t';
+const PASSWORD = uuid();
 
 describe('Whatsapp', () => {
   it('will throw an error if the message type is not supported', async () => {
