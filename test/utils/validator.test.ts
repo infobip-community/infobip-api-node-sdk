@@ -76,6 +76,18 @@ describe('Validator.number', () => {
   });
 });
 
+describe('Validator.boolean', () => {
+  it('checks a boolean is present', () => {
+    expect(Validator.boolean(true)).toBeTruthy();
+  });
+
+  it('throws if value is not a boolean', () => {
+    expect(() => {
+      Validator.boolean('true', 'value');
+    }).toThrow('value must be a boolean.');
+  });
+});
+
 describe('Validator.integer', () => {
   it('checks an integer is present', () => {
     expect(Validator.integer(1)).toBeTruthy();
