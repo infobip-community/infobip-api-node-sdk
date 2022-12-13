@@ -43,16 +43,17 @@ describe('InfobipAuth', () => {
   });
 
   it('creates authorization for username and password', () => {
+    const USERNAME = uuid();
     let auth = new InfobipAuth({
       baseUrl: BASE_URL,
       authType: AuthType.Basic,
-      username: 'infobip',
+      username: USERNAME,
       password: PASSWORD,
     });
     let [type, encoded] = auth.authorization?.split(' ') as Array<string>;
 
     expect(type).toEqual('Basic');
-    expect(Buffer.from(`infobip:${PASSWORD}`).toString('base64')).toEqual(encoded);
+    expect(Buffer.from(`${USERNAME}:${PASSWORD}`).toString('base64')).toEqual(encoded);
   });
 
   it('creates authorization for ibsso', () => {
