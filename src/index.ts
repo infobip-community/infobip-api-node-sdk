@@ -6,14 +6,14 @@ import { WhatsApp } from './apis/whatsapp';
 import { SMS } from './apis/sms';
 import { Auth } from './apis/auth';
 import { Email } from './apis/email';
-import { Auth2FA } from './apis/auth-2fa';
+import { TwoFA } from './apis/2fa';
 import {
-  Auth2FAApplication,
-  Auth2FAMessageTemplate,
-  Auth2FAPinCode,
+  TwoFAApplication,
+  TwoFAMessageTemplate,
+  TwoFAPinCode,
   Pin,
-  Auth2FAVerificationStatus,
-} from './models/auth-2fa-models';
+  TwoFAVerificationStatus,
+} from './models/2fa-models';
 
 class Infobip {
   /**
@@ -60,7 +60,7 @@ class Infobip {
       sms: new SMS(this.credentials),
     };
     this.service = {
-      auth2fa: new Auth2FA(this.credentials),
+      twoFA: new TwoFA(this.credentials),
     };
     this.auth = new Auth(this.credentials);
   }
@@ -70,9 +70,9 @@ export {
   Infobip,
   AuthType,
   EmailStatus,
-  Auth2FAApplication,
-  Auth2FAMessageTemplate,
-  Auth2FAPinCode,
+  TwoFAApplication,
+  TwoFAMessageTemplate,
+  TwoFAPinCode,
   Pin,
-  Auth2FAVerificationStatus,
+  TwoFAVerificationStatus,
 };
