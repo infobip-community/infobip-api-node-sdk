@@ -66,6 +66,7 @@
     "node_modules/**",
     ".eslintrc.js",
     ".vscode/settings.json",
-    ".gitignore"
+    ".gitignore",
+    ".github/workflows"
   ]
 }
