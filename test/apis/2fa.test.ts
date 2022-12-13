@@ -1,10 +1,10 @@
-import { Auth2FA } from '../../src/apis/auth-2fa';
+import { TwoFA } from '../../src/apis/2fa';
 import {
-  Auth2FAApplication,
-  Auth2FAMessageTemplate,
-  Auth2FAPinCode,
-  Auth2FAVerificationStatus,
-} from '../../src/models/auth-2fa-models';
+  TwoFAApplication,
+  TwoFAMessageTemplate,
+  TwoFAPinCode,
+  TwoFAVerificationStatus,
+} from '../../src/models/2fa-models';
 
 import axios from 'axios';
 
@@ -23,12 +23,12 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
-    await auth2fa.getApplications();
+    await twoFA.getApplications();
 
     expect(axios.get).toHaveBeenCalledWith('/2fa/2/applications', {
       params: undefined,
@@ -39,12 +39,12 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
-    let error = await auth2fa.getApplications();
+    let error = await twoFA.getApplications();
 
     expect(error).toEqual({ message: 'error' });
   });
@@ -53,16 +53,16 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    const reqBody: Auth2FAApplication = {
+    const reqBody: TwoFAApplication = {
       name: 'test',
     };
-    await auth2fa.createApplication(reqBody);
+    await twoFA.createApplication(reqBody);
 
     expect(axios.post).toHaveBeenCalledWith(
       '/2fa/2/applications',
@@ -75,13 +75,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.createApplication(1)) as Error;
+    let error: Error = (await twoFA.createApplication(1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
   });
@@ -90,13 +90,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    await auth2fa.getApplication('appId');
+    await twoFA.getApplication('appId');
 
     expect(axios.get).toHaveBeenCalledWith('/2fa/2/applications/appId', {
       params: undefined,
@@ -107,13 +107,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.getApplication('appId')) as Error;
+    let error: Error = (await twoFA.getApplication('appId')) as Error;
 
     expect(error).toEqual({ message: 'error' });
   });
@@ -122,16 +122,16 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    const reqBody: Auth2FAApplication = {
+    const reqBody: TwoFAApplication = {
       name: 'test',
     };
-    await auth2fa.updateApplication('appId', reqBody);
+    await twoFA.updateApplication('appId', reqBody);
 
     expect(axios.put).toHaveBeenCalledWith('/2fa/2/applications/appId', {
       name: 'test',
@@ -142,13 +142,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.updateApplication('test', 1)) as Error;
+    let error: Error = (await twoFA.updateApplication('test', 1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
   });
@@ -157,13 +157,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    await auth2fa.getMessageTemplates('8F9B78BC039C09E45F35BFE');
+    await twoFA.getMessageTemplates('8F9B78BC039C09E45F35BFE');
 
     expect(
       axios.get
@@ -177,13 +177,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.getMessageTemplates(
+    let error: Error = (await twoFA.getMessageTemplates(
       '8F9B78BC039C09E45F35BFE'
     )) as Error;
 
@@ -194,13 +194,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    const reqBody: Auth2FAMessageTemplate = {
+    const reqBody: TwoFAMessageTemplate = {
       messageText: 'Here is your pin: ',
       pinType: 'NUMERIC',
       regional: {
@@ -209,7 +209,7 @@ describe('2FA', () => {
         },
       },
     };
-    await auth2fa.createMessageTemplate('8F9B78BC039C09E45F35BFE', reqBody);
+    await twoFA.createMessageTemplate('8F9B78BC039C09E45F35BFE', reqBody);
 
     expect(axios.post).toHaveBeenCalledWith(
       '/2fa/2/applications/8F9B78BC039C09E45F35BFE/messages',
@@ -222,13 +222,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.createMessageTemplate('1', 1)) as Error;
+    let error: Error = (await twoFA.createMessageTemplate('1', 1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
   });
@@ -237,13 +237,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    await auth2fa.getMessageTemplate('8F9B78', '1C8DA3');
+    await twoFA.getMessageTemplate('8F9B78', '1C8DA3');
 
     expect(axios.get).toHaveBeenCalledWith(
       '/2fa/2/applications/8F9B78/messages/1C8DA3',
@@ -257,13 +257,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.getMessageTemplate(
+    let error: Error = (await twoFA.getMessageTemplate(
       '8F9B78',
       '1C8DA3'
     )) as Error;
@@ -275,13 +275,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    const reqBody: Auth2FAMessageTemplate = {
+    const reqBody: TwoFAMessageTemplate = {
       messageText: 'Here is your pin: ',
       pinType: 'NUMERIC',
       regional: {
@@ -290,7 +290,7 @@ describe('2FA', () => {
         },
       },
     };
-    await auth2fa.updateMessageTemplate('8F9B78', '1C8DA3', reqBody);
+    await twoFA.updateMessageTemplate('8F9B78', '1C8DA3', reqBody);
 
     expect(axios.put).toHaveBeenCalledWith(
       '/2fa/2/applications/8F9B78/messages/1C8DA3',
@@ -302,7 +302,7 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
@@ -317,7 +317,7 @@ describe('2FA', () => {
         },
       },
     };
-    let error: Error = (await auth2fa.updateMessageTemplate(
+    let error: Error = (await twoFA.updateMessageTemplate(
       'test',
       'test',
       reqBody
@@ -330,18 +330,18 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    const reqBody: Auth2FAPinCode = {
+    const reqBody: TwoFAPinCode = {
       applicationId: '8F9B78',
       messageId: '1C8DA3',
       to: '41793026727',
     };
-    await auth2fa.sendPINCodeSMS(reqBody, false);
+    await twoFA.sendPINCodeSMS(reqBody, false);
 
     expect(axios.post).toHaveBeenCalledWith(
       '/2fa/2/pin/?ncNeeded=false',
@@ -354,13 +354,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.sendPINCodeSMS(1, false)) as Error;
+    let error: Error = (await twoFA.sendPINCodeSMS(1, false)) as Error;
 
     expect(error).toBeInstanceOf(Error);
   });
@@ -369,13 +369,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    await auth2fa.resendPINCodeSMS('1ABC2D', {
+    await twoFA.resendPINCodeSMS('1ABC2D', {
       placeholders: { firstName: 'John' },
     });
 
@@ -392,13 +392,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    await auth2fa.resendPINCodeSMS('22CGH3');
+    await twoFA.resendPINCodeSMS('22CGH3');
 
     expect(axios.post).toHaveBeenCalledWith(
       '/2fa/2/pin/22CGH3/resend',
@@ -411,13 +411,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.resendPINCodeSMS('22CGH3')) as Error;
+    let error: Error = (await twoFA.resendPINCodeSMS('22CGH3')) as Error;
 
     expect(error).toEqual({ message: 'error' });
   });
@@ -426,18 +426,18 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    const reqBody: Auth2FAPinCode = {
+    const reqBody: TwoFAPinCode = {
       applicationId: '8F9B78',
       messageId: '1C8DA3',
       to: '41793026727',
     };
-    await auth2fa.sendPINCodeVoice(reqBody);
+    await twoFA.sendPINCodeVoice(reqBody);
 
     expect(axios.post).toHaveBeenCalledWith(
       '/2fa/2/pin/voice',
@@ -450,13 +450,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.sendPINCodeVoice(1)) as Error;
+    let error: Error = (await twoFA.sendPINCodeVoice(1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
   });
@@ -465,13 +465,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    await auth2fa.resendPINCodeVoice('1ABC2D', {
+    await twoFA.resendPINCodeVoice('1ABC2D', {
       placeholders: { firstName: 'John' },
     });
 
@@ -488,13 +488,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    await auth2fa.resendPINCodeVoice('22CGH3');
+    await twoFA.resendPINCodeVoice('22CGH3');
 
     expect(axios.post).toHaveBeenCalledWith(
       '/2fa/2/pin/22CGH3/resend/voice',
@@ -507,13 +507,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.resendPINCodeVoice('22CGH3')) as Error;
+    let error: Error = (await twoFA.resendPINCodeVoice('22CGH3')) as Error;
 
     expect(error).toEqual({ message: 'error' });
   });
@@ -522,13 +522,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    await auth2fa.verifyPhoneNumber('1ABC2D', { pin: '1111' });
+    await twoFA.verifyPhoneNumber('1ABC2D', { pin: '1111' });
 
     expect(axios.post).toHaveBeenCalledWith(
       '/2fa/2/pin/1ABC2D/verify',
@@ -541,13 +541,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.verifyPhoneNumber('1ABC2D', 1)) as Error;
+    let error: Error = (await twoFA.verifyPhoneNumber('1ABC2D', 1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
   });
@@ -556,17 +556,17 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    const queryParamaters: Auth2FAVerificationStatus = {
+    const queryParamaters: TwoFAVerificationStatus = {
       msisdn: '385717284759547',
     };
 
-    await auth2fa.getVerificationStatus('appId', queryParamaters);
+    await twoFA.getVerificationStatus('appId', queryParamaters);
 
     expect(
       axios.get
@@ -580,13 +580,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let auth2fa = new Auth2FA({
+    let twoFA = new TwoFA({
       baseUrl: BASE_URL,
       username: USERNAME,
       password: PASSWORD,
     });
 
-    let error: Error = (await auth2fa.getVerificationStatus(
+    let error: Error = (await twoFA.getVerificationStatus(
       'appId',
       1
     )) as Error;

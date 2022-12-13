@@ -2,14 +2,14 @@ import { Http } from '../utils/http';
 import { InfobipAuth } from '../utils/auth';
 import { Validator } from '../utils/validator';
 import {
-  Auth2FAApplication,
-  Auth2FAMessageTemplate,
-  Auth2FAPinCode,
+  TwoFAApplication,
+  TwoFAMessageTemplate,
+  TwoFAPinCode,
   Pin,
-  Auth2FAVerificationStatus,
-} from '../models/auth-2fa-models';
+  TwoFAVerificationStatus,
+} from '../models/2fa-models';
 
-const auth2FAEndpoints: any = {
+const TwoFAEndpoints: any = {
   uri: '/2fa/2/applications',
 };
 
@@ -17,7 +17,7 @@ const pin2FAEndpoints: any = {
   uri: '/2fa/2/pin',
 };
 
-class Auth2FA {
+class TwoFA {
   http: Http;
   username?: string;
   password?: string;
@@ -36,7 +36,7 @@ class Auth2FA {
    */
   async getApplications() {
     try {
-      const response = await this.http.get(auth2FAEndpoints.uri);
+      const response = await this.http.get(TwoFAEndpoints.uri);
       return response;
     } catch (error) {
       return error;
@@ -46,15 +46,15 @@ class Auth2FA {
   /**
    * Create and configure a new 2FA application
    *
-   * @param { Auth2FAApplication | any } reqBody - Create 2FA application
+   * @param { TwoFAApplication | any } reqBody - Create 2FA application
    * request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async createApplication(reqBody: Auth2FAApplication | any) {
+  async createApplication(reqBody: TwoFAApplication | any) {
     try {
       Validator.requiredString(reqBody.name, 'name');
 
-      const response = await this.http.post(auth2FAEndpoints.uri, reqBody);
+      const response = await this.http.post(TwoFAEndpoints.uri, reqBody);
       return response;
     } catch (error) {
       return error;
@@ -71,7 +71,7 @@ class Auth2FA {
     try {
       Validator.requiredString(appId, 'appId');
 
-      const response = await this.http.get(auth2FAEndpoints.uri + `/${appId}`);
+      const response = await this.http.get(TwoFAEndpoints.uri + `/${appId}`);
       return response;
     } catch (error) {
       return error;
@@ -82,17 +82,17 @@ class Auth2FA {
    * Change configuration options for your existing 2FA application
    *
    * @param { string } appId - ID of the 2FA application
-   * @param { Auth2FAApplication | any } reqBody - Change 2FA application
+   * @param { TwoFAApplication | any } reqBody - Change 2FA application
    * request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async updateApplication(appId: string, reqBody: Auth2FAApplication | any) {
+  async updateApplication(appId: string, reqBody: TwoFAApplication | any) {
     try {
       Validator.requiredString(appId, 'appId');
       Validator.requiredString(reqBody.name, 'name');
 
       const response = await this.http.put(
-        auth2FAEndpoints.uri + `/${appId}`,
+        TwoFAEndpoints.uri + `/${appId}`,
         reqBody
       );
       return response;
@@ -112,7 +112,7 @@ class Auth2FA {
       Validator.requiredString(appId, 'appId');
 
       const response = await this.http.get(
-        auth2FAEndpoints.uri + `/${appId}/messages`
+        TwoFAEndpoints.uri + `/${appId}/messages`
       );
       return response;
     } catch (error) {
@@ -125,13 +125,13 @@ class Auth2FA {
    * where your PIN will be dynamically included when you send the PIN message.
    *
    * @param { string } appId - ID of the 2FA application
-   * @param { Auth2FAMessageTemplate | any } reqBody - Create message template
+   * @param { TwoFAMessageTemplate | any } reqBody - Create message template
    * request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
   async createMessageTemplate(
     appId: string,
-    reqBody: Auth2FAMessageTemplate | any
+    reqBody: TwoFAMessageTemplate | any
   ) {
     try {
       Validator.requiredString(appId, 'appId');
@@ -145,7 +145,7 @@ class Auth2FA {
       }
 
       const response = await this.http.post(
-        auth2FAEndpoints.uri + `/${appId}/messages`,
+        TwoFAEndpoints.uri + `/${appId}/messages`,
         reqBody
       );
       return response;
@@ -168,7 +168,7 @@ class Auth2FA {
       Validator.requiredString(messageId, 'messageId');
 
       const response = await this.http.get(
-        auth2FAEndpoints.uri + `/${appId}/messages/${messageId}`
+        TwoFAEndpoints.uri + `/${appId}/messages/${messageId}`
       );
       return response;
     } catch (error) {
@@ -182,14 +182,14 @@ class Auth2FA {
    *
    * @param { string } appId - ID of the 2FA application
    * @param { string } messageId - ID of the message template
-   * @param { Auth2FAMessageTemplate | any } reqBody - Update message template
+   * @param { TwoFAMessageTemplate | any } reqBody - Update message template
    * request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
   async updateMessageTemplate(
     appId: string,
     messageId: string,
-    reqBody: Auth2FAMessageTemplate | any
+    reqBody: TwoFAMessageTemplate | any
   ) {
     try {
       Validator.requiredString(appId, 'appId');
@@ -202,7 +202,7 @@ class Auth2FA {
       }
 
       const response = await this.http.put(
-        auth2FAEndpoints.uri + `/${appId}/messages/${messageId}`,
+        TwoFAEndpoints.uri + `/${appId}/messages/${messageId}`,
         reqBody
       );
       return response;
@@ -216,10 +216,10 @@ class Auth2FA {
    *
    * @param { string } ncNeededQuery - Indicates if Number Lookup is needed
    * before sending the 2FA message.
-   * @param { Auth2FAPinCode | any } reqBody - Send PIN over SMS request body
+   * @param { TwoFAPinCode | any } reqBody - Send PIN over SMS request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async sendPINCodeSMS(reqBody: Auth2FAPinCode | any, ncNeededQuery?: boolean) {
+  async sendPINCodeSMS(reqBody: TwoFAPinCode | any, ncNeededQuery?: boolean) {
     try {
       Validator.requiredString(reqBody.applicationId, 'applicationId');
       Validator.requiredString(reqBody.messageId, 'messageId');
@@ -267,10 +267,10 @@ class Auth2FA {
   /**
    * Send a PIN code over Voice using previously created message template
    *
-   * @param { Auth2FAPinCode | any } reqBody - Send PIN over Voice request body
+   * @param { TwoFAPinCode | any } reqBody - Send PIN over Voice request body
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
-  async sendPINCodeVoice(reqBody: Auth2FAPinCode | any) {
+  async sendPINCodeVoice(reqBody: TwoFAPinCode | any) {
     try {
       Validator.requiredString(reqBody.applicationId, 'applicationId');
       Validator.requiredString(reqBody.messageId, 'messageId');
@@ -335,13 +335,13 @@ class Auth2FA {
    *
    * @param { string } appId - ID of 2-FA application for which phone number
    * verification status is requested.
-   * @param { Auth2FAVerificationStatus | any } queryParameters - Get verification
+   * @param { TwoFAVerificationStatus | any } queryParameters - Get verification
    * status request query parameters.
    * @return { AxiosResponse<any, any> } response - Return Axios Response
    */
   async getVerificationStatus(
     appId: string,
-    queryParameters: Auth2FAVerificationStatus | any
+    queryParameters: TwoFAVerificationStatus | any
   ) {
     try {
       Validator.requiredString(appId, 'appId');
@@ -350,7 +350,7 @@ class Auth2FA {
       const query = new URLSearchParams(queryParameters);
       const queryString = query.toString();
       const response = await this.http.get(
-        auth2FAEndpoints.uri + `/${appId}/verifications/?${queryString}`
+        TwoFAEndpoints.uri + `/${appId}/verifications/?${queryString}`
       );
       return response;
     } catch (error) {
@@ -359,4 +359,4 @@ class Auth2FA {
   }
 }
 
-export { Auth2FA };
+export { TwoFA };

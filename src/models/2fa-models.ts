@@ -1,4 +1,4 @@
-export interface Auth2FAApplication {
+export interface TwoFAApplication {
   configuration?: Configuration;
   enabled?: boolean;
   name: string;
@@ -13,7 +13,7 @@ export interface Configuration {
   verifyPinLimit?: string;
 }
 
-export interface Auth2FAMessageTemplate {
+export interface TwoFAMessageTemplate {
   language?: string;
   messageText: string;
   pinLength?: number;
@@ -33,7 +33,7 @@ export interface IndiaDlt {
   principalEntityId: string;
 }
 
-export interface Auth2FAPinCode {
+export interface TwoFAPinCode {
   applicationId: string;
   from?: string;
   messageId: string;
@@ -45,7 +45,7 @@ export interface Pin {
   pin: string;
 }
 
-export interface Auth2FAVerificationStatus {
+export interface TwoFAVerificationStatus {
   msisdn: string;
   verified?: boolean;
   sent?: boolean;
