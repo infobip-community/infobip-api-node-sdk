@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { EmailDomain } from '../../src/apis/email-domain';
 
 import axios from 'axios';
@@ -9,7 +10,7 @@ beforeAll(() => {
 
 const BASE_URL = 'https://example.org';
 const USERNAME = 'infobip';
-const PASSWORD = 's3cr3t';
+const PASSWORD = uuid();
 
 describe('EmailDomain', () => {
   it('exposes a get method', async () => {

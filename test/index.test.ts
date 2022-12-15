@@ -1,7 +1,8 @@
+import { v4 as uuid } from 'uuid';
 import { Infobip, AuthType, EmailStatus } from '../src';
 
 const BASE_URL = 'https://api.infobip.com';
-const API_KEY = 's3cr3t';
+const API_KEY = uuid();
 
 describe('infobip', () => {
   it('creates credentials object', () => {
