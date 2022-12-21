@@ -33,7 +33,10 @@
     "trailingComma": "es5"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   },
   "name": "@infobip-api/sdk",
   "author": "Developer Relations<devrel@infobip.com>",
@@ -43,6 +46,7 @@
     "Mike Elsmore<mike.elsmore@infobip.com>"
   ],
   "module": "dist/infobip.esm.js",
+  "type": "module",
   "size-limit": [
     {
       "path": "dist/infobip.cjs.production.min.js",
@@ -56,6 +60,7 @@
   "devDependencies": {
     "@microsoft/api-extractor": "^7.20.1",
     "@size-limit/preset-small-lib": "^7.0.8",
+    "@types/axios": "^0.14.0",
     "@types/uuid": "^9.0.0",
     "husky": "^7.0.4",
     "size-limit": "^7.0.8",
@@ -65,7 +70,7 @@
     "uuid": "^9.0.0"
   },
   "dependencies": {
-    "axios": "^0.26.0",
+    "axios": "^1.2.1",
     "form-data": "^4.0.0"
   },
   "description": "Node.js Client SDK for Infobip APIs.",
