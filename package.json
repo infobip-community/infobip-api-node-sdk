@@ -36,7 +36,12 @@
     "testEnvironment": "node"
   },
   "name": "@infobip-api/sdk",
-  "author": "Alex Lakatos",
+  "author": "Developer Relations<devrel@infobip.com>",
+  "contributors": [
+    "Alex Lakatos<alex.lakatos.dev@gmail.com>",
+    "Julia Biro<julia.biro@infobip.com>",
+    "Mike Elsmore<mike.elsmore@infobip.com>"
+  ],
   "module": "dist/infobip.esm.js",
   "size-limit": [
     {
@@ -62,7 +67,7 @@
   "dependencies": {
     "axios": "^0.26.0",
     "form-data": "^4.0.0"
-  }
+  },
   "description": "Node.js Client SDK for Infobip APIs.",
   "directories": {
     "doc": "docs",
