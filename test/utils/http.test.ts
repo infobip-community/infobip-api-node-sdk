@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { v4 as uuid } from 'uuid';
 import { Http } from '../../src/utils/http';
 
 jest.mock('axios');
@@ -8,7 +9,7 @@ beforeAll(() => {
 });
 
 const BASE_URL = 'https://example.org';
-const AUTHORIZATION = 's3cr3t';
+const AUTHORIZATION = uuid();
 
 describe('Http', () => {
   it('creates a baseUrl', () => {

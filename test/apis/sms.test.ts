@@ -6,6 +6,7 @@ import {
   bulkId,
 } from '../fixtures/sms';
 import axios from 'axios';
+import { v4 as uuid } from 'uuid';
 
 jest.mock('axios');
 
@@ -15,7 +16,7 @@ beforeAll(() => {
 
 const BASE_URL = 'https://example.org';
 const USERNAME = 'infobip';
-const PASSWORD = 's3cr3t';
+const PASSWORD = uuid();
 
 describe('SMS', () => {
   it('sending will throw an error when method parameters are wrong', async () => {
@@ -80,7 +81,7 @@ describe('SMS', () => {
 
     expect(axios.get).toHaveBeenCalledWith('/sms/1/text/query', {
       params: {
-        password: 's3cr3t',
+        password: PASSWORD,
         to: '41793026727,41793026728,41793026729',
         type: 'query',
         username: 'infobip',
