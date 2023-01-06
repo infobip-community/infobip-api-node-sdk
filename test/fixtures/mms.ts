@@ -21,7 +21,7 @@ export const advancedMessage = {
       validityPeriod: 720,
       messageSegments: [
         {
-          contentId: 'rando-string-ID',
+          contentId: 'random-string-ID',
           text: 'Hello World',
         },
       ],
@@ -55,14 +55,14 @@ export const advancedMessage = {
       title: 'A long time ago, in a galaxy far, far away...',
       messageSegments: [
         {
-          contentId: 'rando-string-ID',
+          contentId: 'random-string-ID',
           contentType: 'image/svg+xml',
           contentTransferEncoding: 'base64',
           contentUrl:
             'https://www.infobip.com/wp-content/themes/infobip/static/ui/infobip-logo.svg',
         },
         {
-          contentId: 'rando-string-ID',
+          contentId: 'random-string-ID',
           contentType: 'image/svg+xml',
           contentTransferEncoding: 'base64',
           contentBase64:
@@ -79,7 +79,7 @@ export const advancedMessage = {
       from: '41793026700',
       messageSegments: [
         {
-          contentId: 'rando-string-ID',
+          contentId: 'random-string-ID',
           uploadedContentId: 'ID-of-previously-uploaded-binary-file',
         },
       ],
@@ -93,7 +93,7 @@ export const advancedMessage = {
       from: '41793026700',
       messageSegments: [
         {
-          contentId: 'rando-string-ID',
+          contentId: 'random-string-ID',
           contentType: 'application/smil',
           smil:
             '<smil><head><meta name="author" content="Jane Morales"/><meta name="title" content="Multimedia My Way"/><meta name="copyright" content="(c)1998 Jane Morales"/></head><body><seq><audio src="audio/newsong.wav"/><audio src="audio/oldsong.snd"/></seq></body></smil>',
