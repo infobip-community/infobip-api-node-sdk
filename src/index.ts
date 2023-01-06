@@ -4,6 +4,7 @@ import { InfobipAuth } from './utils/auth';
 import { Validator } from './utils/validator';
 import { WhatsApp } from './apis/whatsapp';
 import { SMS } from './apis/sms';
+import { MMS } from './apis/mms';
 import { Auth } from './apis/auth';
 import { Email } from './apis/email';
 
@@ -49,6 +50,7 @@ class Infobip {
       whatsapp: new WhatsApp(this.credentials),
       email: new Email(this.credentials),
       sms: new SMS(this.credentials),
+      mms: new MMS(this.credentials),
     };
     this.auth = new Auth(this.credentials);
   }
