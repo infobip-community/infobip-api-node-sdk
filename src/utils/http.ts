@@ -1,4 +1,5 @@
 import axios, { Axios } from 'axios';
+const Package = require('../../package.json');
 
 class Http {
   baseUrl: string;
@@ -39,6 +40,7 @@ class Http {
     this.axios = axios.create({
       baseURL: this.baseUrl,
       headers: {
+        'User-Agent': `${Package.name} ${Package.version}`,
         'Content-Type': 'application/json',
         Authorization: `${authorization}`,
       },
