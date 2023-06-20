@@ -562,11 +562,11 @@ describe('2FA', () => {
       password: PASSWORD,
     });
 
-    const queryParamaters: TwoFAVerificationStatus = {
+    const queryParameters: TwoFAVerificationStatus = {
       msisdn: '385717284759547',
     };
 
-    await twoFA.getVerificationStatus('appId', queryParamaters);
+    await twoFA.getVerificationStatus('appId', queryParameters);
 
     expect(
       axios.get
@@ -586,10 +586,7 @@ describe('2FA', () => {
       password: PASSWORD,
     });
 
-    let error: Error = (await twoFA.getVerificationStatus(
-      'appId',
-      1
-    )) as Error;
+    let error: Error = (await twoFA.getVerificationStatus('appId', 1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
   });
