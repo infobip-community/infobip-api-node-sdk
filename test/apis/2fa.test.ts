@@ -586,10 +586,7 @@ describe('2FA', () => {
       password: PASSWORD,
     });
 
-    let error: Error = (await twoFA.getVerificationStatus(
-      'appId',
-      1
-    )) as Error;
+    let error: Error = (await twoFA.getVerificationStatus('appId', 1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
   });

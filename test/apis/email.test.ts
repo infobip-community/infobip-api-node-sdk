@@ -1,6 +1,7 @@
 import { Email } from '../../src/apis/email';
 import FormData from 'form-data';
 import { v4 as uuid } from 'uuid';
+import Fs from 'fs';
 
 import axios from 'axios';
 import { EmailStatus } from '../../src/utils/email-status-type';
@@ -84,6 +85,60 @@ describe('Email', () => {
     );
   });
 
+  it('exposes a send method that accepts an attachment argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      attachment: [{
+        data: Fs.readFileSync('./test/apis/email.test.ts'),
+        name: 'email.test.ts',
+      }]
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an inlineImage argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      inlineImage: [{
+        data: Fs.readFileSync('./test/apis/email.test.ts'),
+        name: 'email.test.ts',
+      }]
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
   it('exposes a send method that throws an error', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
@@ -115,6 +170,132 @@ describe('Email', () => {
 
     expect(error.message).toEqual(
       'Email must contain at least one of these (text, html or templateId).'
+    );
+  });
+
+  it('exposes a send method that throws an error if attachment is the wrong type', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    let error = (await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'help',
+      attachment: 1
+    })) as Error;
+    expect(error.message).toEqual(
+      'email.attachment must be an array.'
+    );
+  });
+
+  it('exposes a send method that throws an error if attachment is missing data', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    let error = (await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'help',
+      attachment: [{ name: 'hello.txt' }]
+    })) as Error;
+    expect(error.message).toEqual(
+      'email.attachment[].data is required.'
+    );
+  });
+
+  it('exposes a send method that throws an error if attachment is missing name', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    let error = (await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'help',
+      attachment: [{ data: 'plaintext' }]
+    })) as Error;
+    expect(error.message).toEqual(
+      'email.attachment[].name is required.'
+    );
+  });
+
+  it('exposes a send method that throws an error if inlineImage is the wrong type', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    let error = (await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'help',
+      inlineImage: 1
+    })) as Error;
+    expect(error.message).toEqual(
+      'email.inlineImage must be an array.'
+    );
+  });
+
+  it('exposes a send method that throws an error if inlineImage is missing data', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    let error = (await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'help',
+      inlineImage: [{ name: 'hello.jpg' }]
+    })) as Error;
+    expect(error.message).toEqual(
+      'email.inlineImage[].data is required.'
+    );
+  });
+
+  it('exposes a send method that throws an error if inlineImage is missing name', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    let error = (await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'help',
+      inlineImage: [{ data: 'plaintext' }]
+    })) as Error;
+    expect(error.message).toEqual(
+      'email.inlineImage[].name is required.'
     );
   });
 

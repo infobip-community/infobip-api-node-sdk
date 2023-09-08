@@ -59,6 +59,34 @@ class Email {
           'Email must contain at least one of these (text, html or templateId).'
         );
 
+      if (email.attachment) {
+        Validator.array(email.attachment, 'email.attachment');
+        email.attachment.forEach((attachmentObject: any) => {
+          Validator.requiredString(
+            attachmentObject.data,
+            'email.attachment[].data'
+          );
+          Validator.requiredString(
+            attachmentObject.name,
+            'email.attachment[].name'
+          );
+        });
+      }
+
+      if (email.inlineImage) {
+        Validator.array(email.inlineImage, 'email.inlineImage');
+        email.inlineImage.forEach((inlineImage: any) => {
+          Validator.requiredString(
+            inlineImage.data,
+            'email.inlineImage[].data'
+          );
+          Validator.requiredString(
+            inlineImage.name,
+            'email.inlineImage[].name'
+          );
+        });
+      }
+
       let form = new FormData();
       FormDataBuilder(form, email);
 
