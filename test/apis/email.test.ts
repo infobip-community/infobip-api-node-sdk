@@ -99,10 +99,12 @@ describe('Email', () => {
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
       text: 'hello world',
-      attachment: [{
-        data: Fs.readFileSync('./test/apis/email.test.ts'),
-        name: 'email.test.ts',
-      }]
+      attachment: [
+        {
+          data: Fs.readFileSync('./test/apis/email.test.ts'),
+          name: 'email.test.ts',
+        },
+      ],
     });
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -126,10 +128,12 @@ describe('Email', () => {
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
       text: 'hello world',
-      inlineImage: [{
-        data: Fs.readFileSync('./test/apis/email.test.ts'),
-        name: 'email.test.ts',
-      }]
+      inlineImage: [
+        {
+          data: Fs.readFileSync('./test/apis/email.test.ts'),
+          name: 'email.test.ts',
+        },
+      ],
     });
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -187,11 +191,9 @@ describe('Email', () => {
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
       text: 'help',
-      attachment: 1
+      attachment: 1,
     })) as Error;
-    expect(error.message).toEqual(
-      'email.attachment must be an array.'
-    );
+    expect(error.message).toEqual('email.attachment must be an array.');
   });
 
   it('exposes a send method that throws an error if attachment is missing data', async () => {
@@ -208,11 +210,9 @@ describe('Email', () => {
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
       text: 'help',
-      attachment: [{ name: 'hello.txt' }]
+      attachment: [{ name: 'hello.txt' }],
     })) as Error;
-    expect(error.message).toEqual(
-      'email.attachment[].data is required.'
-    );
+    expect(error.message).toEqual('email.attachment[].data is required.');
   });
 
   it('exposes a send method that throws an error if attachment is missing name', async () => {
@@ -229,11 +229,9 @@ describe('Email', () => {
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
       text: 'help',
-      attachment: [{ data: 'plaintext' }]
+      attachment: [{ data: 'plaintext' }],
     })) as Error;
-    expect(error.message).toEqual(
-      'email.attachment[].name is required.'
-    );
+    expect(error.message).toEqual('email.attachment[].name is required.');
   });
 
   it('exposes a send method that throws an error if inlineImage is the wrong type', async () => {
@@ -250,11 +248,9 @@ describe('Email', () => {
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
       text: 'help',
-      inlineImage: 1
+      inlineImage: 1,
     })) as Error;
-    expect(error.message).toEqual(
-      'email.inlineImage must be an array.'
-    );
+    expect(error.message).toEqual('email.inlineImage must be an array.');
   });
 
   it('exposes a send method that throws an error if inlineImage is missing data', async () => {
@@ -271,11 +267,9 @@ describe('Email', () => {
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
       text: 'help',
-      inlineImage: [{ name: 'hello.jpg' }]
+      inlineImage: [{ name: 'hello.jpg' }],
     })) as Error;
-    expect(error.message).toEqual(
-      'email.inlineImage[].data is required.'
-    );
+    expect(error.message).toEqual('email.inlineImage[].data is required.');
   });
 
   it('exposes a send method that throws an error if inlineImage is missing name', async () => {
@@ -292,11 +286,9 @@ describe('Email', () => {
       from: 'Tests <testing@example.com>',
       subject: 'Testing',
       text: 'help',
-      inlineImage: [{ data: 'plaintext' }]
+      inlineImage: [{ data: 'plaintext' }],
     })) as Error;
-    expect(error.message).toEqual(
-      'email.inlineImage[].name is required.'
-    );
+    expect(error.message).toEqual('email.inlineImage[].name is required.');
   });
 
   it('exposes a validate method', async () => {
