@@ -154,7 +154,7 @@ describe('Email', () => {
     });
     let error = (await email.send('')) as Error;
 
-    expect(error.message).toEqual('email.to is required.');
+    expect(error.message).toEqual('email must be an object.');
   });
 
   it('exposes a send method that throws an error if text, html or templateId is not present', async () => {
