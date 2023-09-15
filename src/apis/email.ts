@@ -105,7 +105,7 @@ class Email {
       if (email.attachment) {
         Validator.array(email.attachment, 'email.attachment');
         email.attachment.forEach((attachmentObject: any) => {
-          Validator.requiredString(
+          Validator.required(
             attachmentObject.data,
             'email.attachment[].data'
           );
@@ -119,7 +119,7 @@ class Email {
       if (email.inlineImage) {
         Validator.array(email.inlineImage, 'email.inlineImage');
         email.inlineImage.forEach((inlineImage: any) => {
-          Validator.requiredString(
+          Validator.required(
             inlineImage.data,
             'email.inlineImage[].data'
           );
