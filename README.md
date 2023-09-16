@@ -94,7 +94,7 @@ let response = await infobip.channels.email.send({
   subject: 'Testing',
   text: 'hello world',
   attachment: [{
-    data: Fs.readFileSync('/path/to/your/file'),
+    data: Fs.readFile('/path/to/your/file'),
     name: 'name-of-the-attachment-in-the-email',
   }]
 })
