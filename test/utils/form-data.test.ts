@@ -15,6 +15,17 @@ describe('FormDataBuilder', () => {
     expect(form instanceof FormData).toBeTruthy();
   });
 
+  it('allows for array based fields', () => {
+    let form = new FormData();
+    FormDataBuilder(form, {
+      to: [
+        'example@example.com',
+        'test@example.com',
+      ],
+    });
+    expect(form instanceof FormData).toBeTruthy();
+  });
+
   it('allows for files: attachments', () => {
     let form = new FormData();
     FormDataBuilder(form, {
