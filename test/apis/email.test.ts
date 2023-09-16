@@ -39,6 +39,125 @@ describe('Email', () => {
     );
   });
 
+  it('exposes a send method with multiple to', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: ['test@example.com', 'example@example.com'],
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'test',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method with single cc', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      cc: 'example@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'test',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method with multiple cc', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@test.com',
+      cc: ['test@example.com', 'example@example.com'],
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'test',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method with single bcc', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      bcc: 'example@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'test',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method with multiple bcc', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@test.com',
+      bcc: ['test@example.com', 'example@example.com'],
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'test',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
   it('exposes a send method that accepts an html argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
@@ -60,6 +179,49 @@ describe('Email', () => {
       jasmine.any(FormData),
       jasmine.anything()
     );
+  });
+
+  it('exposes a send method that accepts an ampHtml argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      html: 'test',
+      ampHtml: 'test',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that throws an error if ampHtml is included with out a html argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    let error = (await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      ampHtml: 'test',
+      text: 'not html',
+    })) as Error;
+    expect(error.message).toEqual('email.html is required.');
   });
 
   it('exposes a send method that accepts a templateId argument', async () => {
@@ -134,6 +296,462 @@ describe('Email', () => {
           name: 'email.test.ts',
         },
       ],
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an intermediateReport argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      intermediateReport: true,
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an notifyUrl argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      notifyUrl: 'http://notifyUrl.test',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an notifyContentType argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      notifyContentType: 'notifyContentType',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an callbackData argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      callbackData: 'callbackData',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an track argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      track: true,
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an trackClicks argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      trackClicks: true,
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an trackOpens argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      trackOpens: true,
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an trackingUrl argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      trackingUrl: 'http://trackingthis.com',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an bulkId argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      bulkId: 'bigLongBulkGuid',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an messageId argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      messageId: 'thisIsYourMessageId',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an replyTo argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      replyTo: 'test@example.com',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an defaultPlaceholders argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      defaultPlaceholders: '{{placeholder}}',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an preserveRecipients argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      preserveRecipients: true,
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an sendAt argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      sendAt: 'YYYY-MM-DD',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an landingPagePlaceholders argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      landingPagePlaceholders: '{{placeholder}}',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an landingPageId argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      landingPageId: 'LandingPageID',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an templateLanguageVersion argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      templateLanguageVersion: 'versionString',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an applicationId argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      applicationId: 'appID',
+    });
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/email/3/send',
+      jasmine.any(FormData),
+      jasmine.anything()
+    );
+  });
+
+  it('exposes a send method that accepts an entityId argument', async () => {
+    expect.assertions(1);
+    (axios as any).post.mockResolvedValue({});
+
+    let email = new Email({
+      baseUrl: BASE_URL,
+      username: USERNAME,
+      password: PASSWORD,
+    });
+    await email.send({
+      to: 'test@example.com',
+      from: 'Tests <testing@example.com>',
+      subject: 'Testing',
+      text: 'hello world',
+      entityId: 'entityId',
     });
 
     expect(axios.post).toHaveBeenCalledWith(

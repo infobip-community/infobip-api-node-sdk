@@ -18,10 +18,7 @@ describe('FormDataBuilder', () => {
   it('allows for array based fields', () => {
     let form = new FormData();
     FormDataBuilder(form, {
-      to: [
-        'example@example.com',
-        'test@example.com',
-      ],
+      to: ['example@example.com', 'test@example.com'],
     });
     expect(form instanceof FormData).toBeTruthy();
   });
