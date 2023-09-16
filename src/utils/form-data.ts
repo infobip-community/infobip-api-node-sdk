@@ -13,6 +13,10 @@ export function FormDataBuilder(formData: any, data: any, parentKey?: string) {
         );
       }
     });
+  } else if (Array.isArray(data)) {
+    data.forEach((value: any, index: number) => {
+      formData.append(`${parentKey}['${index}']`, value);
+    });
   } else {
     formData.append(parentKey, data);
   }
