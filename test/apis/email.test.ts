@@ -158,7 +158,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an html argument', async () => {
+  it('exposes a send method that accepts a html argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -181,7 +181,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an ampHtml argument', async () => {
+  it('exposes a send method that accepts a ampHtml argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -247,7 +247,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an attachment argument', async () => {
+  it('exposes a send method that accepts a attachment argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -276,7 +276,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an inlineImage argument', async () => {
+  it('exposes a send method that accepts a inlineImage argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -305,7 +305,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an intermediateReport argument', async () => {
+  it('exposes a send method that accepts a intermediateReport argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -329,7 +329,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an notifyUrl argument', async () => {
+  it('exposes a send method that accepts a notifyUrl argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -353,7 +353,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an notifyContentType argument', async () => {
+  it('exposes a send method that accepts a notifyContentType argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -377,7 +377,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an callbackData argument', async () => {
+  it('exposes a send method that accepts a callbackData argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -401,7 +401,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an track argument', async () => {
+  it('exposes a send method that accepts a track argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -425,7 +425,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an trackClicks argument', async () => {
+  it('exposes a send method that accepts a trackClicks argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -449,7 +449,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an trackOpens argument', async () => {
+  it('exposes a send method that accepts a trackOpens argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -473,7 +473,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an trackingUrl argument', async () => {
+  it('exposes a send method that accepts a trackingUrl argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -497,7 +497,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an bulkId argument', async () => {
+  it('exposes a send method that accepts a bulkId argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -521,7 +521,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an messageId argument', async () => {
+  it('exposes a send method that accepts a messageId argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -545,7 +545,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an replyTo argument', async () => {
+  it('exposes a send method that accepts a replyTo argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -569,7 +569,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an defaultPlaceholders argument', async () => {
+  it('exposes a send method that accepts a defaultPlaceholders argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -593,7 +593,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an preserveRecipients argument', async () => {
+  it('exposes a send method that accepts a preserveRecipients argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -617,7 +617,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an sendAt argument', async () => {
+  it('exposes a send method that accepts a sendAt argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -641,7 +641,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an landingPagePlaceholders argument', async () => {
+  it('exposes a send method that accepts a landingPagePlaceholders argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -665,7 +665,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an landingPageId argument', async () => {
+  it('exposes a send method that accepts a landingPageId argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -689,7 +689,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an templateLanguageVersion argument', async () => {
+  it('exposes a send method that accepts a templateLanguageVersion argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -713,7 +713,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an applicationId argument', async () => {
+  it('exposes a send method that accepts a applicationId argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
@@ -737,7 +737,7 @@ describe('Email', () => {
     );
   });
 
-  it('exposes a send method that accepts an entityId argument', async () => {
+  it('exposes a send method that accepts a entityId argument', async () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
