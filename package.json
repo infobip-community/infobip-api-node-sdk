@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -46,7 +46,6 @@
     "Mike Elsmore<mike.elsmore@infobip.com>"
   ],
   "module": "dist/infobip.esm.js",
-  "type": "module",
   "size-limit": [
     {
       "path": "dist/infobip.cjs.production.min.js",
