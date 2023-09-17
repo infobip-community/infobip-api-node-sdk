@@ -4,6 +4,7 @@ Node.js Client SDK for Infobip APIs.
 # Supported Channels
 - Whatsapp -> [Docs](https://www.infobip.com/docs/api#channels/whatsapp)
 - Email -> [Docs](https://www.infobip.com/docs/api#channels/email)
+- SMS -> [Docs](https://www.infobip.com/docs/api#channels/sms)
 
 #### Table of Contents:
 
@@ -62,6 +63,41 @@ let response = await infobip.channels.whatsapp.send({
     text: "Hello World",
   },
 });
+
+console.log(response);
+```
+
+### E-mail Attachment Example
+
+When sending an E-mail with an attachment or inline image, you'll need follow the below process
+
+``javascript
+import { Infobip, AuthType } from "@infobip-api/sdk";
+```
+
+Next, you need to create an instance of `Infobip` with your API Base URL and authentication mechanism. You can find all this information on the [Infobip Portal](https://portal.infobip.com/homepage/).
+
+```javascript
+let infobip = new Infobip({
+  baseUrl: "YOUR_BASE_URL",
+  apiKey: "YOUR_API_KEY",
+  authType: AuthType.ApiKey,
+});
+```
+
+And to send with an attachment, the following way to identify it
+
+```javascript
+let response = await infobip.channels.email.send({
+  to: 'test@example.com',
+  from: 'Tests <testing@example.com>',
+  subject: 'Testing',
+  text: 'hello world',
+  attachment: [{
+    data: Fs.readFile('/path/to/your/file'),
+    name: 'name-of-the-attachment-in-the-email',
+  }]
+})
 
 console.log(response);
 ```

@@ -43,21 +43,172 @@ class Email {
 
   async send(email: any) {
     try {
+      Validator.object(email, 'email');
+
+      Validator.requiredString(email.from, 'email.from');
+
       Validator.required(email.to, 'email.to');
-      Validator.string(email.to, 'email.to');
+      if (!Array.isArray(email.to)) {
+        email.to = [email.to];
+      }
+      Validator.array(email.to, 'email.to');
+      email.to.forEach((to: any, index: number) => {
+        Validator.string(to, `email.to[${index}]`);
+      });
 
-      Validator.required(email.from, 'email.from');
-      Validator.string(email.from, 'email.from');
-
-      if (!email.templateId) {
-        Validator.required(email.subject, 'email.subject');
-        Validator.string(email.subject, 'email.subject');
+      if (email.cc) {
+        if (!Array.isArray(email.cc)) {
+          email.cc = [email.cc];
+        }
+        email.cc.forEach((cc: any, index: number) => {
+          Validator.string(cc, `email.cc[${index}]`);
+        });
       }
 
-      if (!(email.text || email.html || email.templateId))
+      if (email.bcc) {
+        if (!Array.isArray(email.bcc)) {
+          email.bcc = [email.bcc];
+        }
+        email.bcc.forEach((bcc: any, index: number) => {
+          Validator.string(bcc, `email.bcc[${index}]`);
+        });
+      }
+
+      if (!email.templateId) {
+        Validator.requiredString(email.subject, 'email.subject');
+        Validator.maxLength(email.subject, 1000, 'email.subject');
+      }
+
+      if (!(email.text || email.html || email.templateId)) {
         throw new Error(
           'Email must contain at least one of these (text, html or templateId).'
         );
+      }
+
+      if (email.text) {
+        Validator.string(email.text, 'email.text');
+      }
+
+      if (email.html) {
+        Validator.string(email.html, 'email.html');
+      }
+
+      if (email.ampHtml) {
+        Validator.required(email.html, 'email.html');
+        Validator.string(email.ampHtml, 'email.ampHtml');
+      }
+
+      if (email.templateId) {
+        Validator.integer(email.templateId, 'email.templateId');
+      }
+
+      if (email.attachment) {
+        Validator.array(email.attachment, 'email.attachment');
+        email.attachment.forEach((attachmentObject: any) => {
+          Validator.required(attachmentObject.data, 'email.attachment[].data');
+          Validator.requiredString(
+            attachmentObject.name,
+            'email.attachment[].name'
+          );
+        });
+      }
+
+      if (email.inlineImage) {
+        Validator.array(email.inlineImage, 'email.inlineImage');
+        email.inlineImage.forEach((inlineImage: any) => {
+          Validator.required(inlineImage.data, 'email.inlineImage[].data');
+          Validator.requiredString(
+            inlineImage.name,
+            'email.inlineImage[].name'
+          );
+        });
+      }
+
+      if (email.intermediateReport) {
+        Validator.boolean(email.intermediateReport, 'email.intermediateReport');
+      }
+
+      if (email.notifyUrl) {
+        Validator.string(email.notifyUrl, 'email.notifyUrl');
+      }
+
+      if (email.notifyContentType) {
+        Validator.string(email.notifyContentType, 'email.notifyContentType');
+      }
+
+      if (email.callbackData) {
+        Validator.string(email.callbackData, 'email.callbackData');
+        Validator.maxLength(email.callbackData, 4000, 'email.callbackData');
+      }
+
+      if (email.track) {
+        Validator.boolean(email.track, 'email.track');
+      }
+
+      if (email.trackClicks) {
+        Validator.boolean(email.trackClicks, 'email.trackClicks');
+      }
+
+      if (email.trackOpens) {
+        Validator.boolean(email.trackOpens, 'email.trackOpens');
+      }
+
+      if (email.trackingUrl) {
+        Validator.string(email.trackingUrl, 'email.trackingUrl');
+      }
+
+      if (email.bulkId) {
+        Validator.string(email.bulkId, 'email.bulkId');
+      }
+
+      if (email.messageId) {
+        Validator.string(email.messageId, 'email.messageId');
+      }
+
+      if (email.replyTo) {
+        Validator.string(email.replyTo, 'email.replyTo');
+      }
+
+      if (email.defaultPlaceholders) {
+        Validator.string(
+          email.defaultPlaceholders,
+          'email.defaultPlaceholders'
+        );
+      }
+
+      if (email.preserveRecipients) {
+        Validator.boolean(email.preserveRecipients, 'email.preserveRecipients');
+      }
+
+      if (email.sendAt) {
+        Validator.string(email.sendAt, 'email.sendAt');
+      }
+
+      if (email.landingPagePlaceholders) {
+        Validator.string(
+          email.landingPagePlaceholders,
+          'email.landingPagePlaceholders'
+        );
+      }
+
+      if (email.landingPageId) {
+        Validator.string(email.landingPageId, 'email.landingPageId');
+      }
+
+      if (email.templateLanguageVersion) {
+        Validator.string(
+          email.templateLanguageVersion,
+          'email.templateLanguageVersion'
+        );
+      }
+
+      if (email.applicationId) {
+        Validator.string(email.applicationId, 'email.applicationId');
+      }
+
+      if (email.entityId) {
+        Validator.string(email.entityId, 'email.entityId');
+      }
 
       let form = new FormData();
       FormDataBuilder(form, email);
