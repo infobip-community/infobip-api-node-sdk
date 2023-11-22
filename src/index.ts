@@ -16,7 +16,7 @@ import {
 class Infobip {
   /**
    *
-   * @param { InfobipAuth } config - Configuration object for Infobip API
+   * @param { InfobipAuth | Http } config - Configuration object for Infobip API
    *
    */
 
@@ -31,6 +31,7 @@ class Infobip {
     this.credentials = {
       baseUrl: ''
     };
+    this.http = new Http('');
     if (InfobipObject instanceof InfobipAuth) {
       const {
         baseUrl,
@@ -40,7 +41,7 @@ class Infobip {
         password,
         oauthToken,
         ibssoToken,
-      } = Infobip;
+      } = InfobipObject;
       Validator.required(baseUrl, 'Infobip.baseUrl');
       Validator.required(authType, 'Infobip.authType');
   
