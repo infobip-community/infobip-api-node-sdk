@@ -3,6 +3,7 @@ import { InfobipAuth } from '../utils/auth';
 import { AuthType } from '../utils/auth-type';
 import { URLSearchParams } from 'url';
 import { Validator } from '../utils/validator';
+import { Infobip } from '..';
 
 const endpoints: any = {
   session: '/auth/1/session',
@@ -14,8 +15,8 @@ class Auth {
   oauth2: any;
   credentials: InfobipAuth;
 
-  constructor(credentials: InfobipAuth) {
-    this.credentials = credentials;
+  constructor(infobip: Infobip) {
+    this.credentials = infobip.credentials;
     this.ibsso = {
       create: this.createSession.bind(this),
       destroy: this.destroySession.bind(this),

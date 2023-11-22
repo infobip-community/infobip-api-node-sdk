@@ -1,5 +1,3 @@
-import { Http } from '../utils/http';
-import { InfobipAuth } from '../utils/auth';
 import { Validator } from '../utils/validator';
 import {
   TwoFAApplication,
@@ -8,6 +6,8 @@ import {
   Pin,
   TwoFAVerificationStatus,
 } from '../models/2fa-models';
+import { HttpAPI } from './http-api';
+import { Infobip } from '..';
 
 const TwoFAEndpoints: any = {
   uri: '/2fa/2/applications',
@@ -17,15 +17,10 @@ const pin2FAEndpoints: any = {
   uri: '/2fa/2/pin',
 };
 
-class TwoFA {
-  http: Http;
-  username?: string;
-  password?: string;
+class TwoFA extends HttpAPI {
 
-  constructor(credentials: InfobipAuth) {
-    this.http = new Http(credentials.baseUrl, credentials.authorization);
-    this.username = credentials.username;
-    this.password = credentials.password;
+  constructor(infobip: Infobip) {
+    super (infobip);
   }
 
   /**

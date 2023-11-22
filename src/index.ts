@@ -2,11 +2,9 @@ import { AuthType } from './utils/auth-type';
 import { EmailStatus } from './utils/email-status-type';
 import { InfobipAuth } from './utils/auth';
 import { Validator } from './utils/validator';
-import { WhatsApp } from './apis/whatsapp';
-import { SMS } from './apis/sms';
+import { Http } from './utils/http';
+import { API } from './apis';
 import { Auth } from './apis/auth';
-import { Email } from './apis/email';
-import { TwoFA } from './apis/2fa';
 import {
   TwoFAApplication,
   TwoFAMessageTemplate,
@@ -18,57 +16,75 @@ import {
 class Infobip {
   /**
    *
-   * @param {InfobipAuth} config - Configuration object for Infobip API
+   * @param { InfobipAuth } config - Configuration object for Infobip API
    *
    */
 
   credentials: InfobipAuth;
   service: any;
   channels: any;
-  auth: any;
+  auth: Auth;
+  http: Http;
+  api: API;
 
-  constructor({
-    baseUrl,
-    authType,
-    apiKey,
-    username,
-    password,
-    oauthToken,
-    ibssoToken,
-  }: InfobipAuth) {
-    Validator.required(baseUrl, 'Infobip.baseUrl');
-    Validator.required(authType, 'Infobip.authType');
+  constructor(InfobipObject: InfobipAuth | Http) {
+    this.credentials = {
+      baseUrl: ''
+    };
+    if (InfobipObject instanceof InfobipAuth) {
+      const {
+        baseUrl,
+        authType,
+        apiKey,
+        username,
+        password,
+        oauthToken,
+        ibssoToken,
+      } = Infobip;
+      Validator.required(baseUrl, 'Infobip.baseUrl');
+      Validator.required(authType, 'Infobip.authType');
+  
+      password && Validator.string(password, 'Infobip.password');
+      username && Validator.string(username, 'Infobip.username');
+      apiKey && Validator.string(apiKey, 'Infobip.apiKey');
+      oauthToken && Validator.string(oauthToken, 'Infobip.oauthToken');
+      ibssoToken && Validator.string(ibssoToken, 'Infobip.ibssoToken');
+  
+      this.credentials = new InfobipAuth({
+        baseUrl,
+        authType,
+        apiKey,
+        username,
+        password,
+        oauthToken,
+        ibssoToken,
+      });
+      this.http = new Http(this.credentials.baseUrl, this.credentials.authorization);
+    } else if (InfobipObject instanceof Http) {
+      this.http = InfobipObject;
+      this.credentials = {
+        baseUrl: this.http.baseUrl
+      }
+    }
 
-    password && Validator.string(password, 'Infobip.password');
-    username && Validator.string(username, 'Infobip.username');
-    apiKey && Validator.string(apiKey, 'Infobip.apiKey');
-    oauthToken && Validator.string(oauthToken, 'Infobip.oauthToken');
-    ibssoToken && Validator.string(ibssoToken, 'Infobip.ibssoToken');
 
-    this.credentials = new InfobipAuth({
-      baseUrl,
-      authType,
-      apiKey,
-      username,
-      password,
-      oauthToken,
-      ibssoToken,
-    });
+    this.api = new API(this);
     this.channels = {
-      whatsapp: new WhatsApp(this.credentials),
-      email: new Email(this.credentials),
-      sms: new SMS(this.credentials),
+      whatsapp: this.api.whatsapp,
+      email: this.api.email,
+      sms: this.api.sms,
     };
     this.service = {
-      twoFA: new TwoFA(this.credentials),
+      twoFA: this.api.twoFA,
     };
-    this.auth = new Auth(this.credentials);
+    this.auth = this.api.auth;
   }
 }
 
 export {
   Infobip,
   AuthType,
+  Http,
   EmailStatus,
   TwoFAApplication,
   TwoFAMessageTemplate,
