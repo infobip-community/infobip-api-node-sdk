@@ -1,4 +1,3 @@
-import { Infobip } from '..';
 import { Validator } from '../utils/validator';
 import { HttpAPI } from './http-api';
 
@@ -9,11 +8,6 @@ const endpoints: any = {
 };
 
 class EmailDomain extends HttpAPI {
-
-  constructor(infobip: Infobip) {
-    super (infobip);
-  }
-
   async get(filter?: any) {
     try {
       let response;

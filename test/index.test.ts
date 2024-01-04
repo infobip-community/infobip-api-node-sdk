@@ -19,7 +19,6 @@ describe('infobip', () => {
     expect(EmailStatus).toBeDefined();
   });
 
-
   it('exports an Http util', () => {
     expect(Http).toBeDefined();
   });

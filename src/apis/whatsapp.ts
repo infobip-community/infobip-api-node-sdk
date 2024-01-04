@@ -35,7 +35,7 @@ class WhatsApp extends HttpAPI {
   identity: any;
 
   constructor(infobip: Infobip) {
-    super (infobip);
+    super(infobip);
 
     this.media = {
       download: this.downloadMedia.bind(this),

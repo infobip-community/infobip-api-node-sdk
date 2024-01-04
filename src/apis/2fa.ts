@@ -7,7 +7,6 @@ import {
   TwoFAVerificationStatus,
 } from '../models/2fa-models';
 import { HttpAPI } from './http-api';
-import { Infobip } from '..';
 
 const TwoFAEndpoints: any = {
   uri: '/2fa/2/applications',
@@ -18,11 +17,6 @@ const pin2FAEndpoints: any = {
 };
 
 class TwoFA extends HttpAPI {
-
-  constructor(infobip: Infobip) {
-    super (infobip);
-  }
-
   /**
    * An application is a container for 2FA message templates
    * Use this method to list your applications

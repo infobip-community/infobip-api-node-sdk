@@ -26,7 +26,7 @@ class SMS extends HttpAPI {
   status: any;
 
   constructor(infobip: Infobip) {
-    super (infobip);
+    super(infobip);
 
     this.reports = {
       get: this.getDeliveryReports.bind(this),

@@ -23,8 +23,8 @@ class Email extends HttpAPI {
   domain: EmailDomain;
 
   constructor(infobip: Infobip) {
-    super (infobip);
-    this.domain = new EmailDomain(infobip.credentials);
+    super(infobip);
+    this.domain = new EmailDomain(infobip);
 
     this.log = {
       get: this.getLog.bind(this),

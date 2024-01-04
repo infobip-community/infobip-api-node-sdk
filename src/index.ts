@@ -13,6 +13,15 @@ import {
   TwoFAVerificationStatus,
 } from './models/2fa-models';
 
+interface IInfobipAuthObject {
+  baseUrl: string,
+  authType: AuthType,
+  apiKey?: string,
+  username?: string,
+  password?: string,
+  oauthToken?: string,
+  ibssoToken?: string,
+}
 class Infobip {
   /**
    *
@@ -27,12 +36,17 @@ class Infobip {
   http: Http;
   api: API;
 
-  constructor(InfobipObject: InfobipAuth | Http) {
+  constructor(InfobipObject: IInfobipAuthObject | Http) {
     this.credentials = {
-      baseUrl: ''
+      baseUrl: '',
     };
     this.http = new Http('');
-    if (InfobipObject instanceof InfobipAuth) {
+    if (InfobipObject instanceof Http) {
+      this.http = InfobipObject;
+      this.credentials = new InfobipAuth({
+        baseUrl: this.http.baseUrl,
+      });
+    } else {
       const {
         baseUrl,
         authType,
@@ -44,13 +58,13 @@ class Infobip {
       } = InfobipObject;
       Validator.required(baseUrl, 'Infobip.baseUrl');
       Validator.required(authType, 'Infobip.authType');
-  
+
       password && Validator.string(password, 'Infobip.password');
       username && Validator.string(username, 'Infobip.username');
       apiKey && Validator.string(apiKey, 'Infobip.apiKey');
       oauthToken && Validator.string(oauthToken, 'Infobip.oauthToken');
       ibssoToken && Validator.string(ibssoToken, 'Infobip.ibssoToken');
-  
+
       this.credentials = new InfobipAuth({
         baseUrl,
         authType,
@@ -60,14 +74,11 @@ class Infobip {
         oauthToken,
         ibssoToken,
       });
-      this.http = new Http(this.credentials.baseUrl, this.credentials.authorization);
-    } else if (InfobipObject instanceof Http) {
-      this.http = InfobipObject;
-      this.credentials = {
-        baseUrl: this.http.baseUrl
-      }
+      this.http = new Http(
+        this.credentials.baseUrl,
+        this.credentials.authorization
+      );
     }
-
 
     this.api = new API(this);
     this.channels = {
