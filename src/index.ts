@@ -14,13 +14,13 @@ import {
 } from './models/2fa-models';
 
 interface IInfobipAuthObject {
-  baseUrl: string,
-  authType: AuthType,
-  apiKey?: string,
-  username?: string,
-  password?: string,
-  oauthToken?: string,
-  ibssoToken?: string,
+  baseUrl: string;
+  authType: AuthType;
+  apiKey?: string;
+  username?: string;
+  password?: string;
+  oauthToken?: string;
+  ibssoToken?: string;
 }
 class Infobip {
   /**

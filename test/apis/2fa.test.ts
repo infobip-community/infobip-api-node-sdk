@@ -29,7 +29,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
     await twoFA.getApplications();
 
@@ -47,7 +47,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
     let error = await twoFA.getApplications();
 
@@ -63,7 +63,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAApplication = {
@@ -87,7 +87,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.createApplication(1)) as Error;
@@ -104,7 +104,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     await twoFA.getApplication('appId');
@@ -123,7 +123,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.getApplication('appId')) as Error;
@@ -140,7 +140,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAApplication = {
@@ -162,7 +162,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.updateApplication('test', 1)) as Error;
@@ -179,7 +179,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     await twoFA.getMessageTemplates('8F9B78BC039C09E45F35BFE');
@@ -201,7 +201,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.getMessageTemplates(
@@ -220,7 +220,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAMessageTemplate = {
@@ -250,7 +250,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.createMessageTemplate('1', 1)) as Error;
@@ -267,7 +267,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     await twoFA.getMessageTemplate('8F9B78', '1C8DA3');
@@ -289,7 +289,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.getMessageTemplate(
@@ -309,7 +309,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAMessageTemplate = {
@@ -338,7 +338,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     const reqBody = {
@@ -368,7 +368,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAPinCode = {
@@ -394,7 +394,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.sendPINCodeSMS(1, false)) as Error;
@@ -411,7 +411,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     await twoFA.resendPINCodeSMS('1ABC2D', {
@@ -436,7 +436,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     await twoFA.resendPINCodeSMS('22CGH3');
@@ -457,7 +457,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.resendPINCodeSMS('22CGH3')) as Error;
@@ -474,7 +474,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAPinCode = {
@@ -500,7 +500,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.sendPINCodeVoice(1)) as Error;
@@ -517,7 +517,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     await twoFA.resendPINCodeVoice('1ABC2D', {
@@ -542,7 +542,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     await twoFA.resendPINCodeVoice('22CGH3');
@@ -563,7 +563,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.resendPINCodeVoice('22CGH3')) as Error;
@@ -580,7 +580,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     await twoFA.verifyPhoneNumber('1ABC2D', { pin: '1111' });
@@ -601,7 +601,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.verifyPhoneNumber('1ABC2D', 1)) as Error;
@@ -618,7 +618,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     const queryParameters: TwoFAVerificationStatus = {
@@ -644,7 +644,7 @@ describe('2FA', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.getVerificationStatus('appId', 1)) as Error;

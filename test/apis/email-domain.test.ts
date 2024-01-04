@@ -23,7 +23,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     await domain.get();
 
@@ -41,7 +41,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     await domain.get('example.com');
 
@@ -59,7 +59,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     let error = await domain.get();
 
@@ -75,7 +75,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     await domain.add('example.com');
 
@@ -97,7 +97,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     let error = await domain.add('example');
 
@@ -113,7 +113,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     await domain.verify('example.com');
 
@@ -133,7 +133,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     let error = await domain.verify('example');
 
@@ -149,7 +149,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     await domain.tracking('example.com', {});
 
@@ -168,7 +168,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     let error = await domain.tracking('example', {});
 
@@ -184,7 +184,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     await domain.delete('example.com');
 
@@ -202,7 +202,7 @@ describe('EmailDomain', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let domain = new EmailDomain(infobip);
     let error = await domain.delete('example');
 

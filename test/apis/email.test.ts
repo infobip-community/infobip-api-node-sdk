@@ -26,7 +26,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -51,7 +51,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: ['test@example.com', 'example@example.com'],
@@ -76,7 +76,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -102,7 +102,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@test.com',
@@ -128,7 +128,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -154,7 +154,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@test.com',
@@ -180,7 +180,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -205,7 +205,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -231,7 +231,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
@@ -252,7 +252,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -277,7 +277,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -308,7 +308,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -339,7 +339,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -365,7 +365,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -391,7 +391,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -417,7 +417,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -443,7 +443,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -469,7 +469,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -495,7 +495,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -521,7 +521,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -547,7 +547,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -573,7 +573,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -599,7 +599,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -625,7 +625,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -651,7 +651,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -677,7 +677,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -703,7 +703,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -729,7 +729,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -755,7 +755,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -781,7 +781,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -807,7 +807,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
@@ -833,7 +833,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send('')) as Error;
 
@@ -849,7 +849,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
@@ -871,7 +871,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
@@ -892,7 +892,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
@@ -913,7 +913,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
@@ -934,7 +934,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
@@ -955,7 +955,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
@@ -976,7 +976,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
@@ -997,7 +997,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.validate('testing@example.com');
 
@@ -1019,7 +1019,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = await email.validate('testing');
 
@@ -1035,7 +1035,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.get('testing');
 
@@ -1053,7 +1053,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = await email.get('testing');
 
@@ -1069,7 +1069,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     const date = new Date().toISOString();
     await email.reschedule('testing', date);
@@ -1088,7 +1088,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = await email.reschedule('testing', new Date().toISOString());
 
@@ -1104,7 +1104,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.log.get();
 
@@ -1122,7 +1122,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = await email.log.get();
 
@@ -1138,7 +1138,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.report.get();
 
@@ -1156,7 +1156,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = await email.report.get();
 
@@ -1172,7 +1172,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.status.get('testing');
 
@@ -1192,7 +1192,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.status.get()) as Error;
 
@@ -1208,7 +1208,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     await email.status.update('testing', EmailStatus.Paused);
 
@@ -1229,7 +1229,7 @@ describe('Email', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let email = new Email(infobip);
     let error = (await email.status.update()) as Error;
 

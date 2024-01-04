@@ -23,7 +23,7 @@ describe('Auth', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let auth = new Auth(infobip);
     await auth.ibsso.create();
 
@@ -46,7 +46,7 @@ describe('Auth', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let auth = new Auth(infobip);
     try {
       await auth.ibsso.create();
@@ -64,7 +64,7 @@ describe('Auth', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let auth = new Auth(infobip);
     await auth.ibsso.destroy();
 
@@ -82,7 +82,7 @@ describe('Auth', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let auth = new Auth(infobip);
     let error = await auth.ibsso.destroy();
 
@@ -98,7 +98,7 @@ describe('Auth', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let auth = new Auth(infobip);
     await auth.oauth2.create();
 
@@ -118,7 +118,7 @@ describe('Auth', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let auth = new Auth(infobip);
     try {
       await auth.oauth2.create();

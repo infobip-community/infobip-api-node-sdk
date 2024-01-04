@@ -37,7 +37,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error: Error = (await whatsapp.send(1)) as Error;
 
@@ -56,7 +56,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(templateMessage);
 
@@ -76,7 +76,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(textMessage);
 
@@ -96,7 +96,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(documentMessage);
 
@@ -116,7 +116,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(imageMessage);
 
@@ -136,7 +136,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(audioMessage);
 
@@ -156,7 +156,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(videoMessage);
 
@@ -176,7 +176,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(stickerMessage);
 
@@ -196,7 +196,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(locationMessage);
 
@@ -216,7 +216,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(contactMessage);
 
@@ -236,7 +236,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(interactiveButtonsMessage);
 
@@ -256,7 +256,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(interactiveListMessage);
 
@@ -276,7 +276,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(interactiveProductMessage);
 
@@ -296,7 +296,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(interactiveMultiProductMessage);
 
@@ -316,7 +316,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.media.download('447860099299', '1234-abcd');
 
@@ -337,7 +337,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = await whatsapp.media.download();
 
@@ -354,7 +354,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.media.metadata('447860099299', '1234-abcd');
 
@@ -375,7 +375,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = await whatsapp.media.metadata();
 
@@ -392,7 +392,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.media.delete('447860099299', 'http://example.com/');
 
@@ -415,7 +415,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = await whatsapp.media.delete();
 
@@ -432,7 +432,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.markAsRead('447860099299', 'ABCD1234');
 
@@ -452,7 +452,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.markAsRead('', '')) as Error;
 
@@ -469,7 +469,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.template.get('447860099299');
 
@@ -490,7 +490,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.template.get()) as Error;
 
@@ -507,7 +507,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
 
     await whatsapp.template.create('447860099299', {
@@ -546,7 +546,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.template.create()) as Error;
 
@@ -563,7 +563,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.template.delete('447860099299', 'test_template');
 
@@ -584,7 +584,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.template.delete()) as Error;
 
@@ -601,7 +601,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.identity.get('447860099299', '447860099200');
 
@@ -622,7 +622,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.identity.get()) as Error;
 
@@ -639,7 +639,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     await whatsapp.identity.confirm(
       '447860099299',
@@ -664,7 +664,7 @@ describe('Whatsapp', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.identity.confirm()) as Error;
 

@@ -29,7 +29,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
     let error: Error = (await sms.send(1)) as Error;
 
@@ -45,7 +45,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
     let error: Error = (await sms.send({ type: 'something' })) as Error;
 
@@ -63,7 +63,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
     await sms.send(basicTextMessage);
 
@@ -83,7 +83,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     await sms.send(sendQueryMessage);
@@ -107,7 +107,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
     await sms.preview(previewMessage);
 
@@ -127,7 +127,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     let error = await sms.preview(previewMessage);
@@ -143,7 +143,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     let error = await sms.get();
@@ -159,7 +159,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
     await sms.get();
 
@@ -177,7 +177,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     let error = await sms.reports.get();
@@ -193,7 +193,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     await sms.reports.get({ limit: 10 });
@@ -212,7 +212,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     let error = await sms.logs.get();
@@ -228,7 +228,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
     await sms.logs.get({ from: 'TestSender' });
 
@@ -246,7 +246,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     let error: Error = (await sms.scheduled.get(1)) as Error;
@@ -262,7 +262,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     await sms.scheduled.get(bulkId);
@@ -281,7 +281,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     let error: Error = (await sms.scheduled.reschedule(1, 1)) as Error;
@@ -297,7 +297,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     await sms.scheduled.reschedule(bulkId, '2022-07-12T16:00:00.000+0000');
@@ -319,7 +319,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     let error: Error = (await sms.status.get(1)) as Error;
@@ -335,7 +335,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     await sms.status.get(bulkId);
@@ -354,7 +354,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     let error: Error = (await sms.status.update(1, 1)) as Error;
@@ -370,7 +370,7 @@ describe('SMS', () => {
       authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
-    })
+    });
     let sms = new SMS(infobip);
 
     await sms.status.update(bulkId, 'PENDING');
