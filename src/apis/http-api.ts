@@ -1,7 +1,7 @@
 import { Infobip } from '..';
 import { Http } from '../utils/http';
 
-class HttpAPI {
+class HttpApi {
   http: Http;
   username?: string;
   password?: string;
@@ -15,4 +15,4 @@ class HttpAPI {
   }
 }
 
-export { HttpAPI };
+export { HttpApi };

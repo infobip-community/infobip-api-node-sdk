@@ -1,7 +1,7 @@
 import { validateSMSMessage } from '../utils/validators/sms';
 
 import { Validator } from '../utils/validator';
-import { HttpAPI } from './http-api';
+import { HttpApi } from './http-api';
 import { Infobip } from '..';
 
 const sendEndpoints: any = {
@@ -19,7 +19,7 @@ const endpoints: any = {
   status: '/sms/1/bulks/status',
 };
 
-class SMS extends HttpAPI {
+class SMS extends HttpApi {
   reports: any;
   logs: any;
   scheduled: any;

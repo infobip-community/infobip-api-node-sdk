@@ -4,7 +4,7 @@ import { FormDataBuilder } from '../utils/form-data';
 import { Validator } from '../utils/validator';
 import { EmailStatus } from '../utils/email-status-type';
 import { EmailDomain } from './email-domain';
-import { HttpAPI } from './http-api';
+import { HttpApi } from './http-api';
 import { Infobip } from '..';
 
 const endpoints: any = {
@@ -16,7 +16,7 @@ const endpoints: any = {
   log: '/email/1/logs',
 };
 
-class Email extends HttpAPI {
+class Email extends HttpApi {
   status: any;
   report: any;
   log: any;

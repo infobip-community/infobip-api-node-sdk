@@ -4,7 +4,7 @@ import {
   validateWhatsappSend,
   validateWhatsappTemplateCreate,
 } from '../utils/validators/whatsapp';
-import { HttpAPI } from './http-api';
+import { HttpApi } from './http-api';
 
 const sendEndpoints: any = {
   template: '/whatsapp/1/message/template',
@@ -29,7 +29,7 @@ const endpoints: any = {
   identity: '/whatsapp/1/{sender}/contacts/{userNumber}/identity',
 };
 
-class WhatsApp extends HttpAPI {
+class WhatsApp extends HttpApi {
   media: any;
   template: any;
   identity: any;

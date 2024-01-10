@@ -4,14 +4,14 @@ import { AuthType } from '../utils/auth-type';
 import { URLSearchParams } from 'url';
 import { Validator } from '../utils/validator';
 import { Infobip } from '..';
-import { HttpAPI } from './http-api';
+import { HttpApi } from './http-api';
 
 const endpoints: any = {
   session: '/auth/1/session',
   oauth2: '/auth/1/oauth2/token',
 };
 
-class Auth extends HttpAPI {
+class Auth extends HttpApi {
   ibsso: any;
   oauth2: any;
   credentials: InfobipAuth;

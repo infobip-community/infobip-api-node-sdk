@@ -6,7 +6,7 @@ import {
   Pin,
   TwoFAVerificationStatus,
 } from '../models/2fa-models';
-import { HttpAPI } from './http-api';
+import { HttpApi } from './http-api';
 
 const TwoFAEndpoints: any = {
   uri: '/2fa/2/applications',
@@ -16,7 +16,7 @@ const pin2FAEndpoints: any = {
   uri: '/2fa/2/pin',
 };
 
-class TwoFA extends HttpAPI {
+class TwoFA extends HttpApi {
   /**
    * An application is a container for 2FA message templates
    * Use this method to list your applications

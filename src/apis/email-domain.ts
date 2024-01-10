@@ -1,5 +1,5 @@
 import { Validator } from '../utils/validator';
-import { HttpAPI } from './http-api';
+import { HttpApi } from './http-api';
 
 const endpoints: any = {
   domain: '/email/1/domains',
@@ -7,7 +7,7 @@ const endpoints: any = {
   tracking: '/email/1/domains/{domainName}/tracking',
 };
 
-class EmailDomain extends HttpAPI {
+class EmailDomain extends HttpApi {
   async get(filter?: any) {
     try {
       let response;
