@@ -1,3 +1,4 @@
+import { AuthType, Infobip } from '../../src';
 import { TwoFA } from '../../src/apis/2fa';
 import {
   TwoFAApplication,
@@ -23,11 +24,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
     await twoFA.getApplications();
 
     expect(axios.get).toHaveBeenCalledWith('/2fa/2/applications', {
@@ -39,11 +42,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
     let error = await twoFA.getApplications();
 
     expect(error).toEqual({ message: 'error' });
@@ -53,11 +58,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAApplication = {
       name: 'test',
@@ -75,11 +82,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.createApplication(1)) as Error;
 
@@ -90,11 +99,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     await twoFA.getApplication('appId');
 
@@ -107,11 +118,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.getApplication('appId')) as Error;
 
@@ -122,11 +135,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAApplication = {
       name: 'test',
@@ -142,11 +157,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.updateApplication('test', 1)) as Error;
 
@@ -157,11 +174,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     await twoFA.getMessageTemplates('8F9B78BC039C09E45F35BFE');
 
@@ -177,11 +196,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.getMessageTemplates(
       '8F9B78BC039C09E45F35BFE'
@@ -194,11 +215,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAMessageTemplate = {
       messageText: 'Here is your pin: ',
@@ -222,11 +245,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.createMessageTemplate('1', 1)) as Error;
 
@@ -237,11 +262,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     await twoFA.getMessageTemplate('8F9B78', '1C8DA3');
 
@@ -257,11 +284,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.getMessageTemplate(
       '8F9B78',
@@ -275,11 +304,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAMessageTemplate = {
       messageText: 'Here is your pin: ',
@@ -302,11 +333,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     const reqBody = {
       messageText: 'Here is your wrong parameters',
@@ -330,11 +363,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAPinCode = {
       applicationId: '8F9B78',
@@ -354,11 +389,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.sendPINCodeSMS(1, false)) as Error;
 
@@ -369,11 +406,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     await twoFA.resendPINCodeSMS('1ABC2D', {
       placeholders: { firstName: 'John' },
@@ -392,11 +431,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     await twoFA.resendPINCodeSMS('22CGH3');
 
@@ -411,11 +452,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.resendPINCodeSMS('22CGH3')) as Error;
 
@@ -426,11 +469,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     const reqBody: TwoFAPinCode = {
       applicationId: '8F9B78',
@@ -450,11 +495,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.sendPINCodeVoice(1)) as Error;
 
@@ -465,11 +512,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     await twoFA.resendPINCodeVoice('1ABC2D', {
       placeholders: { firstName: 'John' },
@@ -488,11 +537,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     await twoFA.resendPINCodeVoice('22CGH3');
 
@@ -507,11 +558,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.resendPINCodeVoice('22CGH3')) as Error;
 
@@ -522,11 +575,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     await twoFA.verifyPhoneNumber('1ABC2D', { pin: '1111' });
 
@@ -541,11 +596,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.verifyPhoneNumber('1ABC2D', 1)) as Error;
 
@@ -556,11 +613,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     const queryParameters: TwoFAVerificationStatus = {
       msisdn: '385717284759547',
@@ -580,11 +639,13 @@ describe('2FA', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let twoFA = new TwoFA({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let twoFA = new TwoFA(infobip);
 
     let error: Error = (await twoFA.getVerificationStatus('appId', 1)) as Error;
 

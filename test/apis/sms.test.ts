@@ -1,3 +1,4 @@
+import { AuthType, Infobip } from '../../src';
 import { SMS } from '../../src/apis/sms';
 import {
   basicTextMessage,
@@ -23,11 +24,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
     let error: Error = (await sms.send(1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
@@ -37,11 +40,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
     let error: Error = (await sms.send({ type: 'something' })) as Error;
 
     expect(error.message).toEqual(
@@ -53,11 +58,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
     await sms.send(basicTextMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -71,11 +78,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     await sms.send(sendQueryMessage);
 
@@ -93,11 +102,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
     await sms.preview(previewMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -111,11 +122,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     let error = await sms.preview(previewMessage);
     expect(error).toEqual({ message: 'error' });
@@ -125,11 +138,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     let error = await sms.get();
     expect(error).toEqual({ message: 'error' });
@@ -139,11 +154,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
     await sms.get();
 
     expect(axios.get).toHaveBeenCalledWith('/sms/1/inbox/reports', {
@@ -155,11 +172,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     let error = await sms.reports.get();
     expect(error).toEqual({ message: 'error' });
@@ -169,11 +188,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     await sms.reports.get({ limit: 10 });
 
@@ -186,11 +207,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     let error = await sms.logs.get();
     expect(error).toEqual({ message: 'error' });
@@ -200,11 +223,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
     await sms.logs.get({ from: 'TestSender' });
 
     expect(axios.get).toHaveBeenCalledWith('/sms/1/logs', {
@@ -216,11 +241,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     let error: Error = (await sms.scheduled.get(1)) as Error;
     expect(error).toBeInstanceOf(Error);
@@ -230,11 +257,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     await sms.scheduled.get(bulkId);
 
@@ -247,11 +276,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     let error: Error = (await sms.scheduled.reschedule(1, 1)) as Error;
     expect(error).toBeInstanceOf(Error);
@@ -261,11 +292,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     await sms.scheduled.reschedule(bulkId, '2022-07-12T16:00:00.000+0000');
 
@@ -281,11 +314,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     let error: Error = (await sms.status.get(1)) as Error;
     expect(error).toBeInstanceOf(Error);
@@ -295,11 +330,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     await sms.status.get(bulkId);
 
@@ -312,11 +349,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     let error: Error = (await sms.status.update(1, 1)) as Error;
     expect(error).toBeInstanceOf(Error);
@@ -326,11 +365,13 @@ describe('SMS', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let sms = new SMS({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let sms = new SMS(infobip);
 
     await sms.status.update(bulkId, 'PENDING');
 

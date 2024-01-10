@@ -1,11 +1,11 @@
 import FormData from 'form-data';
 
-import { Http } from '../utils/http';
 import { FormDataBuilder } from '../utils/form-data';
-import { InfobipAuth } from '../utils/auth';
 import { Validator } from '../utils/validator';
 import { EmailStatus } from '../utils/email-status-type';
 import { EmailDomain } from './email-domain';
+import { HttpApi } from './http-api';
+import { Infobip } from '..';
 
 const endpoints: any = {
   send: '/email/3/send',
@@ -16,16 +16,15 @@ const endpoints: any = {
   log: '/email/1/logs',
 };
 
-class Email {
-  http: Http;
+class Email extends HttpApi {
   status: any;
   report: any;
   log: any;
   domain: EmailDomain;
 
-  constructor(credentials: InfobipAuth) {
-    this.http = new Http(credentials.baseUrl, credentials.authorization);
-    this.domain = new EmailDomain(credentials);
+  constructor(infobip: Infobip) {
+    super(infobip);
+    this.domain = new EmailDomain(infobip);
 
     this.log = {
       get: this.getLog.bind(this),

@@ -16,6 +16,7 @@ import {
 } from '../fixtures/whatsapp';
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
+import { AuthType, Infobip } from '../../src';
 jest.mock('axios');
 
 beforeAll(() => {
@@ -31,11 +32,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error: Error = (await whatsapp.send(1)) as Error;
 
     expect(error).toBeInstanceOf(Error);
@@ -48,11 +51,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(templateMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -66,11 +71,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(textMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -84,11 +91,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(documentMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -102,11 +111,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(imageMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -120,11 +131,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(audioMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -138,11 +151,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(videoMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -156,11 +171,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(stickerMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -174,11 +191,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(locationMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -192,11 +211,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(contactMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -210,11 +231,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(interactiveButtonsMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -228,11 +251,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(interactiveListMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -246,11 +271,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(interactiveProductMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -264,11 +291,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.send(interactiveMultiProductMessage);
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -282,11 +311,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.media.download('447860099299', '1234-abcd');
 
     expect(axios.get).toHaveBeenCalledWith(
@@ -301,11 +332,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).get.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = await whatsapp.media.download();
 
     expect(error).toBeInstanceOf(Error);
@@ -316,11 +349,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).head.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.media.metadata('447860099299', '1234-abcd');
 
     expect(axios.head).toHaveBeenCalledWith(
@@ -335,11 +370,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).get.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = await whatsapp.media.metadata();
 
     expect(error).toBeInstanceOf(Error);
@@ -350,11 +387,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).delete.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.media.delete('447860099299', 'http://example.com/');
 
     expect(axios.delete).toHaveBeenCalledWith(
@@ -371,11 +410,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).delete.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = await whatsapp.media.delete();
 
     expect(error).toBeInstanceOf(Error);
@@ -386,11 +427,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.markAsRead('447860099299', 'ABCD1234');
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -404,11 +447,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.markAsRead('', '')) as Error;
 
     expect(error).toBeInstanceOf(Error);
@@ -419,11 +464,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.template.get('447860099299');
 
     expect(axios.get).toHaveBeenCalledWith(
@@ -438,11 +485,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).get.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.template.get()) as Error;
 
     expect(error).toBeInstanceOf(Error);
@@ -453,11 +502,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
 
     await whatsapp.template.create('447860099299', {
       name: 'test_template',
@@ -490,11 +541,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).post.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.template.create()) as Error;
 
     expect(error).toBeInstanceOf(Error);
@@ -505,11 +558,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).delete.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.template.delete('447860099299', 'test_template');
 
     expect(
@@ -524,11 +579,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).delete.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.template.delete()) as Error;
 
     expect(error).toBeInstanceOf(Error);
@@ -539,11 +596,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.identity.get('447860099299', '447860099200');
 
     expect(
@@ -558,11 +617,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).get.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.identity.get()) as Error;
 
     expect(error).toBeInstanceOf(Error);
@@ -573,11 +634,13 @@ describe('Whatsapp', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     await whatsapp.identity.confirm(
       '447860099299',
       '447860099200',
@@ -596,11 +659,13 @@ describe('Whatsapp', () => {
     expect.assertions(2);
     (axios as any).put.mockResolvedValue({});
 
-    let whatsapp = new WhatsApp({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let whatsapp = new WhatsApp(infobip);
     let error = (await whatsapp.identity.confirm()) as Error;
 
     expect(error).toBeInstanceOf(Error);

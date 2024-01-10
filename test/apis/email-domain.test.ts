@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { EmailDomain } from '../../src/apis/email-domain';
 
 import axios from 'axios';
+import { AuthType, Infobip } from '../../src';
 jest.mock('axios');
 
 beforeAll(() => {
@@ -17,11 +18,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     await domain.get();
 
     expect(axios.get).toHaveBeenCalledWith('/email/1/domains', {
@@ -33,11 +36,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     await domain.get('example.com');
 
     expect(axios.get).toHaveBeenCalledWith('/email/1/domains/example.com', {
@@ -49,11 +54,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     let error = await domain.get();
 
     expect(error).toEqual({ message: 'error' });
@@ -63,11 +70,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     await domain.add('example.com');
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -83,11 +92,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     let error = await domain.add('example');
 
     expect(error).toEqual({ message: 'error' });
@@ -97,11 +108,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     await domain.verify('example.com');
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -115,11 +128,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     let error = await domain.verify('example');
 
     expect(error).toEqual({ message: 'error' });
@@ -129,11 +144,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     await domain.tracking('example.com', {});
 
     expect(axios.put).toHaveBeenCalledWith(
@@ -146,11 +163,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).put.mockRejectedValue({ message: 'error' });
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     let error = await domain.tracking('example', {});
 
     expect(error).toEqual({ message: 'error' });
@@ -160,11 +179,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).delete.mockResolvedValue({});
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     await domain.delete('example.com');
 
     expect(axios.delete).toHaveBeenCalledWith('/email/1/domains/example.com', {
@@ -176,11 +197,13 @@ describe('EmailDomain', () => {
     expect.assertions(1);
     (axios as any).delete.mockRejectedValue({ message: 'error' });
 
-    let domain = new EmailDomain({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let domain = new EmailDomain(infobip);
     let error = await domain.delete('example');
 
     expect(error).toEqual({ message: 'error' });

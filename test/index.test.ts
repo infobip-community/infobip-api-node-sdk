@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { Infobip, AuthType, EmailStatus } from '../src';
+import { Infobip, AuthType, EmailStatus, Http } from '../src';
 
 const BASE_URL = 'https://api.infobip.com';
 const API_KEY = uuid();
@@ -17,6 +17,10 @@ describe('infobip', () => {
 
   it('exports an EmailStatus util', () => {
     expect(EmailStatus).toBeDefined();
+  });
+
+  it('exports an Http util', () => {
+    expect(Http).toBeDefined();
   });
 
   it('exposes an auth object', () => {

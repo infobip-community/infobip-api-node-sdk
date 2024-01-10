@@ -3,19 +3,22 @@ import { InfobipAuth } from '../utils/auth';
 import { AuthType } from '../utils/auth-type';
 import { URLSearchParams } from 'url';
 import { Validator } from '../utils/validator';
+import { Infobip } from '..';
+import { HttpApi } from './http-api';
 
 const endpoints: any = {
   session: '/auth/1/session',
   oauth2: '/auth/1/oauth2/token',
 };
 
-class Auth {
+class Auth extends HttpApi {
   ibsso: any;
   oauth2: any;
   credentials: InfobipAuth;
 
-  constructor(credentials: InfobipAuth) {
-    this.credentials = credentials;
+  constructor(infobip: Infobip) {
+    super(infobip);
+    this.credentials = infobip.credentials;
     this.ibsso = {
       create: this.createSession.bind(this),
       destroy: this.destroySession.bind(this),
@@ -26,15 +29,18 @@ class Auth {
     };
   }
 
+  public async addCredentials(credentials: InfobipAuth) {
+    this.credentials = credentials;
+  }
+
   private async createSession() {
     try {
-      Validator.required(this.credentials.password, 'Infobip.password');
-      Validator.required(this.credentials.username, 'Infobip.username');
+      Validator.required(this.credentials?.password, 'Infobip.password');
+      Validator.required(this.credentials?.username, 'Infobip.username');
 
-      const http = new Http(this.credentials.baseUrl);
-      const response = await http.post(endpoints.session, {
-        password: this.credentials.password,
-        username: this.credentials.username,
+      const response = this.http.post(endpoints.session, {
+        password: this.credentials?.password,
+        username: this.credentials?.username,
       });
 
       return response;
@@ -58,14 +64,13 @@ class Auth {
 
   private async createToken() {
     try {
-      Validator.required(this.credentials.password, 'Infobip.password');
-      Validator.required(this.credentials.username, 'Infobip.username');
+      Validator.required(this.credentials?.password, 'Infobip.password');
+      Validator.required(this.credentials?.username, 'Infobip.username');
 
-      const http = new Http(this.credentials.baseUrl);
-      const response = await http.post(
+      const response = this.http.post(
         `${endpoints.oauth2}?${new URLSearchParams({
-          client_secret: this.credentials.password as string,
-          client_id: this.credentials.username as string,
+          client_secret: this.credentials?.password as string,
+          client_id: this.credentials?.username as string,
           grant_type: 'client_credentials',
         }).toString()}`,
         {},

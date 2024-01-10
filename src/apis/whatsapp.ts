@@ -1,10 +1,10 @@
-import { Http } from '../utils/http';
-import { InfobipAuth } from '../utils/auth';
+import { Infobip } from '..';
 import { Validator } from '../utils/validator';
 import {
   validateWhatsappSend,
   validateWhatsappTemplateCreate,
 } from '../utils/validators/whatsapp';
+import { HttpApi } from './http-api';
 
 const sendEndpoints: any = {
   template: '/whatsapp/1/message/template',
@@ -29,13 +29,14 @@ const endpoints: any = {
   identity: '/whatsapp/1/{sender}/contacts/{userNumber}/identity',
 };
 
-class WhatsApp {
-  http: Http;
+class WhatsApp extends HttpApi {
   media: any;
   template: any;
   identity: any;
-  constructor(credentials: InfobipAuth) {
-    this.http = new Http(credentials.baseUrl, credentials.authorization);
+
+  constructor(infobip: Infobip) {
+    super(infobip);
+
     this.media = {
       download: this.downloadMedia.bind(this),
       metadata: this.metadataMedia.bind(this),

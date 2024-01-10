@@ -1,8 +1,8 @@
-import { Http } from '../utils/http';
-import { InfobipAuth } from '../utils/auth';
 import { validateSMSMessage } from '../utils/validators/sms';
 
 import { Validator } from '../utils/validator';
+import { HttpApi } from './http-api';
+import { Infobip } from '..';
 
 const sendEndpoints: any = {
   text: '/sms/2/text/advanced',
@@ -19,19 +19,14 @@ const endpoints: any = {
   status: '/sms/1/bulks/status',
 };
 
-class SMS {
-  http: Http;
-  username?: string;
-  password?: string;
+class SMS extends HttpApi {
   reports: any;
   logs: any;
   scheduled: any;
   status: any;
 
-  constructor(credentials: InfobipAuth) {
-    this.http = new Http(credentials.baseUrl, credentials.authorization);
-    this.username = credentials.username;
-    this.password = credentials.password;
+  constructor(infobip: Infobip) {
+    super(infobip);
 
     this.reports = {
       get: this.getDeliveryReports.bind(this),

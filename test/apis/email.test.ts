@@ -5,6 +5,7 @@ import Fs from 'fs';
 
 import axios from 'axios';
 import { EmailStatus } from '../../src/utils/email-status-type';
+import { AuthType, Infobip } from '../../src';
 jest.mock('axios');
 
 beforeAll(() => {
@@ -20,11 +21,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -43,11 +46,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: ['test@example.com', 'example@example.com'],
       from: 'Tests <testing@example.com>',
@@ -66,11 +71,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       cc: 'example@example.com',
@@ -90,11 +97,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@test.com',
       cc: ['test@example.com', 'example@example.com'],
@@ -114,11 +123,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       bcc: 'example@example.com',
@@ -138,11 +149,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@test.com',
       bcc: ['test@example.com', 'example@example.com'],
@@ -162,11 +175,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -185,11 +200,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -209,11 +226,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -228,11 +247,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -251,11 +272,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -280,11 +303,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -309,11 +334,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -333,11 +360,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -357,11 +386,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -381,11 +412,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -405,11 +438,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -429,11 +464,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -453,11 +490,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -477,11 +516,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -501,11 +542,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -525,11 +568,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -549,11 +594,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -573,11 +620,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -597,11 +646,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -621,11 +672,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -645,11 +698,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -669,11 +724,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -693,11 +750,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -717,11 +776,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -741,11 +802,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -765,11 +828,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send('')) as Error;
 
     expect(error.message).toEqual('email must be an object.');
@@ -779,11 +844,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -799,11 +866,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -818,11 +887,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -837,11 +908,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -856,11 +929,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -875,11 +950,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -894,11 +971,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.send({
       to: 'test@example.com',
       from: 'Tests <testing@example.com>',
@@ -913,11 +992,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.validate('testing@example.com');
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -933,11 +1014,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = await email.validate('testing');
 
     expect(error).toEqual({ message: 'error' });
@@ -947,11 +1030,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.get('testing');
 
     expect(axios.get).toHaveBeenCalledWith('/email/1/bulks', {
@@ -963,11 +1048,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = await email.get('testing');
 
     expect(error).toEqual({ message: 'error' });
@@ -977,11 +1064,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     const date = new Date().toISOString();
     await email.reschedule('testing', date);
 
@@ -994,11 +1083,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).put.mockRejectedValue({ message: 'error' });
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = await email.reschedule('testing', new Date().toISOString());
 
     expect(error).toEqual({ message: 'error' });
@@ -1008,11 +1099,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.log.get();
 
     expect(axios.get).toHaveBeenCalledWith('/email/1/logs', {
@@ -1024,11 +1117,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = await email.log.get();
 
     expect(error).toEqual({ message: 'error' });
@@ -1038,11 +1133,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.report.get();
 
     expect(axios.get).toHaveBeenCalledWith('/email/1/reports', {
@@ -1054,11 +1151,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = await email.report.get();
 
     expect(error).toEqual({ message: 'error' });
@@ -1068,11 +1167,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.status.get('testing');
 
     expect(axios.get).toHaveBeenCalledWith('/email/1/bulks/status', {
@@ -1086,11 +1187,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.status.get()) as Error;
 
     expect(error.message).toEqual('bulkId is required.');
@@ -1100,11 +1203,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).put.mockResolvedValue({});
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     await email.status.update('testing', EmailStatus.Paused);
 
     expect(axios.put).toHaveBeenCalledWith(
@@ -1119,11 +1224,13 @@ describe('Email', () => {
     expect.assertions(1);
     (axios as any).get.mockRejectedValue({ message: 'error' });
 
-    let email = new Email({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let email = new Email(infobip);
     let error = (await email.status.update()) as Error;
 
     expect(error.message).toEqual('bulkId is required.');

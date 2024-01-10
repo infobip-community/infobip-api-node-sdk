@@ -1,6 +1,5 @@
-import { Http } from '../utils/http';
-import { InfobipAuth } from '../utils/auth';
 import { Validator } from '../utils/validator';
+import { HttpApi } from './http-api';
 
 const endpoints: any = {
   domain: '/email/1/domains',
@@ -8,13 +7,7 @@ const endpoints: any = {
   tracking: '/email/1/domains/{domainName}/tracking',
 };
 
-class EmailDomain {
-  http: Http;
-
-  constructor(credentials: InfobipAuth) {
-    this.http = new Http(credentials.baseUrl, credentials.authorization);
-  }
-
+class EmailDomain extends HttpApi {
   async get(filter?: any) {
     try {
       let response;

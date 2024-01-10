@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { Auth } from '../../src/apis/auth';
 
 import axios from 'axios';
+import { AuthType, Infobip } from '../../src';
 jest.mock('axios');
 
 beforeAll(() => {
@@ -17,11 +18,13 @@ describe('Auth', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth = new Auth({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let auth = new Auth(infobip);
     await auth.ibsso.create();
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -38,24 +41,31 @@ describe('Auth', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let auth = new Auth({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
-    let error = await auth.ibsso.create();
-
-    expect(error).toEqual({ message: 'error' });
+    let auth = new Auth(infobip);
+    try {
+      await auth.ibsso.create();
+    } catch (error) {
+      expect(error).toEqual({ message: 'error' });
+    }
   });
 
   it('exposes an ibsso destroy method', async () => {
     expect.assertions(1);
     (axios as any).delete.mockResolvedValue({});
 
-    let auth = new Auth({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
-      ibssoToken: PASSWORD,
+      authType: AuthType.Basic,
+      username: USERNAME,
+      password: PASSWORD,
     });
+    let auth = new Auth(infobip);
     await auth.ibsso.destroy();
 
     expect(axios.delete).toHaveBeenCalledWith('/auth/1/session', {
@@ -67,10 +77,13 @@ describe('Auth', () => {
     expect.assertions(1);
     (axios as any).delete.mockRejectedValue({ message: 'error' });
 
-    let auth = new Auth({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
-      ibssoToken: PASSWORD,
+      authType: AuthType.Basic,
+      username: USERNAME,
+      password: PASSWORD,
     });
+    let auth = new Auth(infobip);
     let error = await auth.ibsso.destroy();
 
     expect(error).toEqual({ message: 'error' });
@@ -80,11 +93,13 @@ describe('Auth', () => {
     expect.assertions(1);
     (axios as any).post.mockResolvedValue({});
 
-    let auth = new Auth({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
+    let auth = new Auth(infobip);
     await auth.oauth2.create();
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -98,13 +113,17 @@ describe('Auth', () => {
     expect.assertions(1);
     (axios as any).post.mockRejectedValue({ message: 'error' });
 
-    let auth = new Auth({
+    const infobip = new Infobip({
       baseUrl: BASE_URL,
+      authType: AuthType.Basic,
       username: USERNAME,
       password: PASSWORD,
     });
-    let error = await auth.oauth2.create();
-
-    expect(error).toEqual({ message: 'error' });
+    let auth = new Auth(infobip);
+    try {
+      await auth.oauth2.create();
+    } catch (error) {
+      expect(error).toEqual({ message: 'error' });
+    }
   });
 });

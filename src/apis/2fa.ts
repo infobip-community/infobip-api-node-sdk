@@ -1,5 +1,3 @@
-import { Http } from '../utils/http';
-import { InfobipAuth } from '../utils/auth';
 import { Validator } from '../utils/validator';
 import {
   TwoFAApplication,
@@ -8,6 +6,7 @@ import {
   Pin,
   TwoFAVerificationStatus,
 } from '../models/2fa-models';
+import { HttpApi } from './http-api';
 
 const TwoFAEndpoints: any = {
   uri: '/2fa/2/applications',
@@ -17,17 +16,7 @@ const pin2FAEndpoints: any = {
   uri: '/2fa/2/pin',
 };
 
-class TwoFA {
-  http: Http;
-  username?: string;
-  password?: string;
-
-  constructor(credentials: InfobipAuth) {
-    this.http = new Http(credentials.baseUrl, credentials.authorization);
-    this.username = credentials.username;
-    this.password = credentials.password;
-  }
-
+class TwoFA extends HttpApi {
   /**
    * An application is a container for 2FA message templates
    * Use this method to list your applications
