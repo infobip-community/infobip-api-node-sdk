@@ -18,7 +18,7 @@ Node.js Client SDK for Infobip APIs.
 
 For the `@infobip-api/sdk` package versioning we use the [Semantic Versioning](https://semver.org) scheme.
 
-[Node.js 14](https://nodejs.org/en/about/releases/) is minimum supported version by this SDK.
+[Node.js 14](https://nodejs.org/en/about/releases/) is the minimum supported version by this SDK.
 
 ## License
 
@@ -69,9 +69,9 @@ console.log(response);
 
 ### E-mail Attachment Example
 
-When sending an E-mail with an attachment or inline image, you'll need follow the below process
+When sending an E-mail with an attachment or inline image, you'll need to follow the below process
 
-``javascript
+```javascript
 import { Infobip, AuthType } from "@infobip-api/sdk";
 ```
 
