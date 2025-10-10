@@ -15,6 +15,86 @@ import {
   TwoFAVerificationStatus,
 } from './models/2fa-models';
 
+// Export SMS v3 types and enums
+export {
+  SendSmsV3Request,
+  SendSmsV3Response,
+  BaseSmsMessage,
+  SmsDestination,
+  BinaryContent,
+  SmsReportsQuery,
+  SmsLogsQuery,
+  SmsDeliveryReport,
+  SmsMessageLog,
+  MessageType,
+  DeliveryStatus,
+  GeneralStatus,
+  LanguageCode,
+  Transliteration,
+  UrlOptions,
+  RegionalOptions,
+  IndiaDltOptions,
+  DeliveryTimeWindow
+} from './types/sms';
+
+// Export SMS error classes
+export {
+  SmsError,
+  SmsValidationError,
+  SmsApiError,
+  SmsNetworkError,
+  SmsRateLimitError,
+  SmsTimeoutError,
+  SmsAuthenticationError,
+  SmsConfigurationError,
+  createSmsErrorFromResponse,
+  isSmsErrorRetryable
+} from './errors/sms-errors';
+
+// Export SMS webhook utilities
+export {
+  SmsWebhookPayload,
+  WebhookVerificationOptions,
+  verifyWebhookSignature,
+  parseWebhookPayload,
+  extractDeliveryStatuses,
+  filterReportsByStatus,
+  getFailedDeliveries,
+  getSuccessfulDeliveries,
+  calculateDeliveryStats,
+  createWebhookMiddleware
+} from './utils/sms-webhook';
+
+// Export SMS utility functions
+export {
+  MessageEncoding,
+  MessagePartInfo,
+  PhoneNumberInfo,
+  detectMessageEncoding,
+  calculateMessageParts,
+  formatPhoneNumber,
+  isValidPhoneNumber,
+  isValidSenderId,
+  estimateSmsCost,
+  formatSendAtDateTime,
+  isValidNotifyUrl,
+  generateMessageId,
+  splitTextIntoParts,
+  isValidDeliveryTimeWindow
+} from './utils/sms-utils';
+
+// Export SMS pagination utilities
+export {
+  PaginationOptions,
+  PaginatedResponse,
+  SmsReportsPaginator,
+  SmsLogsPaginator,
+  createReportsPaginator,
+  createLogsPaginator,
+  getAllReports,
+  getAllLogs
+} from './utils/sms-pagination';
+
 class Infobip {
   /**
    *
